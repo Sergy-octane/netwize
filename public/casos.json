@@ -1,0 +1,39 @@
+[
+  {
+    "id": 1,
+    "titulo": "No tengo internet",
+    "categoria": "red",
+    "descripcion": "El usuario no tiene conexión a internet",
+    "preguntaInicial": "¿El router está encendido?",
+    "nodos": [
+      {
+        "id": 1,
+        "pregunta": "¿El router está encendido?",
+        "opciones": [
+          {
+            "texto": "Sí",
+            "siguiente": 2
+          },
+          {
+            "texto": "No",
+            "solucion": "Enciende el router y espera 2 minutos"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "pregunta": "¿Tienes conexión WiFi?",
+        "opciones": [
+          {
+            "texto": "Sí",
+            "solucion": "Revisar DNS o reiniciar router"
+          },
+          {
+            "texto": "No",
+            "solucion": "Conectarse a la red WiFi correcta"
+          }
+        ]
+      }
+    ]
+  }
+]
