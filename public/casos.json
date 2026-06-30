@@ -3,6 +3,7 @@
     "id": 1,
     "titulo": "No tengo internet",
     "categoria": "red",
+    "nivel": "N1",
     "descripcion": "El usuario no tiene conexión a internet",
     "preguntaInicial": "¿El router está encendido?",
     "nodos": [
@@ -31,6 +32,58 @@
           {
             "texto": "No",
             "solucion": "Conectarse a la red WiFi correcta"
+          }
+        ]
+      }
+    ]
+  },
+
+
+  {
+    "id": 2,
+    "titulo": "WiFi lento",
+    "categoria": "red",
+    "nivel": "N1",
+    "descripcion": "El usuario tiene internet pero la conexión es lenta",
+    "preguntaInicial": "¿El problema ocurre en todos los dispositivos?",
+    "nodos": [
+      {
+        "id": 1,
+        "pregunta": "¿El problema ocurre en todos los dispositivos?",
+        "opciones": [
+          {
+            "texto": "Sí",
+            "solucion": "Revisar router o saturación de red"
+          },
+          {
+            "texto": "No",
+            "solucion": "Revisar configuración del dispositivo afectado"
+          }
+        ]
+      }
+    ]
+  },
+
+
+  {
+    "id": 3,
+    "titulo": "Problemas DNS",
+    "categoria": "dns",
+    "nivel": "N1",
+    "descripcion": "Tiene conexión pero no puede abrir páginas",
+    "preguntaInicial": "¿Puedes hacer ping a una dirección IP?",
+    "nodos": [
+      {
+        "id": 1,
+        "pregunta": "¿Puedes hacer ping a una dirección IP?",
+        "opciones": [
+          {
+            "texto": "Sí",
+            "solucion": "El problema puede estar en los servidores DNS"
+          },
+          {
+            "texto": "No",
+            "solucion": "Revisar conexión de red"
           }
         ]
       }
