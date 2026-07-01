@@ -1,10 +1,11 @@
 function App() {
+
   return (
-    <div>
-      <h1>NetWize</h1>
-      <p>Tu compañero de soporte IT</p>
-    </div>
+    <h1 className="text-5xl font-bold text-blue-600">
+      NetWize
+    </h1>
   )
+
 }
 
 export default App
