@@ -1,11 +1,7 @@
+import Layout from "./components/Layout";
+
 function App() {
-
-  return (
-    <h1 className="text-5xl font-bold text-blue-600">
-      NetWize
-    </h1>
-  )
-
+  return <Layout />;
 }
 
-export default App
+export default App;
