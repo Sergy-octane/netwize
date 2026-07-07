@@ -1,8 +1,15 @@
+import { useState } from "react";
+
 import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
+
 import Dashboard from "../pages/Dashboard";
+import Simulator from "../pages/Simulator";
 
 function Layout() {
+
+  const [currentPage, setCurrentPage] = useState("simulator");
+
   return (
     <div>
       <Navbar />
@@ -11,7 +18,11 @@ function Layout() {
         <Sidebar />
 
         <main className="flex-1 p-6 bg-gray-50">
-            <Dashboard />
+
+          {currentPage === "dashboard" && <Dashboard />}
+
+          {currentPage === "simulator" && <Simulator />}
+
         </main>
       </div>
     </div>
