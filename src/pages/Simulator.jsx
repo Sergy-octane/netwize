@@ -6,6 +6,11 @@ function Simulator() {
   const [casoSeleccionado, setCasoSeleccionado] = useState(0);
 
   const caso = casos[casoSeleccionado];
+  
+  const [nodoActual, setNodoActual] = useState(0);
+
+  const nodo = caso.nodos[nodoActual];
+  
 
   return (
   
@@ -50,14 +55,21 @@ function Simulator() {
       </h2>
 
       <p className="text-lg mb-6">
-        {caso.preguntaInicial}
+        {nodo.pregunta}
       </p>
 
        <div className="flex flex-col md:flex-row gap-4">
 
-          <button className="flex-1 bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg transition">
-            Sí
-          </button>
+        <button
+         onClick={() => {
+           if (nodo.opciones[0].siguiente !== undefined) {
+            setNodoActual(nodo.opciones[0].siguiente - 1);
+          }
+          }}
+        className="flex-1 bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg transition"
+>
+         Sí
+       </button>
 
           <button className="flex-1 bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg transition">
             No
