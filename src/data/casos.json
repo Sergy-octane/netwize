@@ -17,7 +17,8 @@
           },
           {
             "texto": "No",
-            "solucion": "Enciende el router y espera 2 minutos"
+            "diagnostico": "El router se encuentra apagado.",
+            "solucion": "Enciende el router y espera 2 minutos."
           }
         ]
       },
@@ -27,17 +28,18 @@
         "opciones": [
           {
             "texto": "Sí",
-            "solucion": "Revisar DNS o reiniciar router"
+            "diagnostico": "El router está encendido y el dispositivo tiene conexión WiFi.",
+            "solucion": "Revisar la configuración DNS o reiniciar el router."
           },
           {
             "texto": "No",
-            "solucion": "Conectarse a la red WiFi correcta"
+            "diagnostico": "El dispositivo no está conectado a la red inalámbrica.",
+            "solucion": "Conectarse a la red WiFi correcta."
           }
         ]
       }
     ]
   },
-
 
   {
     "id": 2,
@@ -53,17 +55,19 @@
         "opciones": [
           {
             "texto": "Sí",
-            "solucion": "Revisar router o saturación de red"
+            "diagnostico": "La lentitud afecta a todos los dispositivos.",
+            "solucion": "Revisar el router o la saturación de la red."
           },
+
           {
             "texto": "No",
-            "solucion": "Revisar configuración del dispositivo afectado"
+            "diagnostico": "El problema solo afecta un dispositivo.",
+            "solucion": "Revisar la configuración del dispositivo afectado."
           }
         ]
       }
     ]
   },
-
 
   {
     "id": 3,
@@ -79,11 +83,13 @@
         "opciones": [
           {
             "texto": "Sí",
-            "solucion": "El problema puede estar en los servidores DNS"
+            "diagnostico": "Existe conectividad, pero falla la resolución de nombres DNS.",
+            "solucion": "Cambiar los servidores DNS o reiniciar el router."
           },
           {
             "texto": "No",
-            "solucion": "Revisar conexión de red"
+            "diagnostico": "No existe conectividad hacia la red.",
+            "solucion": "Revisar la conexión de red."
           }
         ]
       }
