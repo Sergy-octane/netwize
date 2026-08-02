@@ -2,10 +2,9 @@
   {
     "id": 1,
     "titulo": "No tengo internet",
-    "categoria": "red",
+    "categoria": "Red",
     "nivel": "N1",
     "descripcion": "El usuario no tiene conexión a internet",
-    "preguntaInicial": "¿El router está encendido?",
     "nodos": [
       {
         "id": 1,
@@ -24,17 +23,47 @@
       },
       {
         "id": 2,
-        "pregunta": "¿Tienes conexión WiFi?",
+        "pregunta": "¿Las luces del router están normales?",
         "opciones": [
           {
             "texto": "Sí",
-            "diagnostico": "El router está encendido y el dispositivo tiene conexión WiFi.",
-            "solucion": "Revisar la configuración DNS o reiniciar el router."
+            "siguiente": 3
           },
           {
             "texto": "No",
-            "diagnostico": "El dispositivo no está conectado a la red inalámbrica.",
-            "solucion": "Conectarse a la red WiFi correcta."
+            "diagnostico": "El router presenta un estado anormal en sus indicadores luminosos.",
+            "solucion": "Reiniciar el router y verificar el estado de las luces. Si el problema continúa, contactar al proveedor del servicio."
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "pregunta": "¿El problema ocurre en todos los dispositivos?",
+        "opciones": [
+          {
+            "texto": "Sí",
+            "siguiente": 4
+          },
+          {
+            "texto": "No",
+            "diagnostico": "La falla parece estar limitada a un único dispositivo.",
+            "solucion": "Revisar la configuración de red del dispositivo, olvidar la red WiFi y volver a conectarlo."
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "pregunta": "¿El dispositivo está conectado por WiFi?",
+        "opciones": [
+          {
+            "texto": "Sí",
+            "diagnostico": "El problema afecta la conexión inalámbrica de toda la red.",
+            "solucion": "Reiniciar el router y verificar la configuración de la red WiFi."
+          },
+          {
+            "texto": "No",
+            "diagnostico": "El problema afecta la conexión por cable.",
+            "solucion": "Verificar el cable de red, cambiar el puerto Ethernet o reiniciar el router."
           }
         ]
       }
@@ -44,7 +73,7 @@
   {
     "id": 2,
     "titulo": "WiFi lento",
-    "categoria": "red",
+    "categoria": "Red",
     "nivel": "N1",
     "descripcion": "El usuario tiene internet pero la conexión es lenta",
     "preguntaInicial": "¿El problema ocurre en todos los dispositivos?",
@@ -72,7 +101,7 @@
   {
     "id": 3,
     "titulo": "Problemas DNS",
-    "categoria": "dns",
+    "categoria": "DNS",
     "nivel": "N1",
     "descripcion": "Tiene conexión pero no puede abrir páginas",
     "preguntaInicial": "¿Puedes hacer ping a una dirección IP?",
@@ -90,6 +119,60 @@
             "texto": "No",
             "diagnostico": "No existe conectividad hacia la red.",
             "solucion": "Revisar la conexión de red."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "titulo": "Internet intermitente",
+    "categoria": "Red",
+    "nivel": "N1",
+    "descripcion": "La conexión a internet se pierde por momentos y luego vuelve.",
+    "nodos": [
+      {
+        "id": 1,
+        "pregunta": "¿La conexión se cae en todos los dispositivos?",
+        "opciones": [
+          {
+            "texto": "Sí",
+            "siguiente": 2
+          },
+          {
+            "texto": "No",
+            "diagnostico": "La falla parece estar limitada a un único dispositivo.",
+            "solucion": "Revisar la configuración de red del dispositivo afectado y actualizar sus controladores de red si es necesario."
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "pregunta": "¿La falla ocurre siempre en el mismo horario?",
+        "opciones": [
+          {
+            "texto": "Sí",
+            "siguiente": 3
+          },
+          {
+            "texto": "No",
+            "diagnostico": "La falla es intermitente pero no sigue un patrón de horario.",
+            "solucion": "Revisar el estado del router y comprobar si existen cortes reportados por el proveedor."
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "pregunta": "¿El router se reinicia solo durante la falla?",
+        "opciones": [
+          {
+            "texto": "Sí",
+            "diagnostico": "El router presenta reinicios inesperados.",
+            "solucion": "Restablecer el router a valores de fábrica. Si continúa reiniciándose, gestionar el reemplazo del equipo."
+          },
+          {
+            "texto": "No",
+            "siguiente": 4
           }
         ]
       }

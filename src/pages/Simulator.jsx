@@ -1,7 +1,8 @@
 import { useState } from "react";
 import casos from "../data/casos.json";
 
-function Simulator() {
+function Simulator({ setCurrentPage }) {
+   console.log("Prop recibida:", setCurrentPage);
   const [casoSeleccionado, setCasoSeleccionado] = useState(0);
   const [nodoActual, setNodoActual] = useState(0);
   const [solucion, setSolucion] = useState("");
@@ -22,53 +23,45 @@ function Simulator() {
 
       {/* Botones para seleccionar el caso */}
       <div className="flex flex-wrap gap-3 mb-8">
-        <button
-          onClick={() => {
-            setCasoSeleccionado(0);
-            setNodoActual(0);
-            setSolucion("");
-            setDiagnostico("");
-          }}
-          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg"
-        >
-          No tengo internet
-        </button>
-
-        <button
-          onClick={() => {
-            setCasoSeleccionado(1);
-            setNodoActual(0);
-            setSolucion("");
-            setDiagnostico("");
-          }}
-          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg"
-        >
-          WiFi lento
-        </button>
-
-        <button
-          onClick={() => {
-            setCasoSeleccionado(2);
-            setNodoActual(0);
-            setSolucion("");
-            setDiagnostico("");
-          }}
-          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg"
-        >
-          Problemas DNS
-        </button>
-      </div>
+  {casos.map((casoItem, index) => (
+    <button
+      key={casoItem.id}
+      onClick={() => {
+        setCasoSeleccionado(index);
+        setNodoActual(0);
+        setSolucion("");
+        setDiagnostico("");
+      }}
+      className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg"
+    >
+      {casoItem.titulo}
+    </button>
+  ))}
+</div>
 
       {/* Tarjeta principal */}
       <div className="bg-white rounded-xl shadow-lg p-8 max-w-3xl mx-auto">
 
-        <h2 className="text-xl font-semibold mb-4">
-          Caso: {caso.titulo}
-        </h2>
+        <h2 className="text-2xl font-bold mb-2">
+  {caso.titulo}
+</h2>
 
-        <p className="text-lg mb-6">
-          {nodo.pregunta}
-        </p>
+<div className="flex gap-4 text-sm text-gray-600 mb-4">
+  <span>📂 Categoría: {caso.categoria}</span>
+  <span>🎯 Nivel: {caso.nivel}</span>
+</div>
+   
+<p className="text-gray-700 mb-6">
+  {caso.descripcion}
+</p>
+
+<p className="text-sm text-gray-500 mb-2">
+  Paso {nodoActual + 1} de {caso.nodos.length}
+</p>
+
+<p className="text-lg font-medium mb-6">
+  {nodo.pregunta}
+</p>
 
         {/* Botones Sí y No */}
         
@@ -112,7 +105,7 @@ function Simulator() {
           </div>
           )}
 
-        {/* Solución */}
+                {/* Solución */}
         {solucion && (
           <div className="mt-6 p-4 bg-green-100 border border-green-400 rounded-lg">
             <h3 className="font-bold mb-2">✅ Solución:</h3>
@@ -122,7 +115,13 @@ function Simulator() {
 
         {/* Botón volver */}
         <div className="mt-8 text-center">
-          <button className="bg-gray-700 hover:bg-gray-800 text-white px-6 py-3 rounded-lg rounded-lg transition">
+          <button
+            onClick={() => {
+              console.log("Click");
+              setCurrentPage("dashboard");
+            }}
+            className="bg-gray-700 hover:bg-gray-800 text-white px-6 py-3 rounded-lg transition"
+          >
             Volver al Dashboard
           </button>
         </div>

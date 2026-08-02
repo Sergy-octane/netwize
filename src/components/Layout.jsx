@@ -9,6 +9,7 @@ import Simulator from "../pages/Simulator";
 function Layout() {
 
   const [currentPage, setCurrentPage] = useState("simulator");
+  console.log("ESTOY EN LAYOUT");
 
   return (
     <div>
@@ -19,9 +20,9 @@ function Layout() {
 
         <main className="flex-1 p-6 bg-gray-50">
 
-          {currentPage === "dashboard" && <Dashboard />}
+          {currentPage === "dashboard" && <Dashboard setCurrentPage={setCurrentPage} />}
 
-          {currentPage === "simulator" && <Simulator />}
+          {currentPage === "simulator" && <Simulator setCurrentPage={setCurrentPage} />}
 
         </main>
       </div>

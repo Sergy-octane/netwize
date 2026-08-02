@@ -1,4 +1,4 @@
-function Dashboard() {
+function Dashboard({ setCurrentPage }) {
   return (
     <div>
       <h1 className="text-3xl font-bold mb-2">
@@ -27,11 +27,14 @@ function Dashboard() {
         </div>
 
       </div>
-      <div className="mt-10">
-        <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition">
-        Iniciar simulación
-        </button>
-     </div>
+     <div className="mt-10">
+  <button
+    onClick={() => setCurrentPage("simulator")}
+    className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition"
+  >
+    Iniciar simulación
+  </button>
+</div>
     
     </div>
   );
