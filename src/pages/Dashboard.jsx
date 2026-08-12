@@ -1,4 +1,13 @@
-function Dashboard({ setCurrentPage }) {
+  import { useState } from "react";
+  function Dashboard({ setCurrentPage }) {
+  const [historial] = useState(() => {
+    const historialGuardado = localStorage.getItem("historial");
+
+    return historialGuardado
+      ? JSON.parse(historialGuardado)
+      : [];
+  });
+
   return (
     <div>
       <h1 className="text-3xl font-bold mb-2">
@@ -27,6 +36,34 @@ function Dashboard({ setCurrentPage }) {
         </div>
 
       </div>
+      <div className="mt-10 bg-white rounded-xl shadow p-6">
+  <h2 className="text-xl font-bold mb-4">
+    Historial de casos
+  </h2>
+
+  {historial.length === 0 ? (
+    <p className="text-gray-500">
+      Aún no has resuelto ningún caso.
+    </p>
+  ) : (
+    <ul className="space-y-3">
+      {historial.map((registro, index) => (
+  <li
+    key={index}
+    className="p-3 bg-gray-50 rounded-lg"
+  >
+    <p className="font-semibold">
+      ✅ {registro.caso}
+    </p>
+
+    <p className="text-sm text-gray-500 mt-1">
+      {registro.fecha}
+    </p>
+  </li>
+))}
+    </ul>
+  )}
+</div>
      <div className="mt-10">
   <button
     onClick={() => setCurrentPage("simulator")}

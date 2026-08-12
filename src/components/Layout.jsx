@@ -9,7 +9,7 @@ import Simulator from "../pages/Simulator";
 function Layout() {
 
   const [currentPage, setCurrentPage] = useState("simulator");
-  console.log("ESTOY EN LAYOUT");
+  
 
   return (
     <div>

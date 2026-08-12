@@ -2,11 +2,17 @@ import { useState } from "react";
 import casos from "../data/casos.json";
 
 function Simulator({ setCurrentPage }) {
-   console.log("Prop recibida:", setCurrentPage);
   const [casoSeleccionado, setCasoSeleccionado] = useState(0);
   const [nodoActual, setNodoActual] = useState(0);
   const [solucion, setSolucion] = useState("");
-  const [diagnostico, setDiagnostico] = useState("");
+  const [diagnostico, setDiagnostico] = useState("")
+  const [historial, setHistorial] = useState(() => {
+  const historialGuardado = localStorage.getItem("historial");
+
+  return historialGuardado
+    ? JSON.parse(historialGuardado)
+    : [];
+});
 
   const caso = casos[casoSeleccionado];
   const nodo = caso.nodos[nodoActual];
@@ -84,7 +90,21 @@ function Simulator({ setCurrentPage }) {
         }
         
         if (opcion.solucion) {
-          setSolucion(opcion.solucion);
+            setSolucion(opcion.solucion);
+
+          const nuevoRegistro = {
+            caso: caso.titulo,
+            fecha: new Date().toLocaleString()
+          };
+
+const nuevoHistorial = [...historial, nuevoRegistro];
+
+setHistorial(nuevoHistorial);
+
+localStorage.setItem(
+  "historial",
+  JSON.stringify(nuevoHistorial)
+);
         }
 
       }}
