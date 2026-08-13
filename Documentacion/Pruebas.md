@@ -132,6 +132,55 @@ Cada registro debe mostrar el caso realizado y su fecha y hora.
 **Estado:** Aprobado.
 
 ---
+## Semana 14 — Pruebas de estadísticas
+
+### Prueba 1 — Contador de casos resueltos
+
+**Objetivo:** Verificar que el Dashboard muestre correctamente la cantidad de casos registrados.
+
+**Resultado esperado:** El número mostrado debe coincidir con la cantidad de registros almacenados en el historial.
+
+**Resultado obtenido:** Correcto.
+
+---
+
+### Prueba 2 — Contador de simulaciones
+
+**Objetivo:** Verificar que el Dashboard muestre la cantidad de simulaciones realizadas.
+
+**Resultado esperado:** El contador debe actualizarse utilizando el historial almacenado.
+
+**Resultado obtenido:** Correcto.
+
+---
+
+### Prueba 3 — Categoría más frecuente
+
+**Objetivo:** Verificar que NetWize identifique correctamente la categoría con mayor cantidad de casos.
+
+**Resultado esperado:** El Dashboard debe mostrar la categoría con mayor frecuencia.
+
+**Resultado obtenido:** Correcto.
+
+---
+
+### Prueba 4 — Barras de categorías
+
+**Objetivo:** Verificar la representación visual de la frecuencia de las categorías.
+
+**Resultado esperado:** Cada categoría debe mostrar una barra proporcional a la cantidad de casos registrados.
+
+**Resultado obtenido:** Correcto.
+
+---
+
+### Prueba 5 — Persistencia de estadísticas
+
+**Objetivo:** Verificar que las estadísticas continúen disponibles después de recargar la aplicación.
+
+**Resultado esperado:** Los datos deben mantenerse debido al almacenamiento mediante `localStorage`.
+
+**Resultado obtenido:** Correcto.
 
 ## Resultado general
 
