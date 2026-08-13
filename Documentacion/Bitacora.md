@@ -199,8 +199,36 @@ Cada simulación almacena:
 
 Ejemplo:
 
-```json
+``json
 {
   "caso": "WiFi lento",
   "fecha": "12/08/2026, 08:15:32"
 }
+---
+## Semana 14
+
+### Objetivos
+
+- Mostrar estadísticas básicas del simulador.
+- Mostrar cantidad de casos resueltos.
+- Mostrar cantidad de simulaciones realizadas.
+- Identificar las categorías de soporte más frecuentes.
+- Representar visualmente la frecuencia de las categorías.
+
+### Desarrollo
+
+- Se implementó la lectura del historial de simulaciones almacenado en `localStorage`.
+- Se agregaron estadísticas dinámicas al Dashboard.
+- Se implementó el contador de casos resueltos.
+- Se implementó el contador de simulaciones realizadas.
+- Se implementó el cálculo de la categoría de soporte más frecuente.
+- Se agregó un apartado de categorías frecuentes.
+- Se implementaron barras visuales para representar la frecuencia de cada categoría.
+- Las estadísticas se generan automáticamente a partir del historial almacenado.
+- Se verificó el funcionamiento de las estadísticas al regresar desde el simulador al Dashboard.
+
+### Resultado
+
+El Dashboard de NetWize ahora presenta información dinámica sobre el uso del simulador y permite visualizar los casos resueltos, las simulaciones realizadas y las categorías de soporte más frecuentes.
+
+Las estadísticas utilizan los datos almacenados localmente mediante `localStorage`, evitando que la información se pierda al recargar la aplicación.
