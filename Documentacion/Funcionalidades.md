@@ -82,6 +82,19 @@ Cada registro almacena:
 
 Ejemplo:
 
-```text
+``text
 Caso: WiFi lento
 Fecha: 12/08/2026, 08:15:32
+## Estadísticas del Dashboard
+---
+NetWize cuenta con un sistema de estadísticas básicas basado en el historial de simulaciones.
+
+Las estadísticas disponibles son:
+
+- Cantidad de casos resueltos.
+- Cantidad de simulaciones realizadas.
+- Categoría de soporte más frecuente.
+- Cantidad de casos por categoría.
+- Representación visual mediante barras de frecuencia.
+
+Los datos utilizados para generar estas estadísticas provienen del historial almacenado localmente mediante `localStorage`.
