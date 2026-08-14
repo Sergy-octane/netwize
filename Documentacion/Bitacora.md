@@ -232,3 +232,27 @@ Ejemplo:
 El Dashboard de NetWize ahora presenta información dinámica sobre el uso del simulador y permite visualizar los casos resueltos, las simulaciones realizadas y las categorías de soporte más frecuentes.
 
 Las estadísticas utilizan los datos almacenados localmente mediante `localStorage`, evitando que la información se pierda al recargar la aplicación.
+
+## Semana 15
+
+### Objetivos
+
+- Crear gráficas simples sin utilizar librerías externas.
+- Representar estadísticas mediante barras visuales.
+- Implementar porcentajes dinámicos.
+- Mejorar la apariencia del Dashboard.
+
+### Desarrollo
+
+- Se mejoró la presentación visual de las estadísticas del Dashboard.
+- Se implementaron tarjetas visuales para mostrar información resumida.
+- Se agregaron barras de progreso utilizando únicamente clases de Tailwind CSS.
+- Se implementó el cálculo dinámico del porcentaje correspondiente a cada categoría.
+- Se agregó la representación del número de casos y su porcentaje.
+- Se incorporó una transición visual en las barras para mejorar la experiencia de usuario.
+- Las gráficas utilizan directamente los datos almacenados en el historial de simulaciones.
+- No se utilizaron librerías externas para la generación de gráficas.
+
+### Resultado
+
+El Dashboard de NetWize cuenta con una representación visual de las categorías de soporte más frecuentes mediante barras dinámicas. Los porcentajes se calculan automáticamente según los casos registrados, permitiendo que las gráficas se actualicen de acuerdo con el uso del simulador.
