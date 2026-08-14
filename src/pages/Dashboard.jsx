@@ -29,6 +29,7 @@ const categoriaFrecuente = Object.entries(conteoCategorias)
   .sort((a, b) => b[1] - a[1])[0] || ["Ninguna", 0];
 
   return (
+    
     <div>
       <h1 className="text-3xl font-bold mb-2">
         Bienvenido a NetWize
@@ -38,77 +39,129 @@ const categoriaFrecuente = Object.entries(conteoCategorias)
         Panel principal del simulador de soporte técnico.
       </p>
 
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
 
-        <div className="bg-white rounded-xl shadow p-6">
-          <h2 className="text-gray-500">Casos resueltos</h2>
-          <p className="text-3xl font-bold mt-2">
-          {historial.length}
-          </p>
-        </div>
-
-        <div className="bg-white rounded-xl shadow p-6">
-          <h2 className="text-gray-500">Simulaciones</h2>
-          <p className="text-3xl font-bold mt-2">
-          {historial.length}
-          </p>  
-        </div>
-
-        <div className="bg-white rounded-xl shadow p-6">
-          <h2 className="text-gray-500">Nivel</h2>
-          <p className="text-3xl font-bold mt-2">N1</p>
-        </div>
-
-        <div className="bg-white rounded-xl shadow p-6">
-  <h2 className="text-gray-500">Categoría frecuente</h2>
-
-  <p className="text-3xl font-bold mt-2">
-    {categoriaFrecuente[0]}
-  </p>
-
-  <p className="text-sm text-gray-500 mt-1">
-    {categoriaFrecuente[1]} caso(s)
-  </p>
-</div>
-
-    <div className="mt-10 bg-white rounded-xl shadow p-6">
-  <h2 className="text-xl font-bold mb-4">
-    Categorías frecuentes
-  </h2>
-
-  {Object.keys(conteoCategorias).length === 0 ? (
-    <p className="text-gray-500">
-      Aún no hay estadísticas disponibles.
+  {/* Casos resueltos */}
+  <div className="bg-white rounded-xl shadow p-6">
+    <p className="text-sm text-gray-500">
+      Casos resueltos
     </p>
-  ) : (
-    <div className="space-y-4">
-      {Object.entries(conteoCategorias).map(
-        ([categoria, cantidad]) => (
-          <div key={categoria}>
-            <div className="flex justify-between mb-1">
-              <span className="font-medium">
-                {categoria}
-              </span>
 
-              <span className="text-gray-500">
-                {cantidad} caso(s)
-              </span>
-            </div>
+    <p className="text-4xl font-bold mt-2">
+      {historial.length}
+    </p>
 
-            <div className="w-full bg-gray-200 rounded-full h-3">
-              <div
-                className="bg-blue-600 h-3 rounded-full"
-                style={{
-                  width: `${(cantidad / historial.length) * 100}%`,
-                }}
-              ></div>
-            </div>
-          </div>
-        )
-      )}
-    </div>
-  )}
-</div>
+    <p className="text-sm text-green-600 mt-2">
+      Casos completados
+    </p>
+  </div>
+
+
+  {/* Simulaciones */}
+  <div className="bg-white rounded-xl shadow p-6">
+    <p className="text-sm text-gray-500">
+      Simulaciones
+    </p>
+
+    <p className="text-4xl font-bold mt-2">
+      {historial.length}
+    </p>
+
+    <p className="text-sm text-blue-600 mt-2">
+      Simulaciones realizadas
+    </p>
+  </div>
+
+
+  {/* Nivel */}
+  <div className="bg-white rounded-xl shadow p-6">
+    <p className="text-sm text-gray-500">
+      Nivel actual
+    </p>
+
+    <p className="text-4xl font-bold mt-2">
+      N1
+    </p>
+
+    <p className="text-sm text-gray-500 mt-2">
+      Soporte técnico
+    </p>
+  </div>
+
+
+  {/* Categoría frecuente */}
+  <div className="bg-white rounded-xl shadow p-6">
+    <p className="text-sm text-gray-500">
+      Categoría frecuente
+    </p>
+
+    <p className="text-3xl font-bold mt-2">
+      {categoriaFrecuente[0]}
+    </p>
+
+    <p className="text-sm text-gray-500 mt-2">
+      {categoriaFrecuente[1]} caso(s)
+    </p>
+  </div>
+
+
+  {/* Gráfica de categorías */}
+  <div className="bg-white rounded-xl shadow p-6 md:col-span-2 lg:col-span-4">
+
+    <h2 className="text-xl font-bold mb-6">
+      Categorías frecuentes
+    </h2>
+
+    {Object.keys(conteoCategorias).length === 0 ? (
+      <p className="text-gray-500">
+        Aún no hay estadísticas disponibles.
+      </p>
+    ) : (
+      <div className="space-y-5">
+
+        {Object.entries(conteoCategorias).map(
+          ([categoria, cantidad]) => {
+
+            const porcentaje =
+              (cantidad / historial.length) * 100;
+
+            return (
+              <div key={categoria}>
+
+                <div className="flex justify-between mb-2">
+
+                  <span className="font-medium">
+                    {categoria}
+                  </span>
+
+                  <span className="text-sm text-gray-500">
+                    {cantidad} caso(s) — {porcentaje.toFixed(0)}%
+                  </span>
+
+                </div>
+
+                <div className="w-full bg-gray-200 rounded-full h-4">
+
+                  <div
+                    className="bg-blue-600 h-4 rounded-full transition-all duration-500"
+                    style={{
+                      width: `${porcentaje}%`,
+                    }}
+                  ></div>
+
+                </div>
+
+              </div>
+            );
+          }
+        )}
+
+      </div>
+    )}
+
+  </div>
+
+
       </div>
       <div className="mt-10 bg-white rounded-xl shadow p-6">
   <h2 className="text-xl font-bold mb-4">
