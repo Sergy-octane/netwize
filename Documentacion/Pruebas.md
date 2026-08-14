@@ -187,3 +187,53 @@ Cada registro debe mostrar el caso realizado y su fecha y hora.
 Las pruebas realizadas hasta la Semana 13 permiten verificar el funcionamiento de las principales características implementadas en NetWize.
 
 Las funcionalidades probadas se encuentran operativas.
+
+## Semana 15 — Pruebas de gráficas y estadísticas visuales
+
+### Prueba 1 — Actualización de porcentajes
+
+**Objetivo:** Verificar que los porcentajes de las categorías se calculen automáticamente.
+
+**Resultado esperado:** El porcentaje debe cambiar cuando se agregan nuevos casos al historial.
+
+**Resultado obtenido:** Correcto.
+
+---
+
+### Prueba 2 — Actualización de barras
+
+**Objetivo:** Verificar que el tamaño de las barras corresponda al porcentaje de cada categoría.
+
+**Resultado esperado:** Las barras deben aumentar o disminuir proporcionalmente según la cantidad de casos.
+
+**Resultado obtenido:** Correcto.
+
+---
+
+### Prueba 3 — Múltiples categorías
+
+**Objetivo:** Verificar la representación de varias categorías simultáneamente.
+
+**Resultado esperado:** Cada categoría debe mostrar su propia cantidad, porcentaje y barra.
+
+**Resultado obtenido:** Correcto.
+
+---
+
+### Prueba 4 — Sin librerías externas
+
+**Objetivo:** Verificar que las gráficas funcionen sin instalar librerías adicionales.
+
+**Resultado esperado:** Las gráficas deben generarse utilizando React, JavaScript y Tailwind CSS.
+
+**Resultado obtenido:** Correcto.
+
+---
+
+### Prueba 5 — Actualización dinámica
+
+**Objetivo:** Verificar que las estadísticas cambien al resolver diferentes casos.
+
+**Resultado esperado:** Las barras y porcentajes deben subir o disminuir dependiendo de los casos registrados.
+
+**Resultado obtenido:** Correcto.
