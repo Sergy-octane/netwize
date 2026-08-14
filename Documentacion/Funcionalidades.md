@@ -98,3 +98,18 @@ Las estadísticas disponibles son:
 - Representación visual mediante barras de frecuencia.
 
 Los datos utilizados para generar estas estadísticas provienen del historial almacenado localmente mediante `localStorage`.
+
+## Gráficas y estadísticas visuales
+
+NetWize incorpora gráficas simples para representar visualmente la frecuencia de las categorías de soporte.
+
+Las gráficas se construyen sin librerías externas y utilizan:
+
+- React para generar los elementos dinámicamente.
+- JavaScript para calcular los porcentajes.
+- Tailwind CSS para representar las barras visuales.
+- LocalStorage como fuente de los datos del historial.
+
+Cada categoría muestra su cantidad de casos y el porcentaje correspondiente.
+
+Las barras se actualizan automáticamente cuando cambia la información almacenada en el historial.
