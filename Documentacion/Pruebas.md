@@ -321,3 +321,102 @@ El Sidebar permite acceder correctamente al Dashboard y al Simulador, y los boto
 
 La Enciclopedia queda definida como una funcionalidad futura.
 
+## Semana 17 — Pruebas responsive
+
+### Prueba 1 — Visualización en celular
+
+**Objetivo:** Verificar que la interfaz se adapte correctamente a pantallas pequeñas.
+
+**Procedimiento:**
+
+1. Abrir NetWize en un tamaño de pantalla correspondiente a un celular.
+2. Revisar la distribución de los elementos.
+3. Verificar que no existan elementos fuera de la pantalla.
+
+**Resultado esperado:**
+
+La interfaz debe adaptarse correctamente al tamaño disponible.
+
+**Resultado obtenido:** Correcto.
+
+---
+
+### Prueba 2 — Visualización en tablet
+
+**Objetivo:** Verificar el comportamiento de la interfaz en tamaños de pantalla correspondientes a tablets.
+
+**Procedimiento:**
+
+1. Abrir NetWize en un tamaño de pantalla correspondiente a una tablet.
+2. Revisar la barra lateral.
+3. Verificar la distribución del contenido.
+
+**Resultado esperado:**
+
+El Sidebar y el contenido principal deben mostrarse correctamente sin afectar la navegación.
+
+**Resultado obtenido:** Correcto.
+
+---
+
+### Prueba 3 — Visualización en portátil
+
+**Objetivo:** Verificar que la interfaz mantenga su distribución en pantallas de mayor tamaño.
+
+**Procedimiento:**
+
+1. Abrir NetWize en un tamaño de pantalla correspondiente a un portátil.
+2. Revisar el Sidebar y el contenido principal.
+3. Verificar la navegación.
+
+**Resultado esperado:**
+
+Todos los elementos deben mostrarse correctamente y mantener su distribución.
+
+**Resultado obtenido:** Correcto.
+
+---
+
+### Prueba 4 — Corrección del Sidebar
+
+**Objetivo:** Verificar que el Sidebar se muestre correctamente después del ajuste del breakpoint responsive.
+
+**Procedimiento:**
+
+1. Probar NetWize en diferentes anchos de pantalla.
+2. Revisar la visibilidad del Sidebar.
+3. Verificar que la navegación continúe funcionando.
+
+**Resultado esperado:**
+
+El Sidebar debe mostrarse correctamente en los tamaños establecidos para tablets y pantallas mayores.
+
+**Resultado obtenido:** Correcto.
+
+---
+
+### Prueba 5 — Desbordamiento horizontal
+
+**Objetivo:** Verificar que ningún elemento genere desplazamiento horizontal innecesario.
+
+**Procedimiento:**
+
+1. Revisar NetWize en diferentes tamaños de pantalla.
+2. Desplazarse por las diferentes vistas.
+3. Verificar los límites de la interfaz.
+
+**Resultado esperado:**
+
+El contenido debe mantenerse dentro del ancho disponible.
+
+**Resultado obtenido:** Correcto.
+
+---
+
+### Resultado general
+
+Las pruebas realizadas durante la Semana 17 permitieron verificar el comportamiento responsive de NetWize en diferentes tamaños de pantalla.
+
+Se corrigió el comportamiento del Sidebar y se confirmó que la interfaz mantiene una distribución adecuada sin realizar cambios estructurales en el diseño.
+
+
