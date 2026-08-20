@@ -16,7 +16,8 @@ function Layout() {
       <Navbar />
 
       <div className="flex">
-        <Sidebar />
+          
+       <Sidebar setCurrentPage={setCurrentPage} />
 
         <main className="flex-1 p-6 bg-gray-50">
 
