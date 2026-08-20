@@ -256,3 +256,35 @@ Las estadísticas utilizan los datos almacenados localmente mediante `localStora
 ### Resultado
 
 El Dashboard de NetWize cuenta con una representación visual de las categorías de soporte más frecuentes mediante barras dinámicas. Los porcentajes se calculan automáticamente según los casos registrados, permitiendo que las gráficas se actualicen de acuerdo con el uso del simulador.
+
+## Semana 16
+
+### Objetivos
+
+* Revisar la navegación general de la aplicación.
+* Implementar navegación funcional desde la barra lateral.
+* Permitir el acceso al Dashboard y al Simulador desde el Sidebar.
+* Verificar el funcionamiento de los botones internos de navegación.
+* Revisar el comportamiento de la opción Enciclopedia.
+
+### Desarrollo
+
+* Se revisó el funcionamiento de la barra lateral de navegación.
+* Se identificó que las opciones del Sidebar eran únicamente elementos visuales y no ejecutaban ninguna acción.
+* Se implementó el estado `currentPage` para controlar la vista mostrada en la aplicación.
+* Se conectó el componente `Sidebar` con `Layout` mediante la función `setCurrentPage`.
+* Se implementó la navegación hacia el Dashboard desde el Sidebar.
+* Se implementó la navegación hacia el Simulador desde el Sidebar.
+* Se verificó el funcionamiento de los botones internos del Dashboard y del Simulador.
+* Se realizaron pruebas de navegación entre las principales vistas de NetWize.
+* Se revisó la opción Enciclopedia y se determinó que será desarrollada como una funcionalidad futura.
+* Se realizó una revisión general del funcionamiento de la interfaz y la navegación.
+
+### Resultado
+
+La barra lateral de NetWize ahora permite navegar correctamente entre el Dashboard y el Simulador.
+
+La navegación dejó de ser únicamente visual y pasó a controlar las vistas mostradas mediante el estado de React.
+
+La opción Enciclopedia permanece como una funcionalidad futura, cuya finalidad será proporcionar explicaciones sencillas sobre conceptos relacionados con redes y soporte técnico.
+
