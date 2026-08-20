@@ -237,3 +237,87 @@ Las funcionalidades probadas se encuentran operativas.
 **Resultado esperado:** Las barras y porcentajes deben subir o disminuir dependiendo de los casos registrados.
 
 **Resultado obtenido:** Correcto.
+
+## Semana 16 — Pruebas de navegación
+
+### Prueba 1 — Navegación al Dashboard desde el Sidebar
+
+**Objetivo:** Verificar que el usuario pueda acceder al Dashboard utilizando la barra lateral.
+
+**Procedimiento:**
+
+1. Ingresar a NetWize.
+2. Ubicar la barra lateral.
+3. Seleccionar "Dashboard".
+
+**Resultado esperado:**
+
+La aplicación debe mostrar correctamente el Dashboard.
+
+**Resultado obtenido:** Correcto.
+
+---
+
+### Prueba 2 — Navegación al Simulador desde el Sidebar
+
+**Objetivo:** Verificar que el usuario pueda acceder al Simulador utilizando la barra lateral.
+
+**Procedimiento:**
+
+1. Ingresar a NetWize.
+2. Ubicar la barra lateral.
+3. Seleccionar "Simulador".
+
+**Resultado esperado:**
+
+La aplicación debe mostrar correctamente el Simulador.
+
+**Resultado obtenido:** Correcto.
+
+---
+
+### Prueba 3 — Navegación mediante botones internos
+
+**Objetivo:** Verificar que los botones internos de la aplicación permitan desplazarse entre las vistas principales.
+
+**Procedimiento:**
+
+1. Ingresar al Dashboard.
+2. Seleccionar la opción para iniciar una simulación.
+3. Verificar el acceso al Simulador.
+4. Utilizar la opción para regresar al Dashboard.
+
+**Resultado esperado:**
+
+El usuario debe poder desplazarse correctamente entre Dashboard y Simulador.
+
+**Resultado obtenido:** Correcto.
+
+---
+
+### Prueba 4 — Revisión de Enciclopedia
+
+**Objetivo:** Verificar el comportamiento actual de la opción Enciclopedia.
+
+**Procedimiento:**
+
+1. Ingresar a NetWize.
+2. Ubicar la opción "Enciclopedia" en el Sidebar.
+3. Seleccionarla.
+
+**Resultado esperado:**
+
+La opción debe permanecer identificada como una funcionalidad pendiente de desarrollo.
+
+**Resultado obtenido:** Correcto. La opción se encuentra visible, pero todavía no cuenta con una vista o funcionalidad asociada.
+
+---
+
+### Resultado general
+
+Las pruebas realizadas durante la Semana 16 permitieron verificar el funcionamiento de la navegación principal de NetWize.
+
+El Sidebar permite acceder correctamente al Dashboard y al Simulador, y los botones internos de navegación funcionan de acuerdo con lo esperado.
+
+La Enciclopedia queda definida como una funcionalidad futura.
+
