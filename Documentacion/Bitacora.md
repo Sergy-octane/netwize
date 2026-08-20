@@ -288,3 +288,29 @@ La navegación dejó de ser únicamente visual y pasó a controlar las vistas mo
 
 La opción Enciclopedia permanece como una funcionalidad futura, cuya finalidad será proporcionar explicaciones sencillas sobre conceptos relacionados con redes y soporte técnico.
 
+## Semana 17
+
+### Objetivos
+
+* Revisar el comportamiento responsive de NetWize.
+* Verificar la interfaz en celular, tablet y portátil.
+* Detectar y corregir pequeños problemas de visualización.
+* Mantener el diseño existente sin realizar cambios estructurales.
+
+### Desarrollo
+
+* Se realizó una revisión general de la interfaz en diferentes tamaños de pantalla.
+* Se verificó el comportamiento de NetWize en dispositivos móviles, tablets y portátiles.
+* Se identificó un problema de visualización de la barra lateral en determinados tamaños de pantalla.
+* Se ajustó el breakpoint responsive del Sidebar para mejorar su visualización en tablets y pantallas de mayor tamaño.
+* Se verificó nuevamente la navegación después del ajuste.
+* Se comprobó que no existieran problemas de desbordamiento horizontal o elementos fuera de la pantalla.
+* Se realizó una revisión final de la interfaz responsive.
+
+### Resultado
+
+NetWize presenta un comportamiento responsive adecuado en celular, tablet y portátil.
+
+Se corrigió el comportamiento de visualización del Sidebar en determinados tamaños de pantalla sin modificar el diseño general de la aplicación.
+
+
