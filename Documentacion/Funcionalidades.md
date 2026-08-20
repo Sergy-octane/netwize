@@ -113,3 +113,19 @@ Las gráficas se construyen sin librerías externas y utilizan:
 Cada categoría muestra su cantidad de casos y el porcentaje correspondiente.
 
 Las barras se actualizan automáticamente cuando cambia la información almacenada en el historial.
+
+## 5. Navegación
+
+La aplicación permite navegar entre las principales vistas mediante la barra lateral y los botones internos de la interfaz.
+
+Actualmente se encuentran disponibles:
+
+* Dashboard.
+* Simulador.
+
+La navegación se controla mediante el estado `currentPage` de React y la función `setCurrentPage`.
+
+El Sidebar permite cambiar entre las vistas sin necesidad de recargar la aplicación.
+
+La opción **Enciclopedia** se encuentra visible en el Sidebar, pero actualmente está reservada para una futura funcionalidad educativa.
+
