@@ -17,7 +17,10 @@ function Layout() {
 
       <div className="flex">
           
-       <Sidebar setCurrentPage={setCurrentPage} />
+       <Sidebar
+  setCurrentPage={setCurrentPage}
+  currentPage={currentPage}
+        />
 
         <main className="flex-1 p-6 bg-gray-50">
 

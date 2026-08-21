@@ -201,10 +201,12 @@ Ejemplo:
 
 ``json
 {
-  "caso": "WiFi lento",
-  "fecha": "12/08/2026, 08:15:32"
+"caso": "WiFi lento",
+"fecha": "12/08/2026, 08:15:32"
 }
+
 ---
+
 ## Semana 14
 
 ### Objetivos
@@ -261,24 +263,24 @@ El Dashboard de NetWize cuenta con una representación visual de las categorías
 
 ### Objetivos
 
-* Revisar la navegación general de la aplicación.
-* Implementar navegación funcional desde la barra lateral.
-* Permitir el acceso al Dashboard y al Simulador desde el Sidebar.
-* Verificar el funcionamiento de los botones internos de navegación.
-* Revisar el comportamiento de la opción Enciclopedia.
+- Revisar la navegación general de la aplicación.
+- Implementar navegación funcional desde la barra lateral.
+- Permitir el acceso al Dashboard y al Simulador desde el Sidebar.
+- Verificar el funcionamiento de los botones internos de navegación.
+- Revisar el comportamiento de la opción Enciclopedia.
 
 ### Desarrollo
 
-* Se revisó el funcionamiento de la barra lateral de navegación.
-* Se identificó que las opciones del Sidebar eran únicamente elementos visuales y no ejecutaban ninguna acción.
-* Se implementó el estado `currentPage` para controlar la vista mostrada en la aplicación.
-* Se conectó el componente `Sidebar` con `Layout` mediante la función `setCurrentPage`.
-* Se implementó la navegación hacia el Dashboard desde el Sidebar.
-* Se implementó la navegación hacia el Simulador desde el Sidebar.
-* Se verificó el funcionamiento de los botones internos del Dashboard y del Simulador.
-* Se realizaron pruebas de navegación entre las principales vistas de NetWize.
-* Se revisó la opción Enciclopedia y se determinó que será desarrollada como una funcionalidad futura.
-* Se realizó una revisión general del funcionamiento de la interfaz y la navegación.
+- Se revisó el funcionamiento de la barra lateral de navegación.
+- Se identificó que las opciones del Sidebar eran únicamente elementos visuales y no ejecutaban ninguna acción.
+- Se implementó el estado `currentPage` para controlar la vista mostrada en la aplicación.
+- Se conectó el componente `Sidebar` con `Layout` mediante la función `setCurrentPage`.
+- Se implementó la navegación hacia el Dashboard desde el Sidebar.
+- Se implementó la navegación hacia el Simulador desde el Sidebar.
+- Se verificó el funcionamiento de los botones internos del Dashboard y del Simulador.
+- Se realizaron pruebas de navegación entre las principales vistas de NetWize.
+- Se revisó la opción Enciclopedia y se determinó que será desarrollada como una funcionalidad futura.
+- Se realizó una revisión general del funcionamiento de la interfaz y la navegación.
 
 ### Resultado
 
@@ -292,20 +294,20 @@ La opción Enciclopedia permanece como una funcionalidad futura, cuya finalidad 
 
 ### Objetivos
 
-* Revisar el comportamiento responsive de NetWize.
-* Verificar la interfaz en celular, tablet y portátil.
-* Detectar y corregir pequeños problemas de visualización.
-* Mantener el diseño existente sin realizar cambios estructurales.
+- Revisar el comportamiento responsive de NetWize.
+- Verificar la interfaz en celular, tablet y portátil.
+- Detectar y corregir pequeños problemas de visualización.
+- Mantener el diseño existente sin realizar cambios estructurales.
 
 ### Desarrollo
 
-* Se realizó una revisión general de la interfaz en diferentes tamaños de pantalla.
-* Se verificó el comportamiento de NetWize en dispositivos móviles, tablets y portátiles.
-* Se identificó un problema de visualización de la barra lateral en determinados tamaños de pantalla.
-* Se ajustó el breakpoint responsive del Sidebar para mejorar su visualización en tablets y pantallas de mayor tamaño.
-* Se verificó nuevamente la navegación después del ajuste.
-* Se comprobó que no existieran problemas de desbordamiento horizontal o elementos fuera de la pantalla.
-* Se realizó una revisión final de la interfaz responsive.
+- Se realizó una revisión general de la interfaz en diferentes tamaños de pantalla.
+- Se verificó el comportamiento de NetWize en dispositivos móviles, tablets y portátiles.
+- Se identificó un problema de visualización de la barra lateral en determinados tamaños de pantalla.
+- Se ajustó el breakpoint responsive del Sidebar para mejorar su visualización en tablets y pantallas de mayor tamaño.
+- Se verificó nuevamente la navegación después del ajuste.
+- Se comprobó que no existieran problemas de desbordamiento horizontal o elementos fuera de la pantalla.
+- Se realizó una revisión final de la interfaz responsive.
 
 ### Resultado
 
@@ -313,4 +315,29 @@ NetWize presenta un comportamiento responsive adecuado en celular, tablet y port
 
 Se corrigió el comportamiento de visualización del Sidebar en determinados tamaños de pantalla sin modificar el diseño general de la aplicación.
 
+## Semana 18
 
+### Objetivos
+
+- Mejorar las animaciones suaves de la interfaz.
+- Implementar microinteracciones en elementos interactivos.
+- Mejorar los estados visuales de la aplicación.
+- Mantener la lógica existente sin realizar cambios estructurales.
+
+### Desarrollo
+
+- Se mejoraron las animaciones de las tarjetas del Dashboard mediante transiciones y efectos hover.
+- Se agregaron microinteracciones visuales al Sidebar para mejorar la respuesta al pasar el cursor sobre las opciones.
+- Se implementó un estado visual activo en el Sidebar para identificar la página actualmente seleccionada.
+- Se mejoraron las transiciones de las barras de estadísticas del Dashboard.
+- Se mejoró el estado vacío del historial de casos para proporcionar información visual y orientación al usuario cuando no existen registros.
+- Se realizaron pruebas de navegación entre Dashboard y Simulador para verificar que los estados visuales funcionaran correctamente.
+- Se realizó una revisión final de las mejoras visuales implementadas.
+
+### Resultado
+
+NetWize presenta una interfaz más dinámica y agradable mediante animaciones suaves y microinteracciones.
+
+El Sidebar permite identificar visualmente la sección activa y el Dashboard cuenta con un estado vacío más claro para el historial.
+
+Las mejoras se realizaron sin modificar la lógica principal del simulador ni del sistema de almacenamiento local.

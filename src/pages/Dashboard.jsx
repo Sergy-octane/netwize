@@ -42,7 +42,7 @@ const categoriaFrecuente = Object.entries(conteoCategorias)
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
 
   {/* Casos resueltos */}
-  <div className="bg-white rounded-xl shadow p-6">
+  <div className="bg-white rounded-xl shadow p-6 transition-all duration-200 hover:-translate-y-1 hover:shadow-lg">
     <p className="text-sm text-gray-500">
       Casos resueltos
     </p>
@@ -58,7 +58,7 @@ const categoriaFrecuente = Object.entries(conteoCategorias)
 
 
   {/* Simulaciones */}
-  <div className="bg-white rounded-xl shadow p-6">
+  <div className="bg-white rounded-xl shadow p-6 transition-all duration-200 hover:-translate-y-1 hover:shadow-lg">
     <p className="text-sm text-gray-500">
       Simulaciones
     </p>
@@ -90,7 +90,7 @@ const categoriaFrecuente = Object.entries(conteoCategorias)
 
 
   {/* Categoría frecuente */}
-  <div className="bg-white rounded-xl shadow p-6">
+  <div className="bg-white rounded-xl shadow p-6 transition-all duration-200 hover:-translate-y-1 hover:shadow-lg">
     <p className="text-sm text-gray-500">
       Categoría frecuente
     </p>
@@ -169,9 +169,17 @@ const categoriaFrecuente = Object.entries(conteoCategorias)
   </h2>
 
   {historial.length === 0 ? (
-    <p className="text-gray-500">
-      Aún no has resuelto ningún caso.
-    </p>
+   <div className="text-center py-8">
+  <p className="text-4xl mb-3">📋</p>
+
+  <p className="text-gray-600 font-medium">
+    Aún no has resuelto ningún caso.
+  </p>
+
+  <p className="text-sm text-gray-400 mt-1">
+    Completa una simulación para comenzar tu historial.
+  </p>
+</div>
   ) : (
     <ul className="space-y-3">
       {historial.map((registro, index) => (

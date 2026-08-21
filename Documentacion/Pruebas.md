@@ -132,6 +132,7 @@ Cada registro debe mostrar el caso realizado y su fecha y hora.
 **Estado:** Aprobado.
 
 ---
+
 ## Semana 14 — Pruebas de estadísticas
 
 ### Prueba 1 — Contador de casos resueltos
@@ -419,4 +420,65 @@ Las pruebas realizadas durante la Semana 17 permitieron verificar el comportamie
 
 Se corrigió el comportamiento del Sidebar y se confirmó que la interfaz mantiene una distribución adecuada sin realizar cambios estructurales en el diseño.
 
+## Semana 18 — Pruebas de interfaz y microinteracciones
 
+### Prueba 1 — Estado activo del Sidebar
+
+**Objetivo:** Verificar que la opción correspondiente a la página actual se identifique visualmente.
+
+**Procedimiento:**
+
+1. Abrir NetWize.
+2. Seleccionar Dashboard.
+3. Seleccionar Simulador.
+4. Revisar el estado visual de las opciones.
+
+**Resultado esperado:**
+
+La página seleccionada debe mostrarse resaltada visualmente.
+
+**Resultado obtenido:** Correcto.
+
+---
+
+### Prueba 2 — Microinteracciones
+
+**Objetivo:** Verificar el funcionamiento de las animaciones y efectos hover.
+
+**Procedimiento:**
+
+1. Pasar el cursor sobre las tarjetas del Dashboard.
+2. Pasar el cursor sobre las opciones del Sidebar.
+3. Revisar las transiciones visuales.
+
+**Resultado esperado:**
+
+Los elementos deben responder suavemente a la interacción del usuario.
+
+**Resultado obtenido:** Correcto.
+
+---
+
+### Prueba 3 — Estado vacío del historial
+
+**Objetivo:** Verificar la visualización del historial cuando no existen registros.
+
+**Procedimiento:**
+
+1. Eliminar temporalmente el registro `historial` de LocalStorage.
+2. Recargar NetWize.
+3. Revisar la sección Historial de casos.
+
+**Resultado esperado:**
+
+Debe mostrarse un mensaje indicando que todavía no existen casos resueltos.
+
+**Resultado obtenido:** Correcto.
+
+---
+
+### Resultado general
+
+Las pruebas realizadas durante la Semana 18 permitieron verificar las nuevas animaciones, microinteracciones y estados visuales implementados en NetWize.
+
+Las funcionalidades principales continúan funcionando correctamente después de las mejoras de interfaz.

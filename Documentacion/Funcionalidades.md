@@ -85,8 +85,11 @@ Ejemplo:
 ``text
 Caso: WiFi lento
 Fecha: 12/08/2026, 08:15:32
+
 ## Estadísticas del Dashboard
+
 ---
+
 NetWize cuenta con un sistema de estadísticas básicas basado en el historial de simulaciones.
 
 Las estadísticas disponibles son:
@@ -120,8 +123,8 @@ La aplicación permite navegar entre las principales vistas mediante la barra la
 
 Actualmente se encuentran disponibles:
 
-* Dashboard.
-* Simulador.
+- Dashboard.
+- Simulador.
 
 La navegación se controla mediante el estado `currentPage` de React y la función `setCurrentPage`.
 
@@ -129,3 +132,16 @@ El Sidebar permite cambiar entre las vistas sin necesidad de recargar la aplicac
 
 La opción **Enciclopedia** se encuentra visible en el Sidebar, pero actualmente está reservada para una futura funcionalidad educativa.
 
+## Mejoras visuales e interacciones
+
+NetWize incorpora mejoras visuales orientadas a proporcionar una experiencia de usuario más dinámica y clara.
+
+Se implementaron:
+
+- Animaciones suaves en las tarjetas del Dashboard mediante transiciones y efectos hover.
+- Microinteracciones en las opciones del Sidebar.
+- Indicador visual de la sección actualmente seleccionada en el Sidebar.
+- Transiciones en las barras de estadísticas.
+- Estado visual para el historial cuando no existen simulaciones registradas.
+
+Estas mejoras no modifican la lógica principal de la aplicación y permiten una interacción más clara con los elementos de la interfaz.

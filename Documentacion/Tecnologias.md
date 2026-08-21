@@ -95,3 +95,4 @@ src/
 └── pages/
     ├── Dashboard.jsx
     └── Simulator.jsx
+```
