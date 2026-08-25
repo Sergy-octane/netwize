@@ -32,9 +32,16 @@ function Sidebar({ setCurrentPage, currentPage }) {
   Simulador
 </li>
 
-        <li className="cursor-pointer hover:text-blue-400 transition">
-          Enciclopedia
-        </li>
+       <li
+  onClick={() => setCurrentPage("encyclopedia")}
+  className={`cursor-pointer transition-all duration-200 ${
+    currentPage === "encyclopedia"
+      ? "text-blue-400 font-semibold"
+      : "hover:text-blue-400 hover:translate-x-1"
+  }`}
+>
+  Enciclopedia
+</li>
 
       </ul>
 

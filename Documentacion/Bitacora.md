@@ -341,3 +341,33 @@ NetWize presenta una interfaz más dinámica y agradable mediante animaciones su
 El Sidebar permite identificar visualmente la sección activa y el Dashboard cuenta con un estado vacío más claro para el historial.
 
 Las mejoras se realizaron sin modificar la lógica principal del simulador ni del sistema de almacenamiento local.
+
+## Semana 19
+
+### Objetivos
+
+- Crear la Enciclopedia N1.
+- Incorporar conceptos básicos de redes y soporte técnico.
+- Presentar explicaciones sencillas orientadas al trabajo de soporte N1.
+- Mantener la información separada de la lógica de la interfaz.
+
+### Desarrollo
+
+- Se creó el archivo `encyclopedia.json` para almacenar la información de los conceptos técnicos.
+- Se incorporaron 29 conceptos relacionados con redes, Wi-Fi, cableado, tecnologías de acceso, redes móviles y hardware.
+- Se creó el componente `Encyclopedia.jsx`.
+- Se conectó la Enciclopedia con el sistema de navegación de NetWize.
+- Se implementó la lectura dinámica de los conceptos desde `encyclopedia.json`.
+- Se crearon tarjetas dinámicas para mostrar cada concepto.
+- Cada concepto incluye una explicación de qué es, para qué sirve y qué debe revisar un agente N1.
+- Se implementó una distribución responsive de las tarjetas utilizando Tailwind CSS.
+- Se realizaron pruebas en celular, tablet y portátil.
+- Se verificó la navegación entre Dashboard, Simulador y Enciclopedia.
+
+### Resultado
+
+NetWize cuenta con una Enciclopedia N1 funcional y dinámica que permite consultar conceptos técnicos de manera sencilla y orientada al soporte técnico.
+
+La información se encuentra separada de la interfaz mediante `encyclopedia.json`, permitiendo agregar nuevos conceptos sin modificar la estructura principal del componente.
+
+La Enciclopedia mantiene un comportamiento responsive y se integra correctamente con la navegación de la aplicación.

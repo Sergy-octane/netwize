@@ -482,3 +482,107 @@ Debe mostrarse un mensaje indicando que todavía no existen casos resueltos.
 Las pruebas realizadas durante la Semana 18 permitieron verificar las nuevas animaciones, microinteracciones y estados visuales implementados en NetWize.
 
 Las funcionalidades principales continúan funcionando correctamente después de las mejoras de interfaz.
+
+## Semana 19 — Pruebas de Enciclopedia N1
+
+### Prueba 1 — Visualización de conceptos
+
+**Objetivo:** Verificar que los conceptos almacenados en `encyclopedia.json` se carguen correctamente.
+
+**Procedimiento:**
+
+1. Abrir NetWize.
+2. Seleccionar Enciclopedia desde el Sidebar.
+3. Revisar las tarjetas mostradas.
+
+**Resultado esperado:**
+
+Los conceptos deben aparecer correctamente en la Enciclopedia.
+
+**Resultado obtenido:** Correcto.
+
+---
+
+### Prueba 2 — Información de los conceptos
+
+**Objetivo:** Verificar que cada concepto muestre la información correspondiente.
+
+**Procedimiento:**
+
+1. Abrir la Enciclopedia.
+2. Revisar diferentes tarjetas.
+3. Comprobar las secciones de cada concepto.
+
+**Resultado esperado:**
+
+Cada tarjeta debe mostrar:
+
+- ¿Qué es?
+- ¿Para qué sirve?
+- ¿Qué debo revisar como N1?
+
+**Resultado obtenido:** Correcto.
+
+---
+
+### Prueba 3 — Navegación
+
+**Objetivo:** Verificar que la Enciclopedia pueda abrirse desde el Sidebar.
+
+**Procedimiento:**
+
+1. Abrir NetWize.
+2. Seleccionar Enciclopedia.
+3. Navegar hacia Dashboard y Simulador.
+4. Regresar a Enciclopedia.
+
+**Resultado esperado:**
+
+La navegación debe funcionar correctamente sin recargar la aplicación.
+
+**Resultado obtenido:** Correcto.
+
+---
+
+### Prueba 4 — Responsive
+
+**Objetivo:** Verificar que las tarjetas se adapten a diferentes tamaños de pantalla.
+
+**Procedimiento:**
+
+1. Probar la Enciclopedia en celular.
+2. Probarla en tablet.
+3. Probarla en portátil.
+4. Revisar la distribución de las tarjetas.
+
+**Resultado esperado:**
+
+Las tarjetas deben adaptarse al ancho disponible sin generar desbordamiento horizontal.
+
+**Resultado obtenido:** Correcto.
+
+---
+
+### Prueba 5 — Carga dinámica
+
+**Objetivo:** Verificar que la Enciclopedia genere las tarjetas a partir del archivo JSON.
+
+**Procedimiento:**
+
+1. Abrir la Enciclopedia.
+2. Revisar los conceptos cargados.
+3. Comprobar que la información corresponda al contenido de `encyclopedia.json`.
+
+**Resultado esperado:**
+
+Los conceptos deben generarse automáticamente a partir de los datos almacenados en el archivo JSON.
+
+**Resultado obtenido:** Correcto.
+
+---
+
+### Resultado general
+
+Las pruebas realizadas durante la Semana 19 permitieron verificar el funcionamiento de la Enciclopedia N1, su navegación, carga dinámica de información y comportamiento responsive.
+
+La nueva funcionalidad se integra correctamente con las demás vistas de NetWize.

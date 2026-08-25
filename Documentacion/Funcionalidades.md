@@ -125,12 +125,42 @@ Actualmente se encuentran disponibles:
 
 - Dashboard.
 - Simulador.
+- Enciclopedia.
 
 La navegación se controla mediante el estado `currentPage` de React y la función `setCurrentPage`.
 
 El Sidebar permite cambiar entre las vistas sin necesidad de recargar la aplicación.
 
-La opción **Enciclopedia** se encuentra visible en el Sidebar, pero actualmente está reservada para una futura funcionalidad educativa.
+---
+
+## Enciclopedia N1
+
+NetWize incorpora una Enciclopedia N1 orientada a la consulta y aprendizaje de conceptos básicos relacionados con soporte técnico y redes.
+
+La información de la Enciclopedia se almacena en:
+
+`src/data/encyclopedia.json`
+
+Actualmente contiene conceptos relacionados con:
+
+- Redes básicas.
+- Cableado.
+- Wi-Fi.
+- Tecnologías de acceso.
+- Redes móviles.
+- Hardware.
+
+Cada concepto incluye:
+
+- ¿Qué es?
+- ¿Para qué sirve?
+- ¿Qué debo revisar como N1?
+
+La información se carga dinámicamente desde el archivo JSON, permitiendo agregar nuevos conceptos sin modificar la estructura principal del componente.
+
+Las tarjetas de la Enciclopedia utilizan un diseño responsive para adaptarse a diferentes tamaños de pantalla.
+
+---
 
 ## Mejoras visuales e interacciones
 

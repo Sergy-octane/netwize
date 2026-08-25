@@ -5,6 +5,7 @@ import Sidebar from "./Sidebar";
 
 import Dashboard from "../pages/Dashboard";
 import Simulator from "../pages/Simulator";
+import Encyclopedia from "../pages/Encyclopedia";
 
 function Layout() {
 
@@ -27,6 +28,8 @@ function Layout() {
           {currentPage === "dashboard" && <Dashboard setCurrentPage={setCurrentPage} />}
 
           {currentPage === "simulator" && <Simulator setCurrentPage={setCurrentPage} />}
+
+          {currentPage === "encyclopedia" && (<Encyclopedia setCurrentPage={setCurrentPage} />)}
 
         </main>
       </div>

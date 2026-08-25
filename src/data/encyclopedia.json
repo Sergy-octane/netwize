@@ -1,0 +1,219 @@
+[
+  {
+    "titulo": "IP",
+    "categoria": "Redes básicas",
+    "queEs": "Una dirección IP es como la dirección de una casa, pero para un dispositivo en una red. Permite identificar un equipo para que pueda comunicarse con otros dispositivos.",
+    "paraQueSirve": "Sirve para identificar un dispositivo dentro de una red y permitir que pueda enviar y recibir información.",
+    "revisarN1": "Verificar que el dispositivo tenga una dirección IP válida y comprobar su configuración de red."
+  },
+  {
+    "titulo": "DNS",
+    "categoria": "Redes básicas",
+    "queEs": "DNS funciona como una agenda telefónica de Internet. Convierte nombres como google.com en direcciones IP que los dispositivos pueden entender.",
+    "paraQueSirve": "Permite acceder a sitios web utilizando nombres fáciles de recordar en lugar de direcciones IP.",
+    "revisarN1": "Comprobar la configuración DNS y verificar si el dispositivo puede resolver nombres de dominio correctamente."
+  },
+  {
+    "titulo": "DHCP",
+    "categoria": "Redes básicas",
+    "queEs": "DHCP es el servicio que asigna automáticamente una dirección IP y otros datos de red a los dispositivos.",
+    "paraQueSirve": "Facilita la conexión de los dispositivos a una red sin tener que configurar manualmente cada dirección IP.",
+    "revisarN1": "Verificar que el dispositivo haya recibido una IP, gateway y DNS correctamente."
+  },
+  {
+    "titulo": "Gateway",
+    "categoria": "Redes básicas",
+    "queEs": "El gateway o puerta de enlace es el dispositivo que permite que un equipo se comunique con otras redes, como Internet.",
+    "paraQueSirve": "Permite enviar información fuera de la red local hacia otras redes.",
+    "revisarN1": "Verificar que el dispositivo tenga configurado un gateway válido y que pueda comunicarse con él."
+  },
+  {
+    "titulo": "NAT",
+    "categoria": "Redes básicas",
+    "queEs": "NAT permite que varios dispositivos de una red privada compartan una misma dirección IP pública para acceder a Internet.",
+    "paraQueSirve": "Permite conectar múltiples dispositivos a Internet utilizando una dirección IP pública.",
+    "revisarN1": "Comprobar que el router tenga conectividad y que los dispositivos puedan salir correctamente a Internet."
+  },
+  {
+    "titulo": "Ping",
+    "categoria": "Redes básicas",
+    "queEs": "Ping es una herramienta que permite comprobar si un dispositivo puede comunicarse con otro a través de una red.",
+    "paraQueSirve": "Sirve para comprobar conectividad y observar cuánto tiempo tarda una respuesta en regresar.",
+    "revisarN1": "Revisar si existe respuesta, pérdida de paquetes y tiempos de respuesta elevados."
+  },
+  {
+    "titulo": "Tracert",
+    "categoria": "Redes básicas",
+    "queEs": "Tracert es una herramienta que muestra el camino que siguen los datos desde un dispositivo hasta otro destino en la red.",
+    "paraQueSirve": "Permite identificar en qué parte del recorrido pueden aparecer problemas de conexión o latencia.",
+    "revisarN1": "Revisar dónde aumenta la latencia o dónde dejan de aparecer respuestas durante el recorrido."
+  },
+  {
+    "titulo": "Latencia",
+    "categoria": "Redes básicas",
+    "queEs": "La latencia es el tiempo que tarda la información en viajar desde un punto de la red hasta otro.",
+    "paraQueSirve": "Permite conocer qué tan rápido responde una conexión.",
+    "revisarN1": "Comprobar si existen tiempos de respuesta elevados y comparar los resultados de pruebas como ping."
+  },
+  {
+    "titulo": "Mbps / MB/s",
+    "categoria": "Redes básicas",
+    "queEs": "Mbps significa megabits por segundo y MB/s significa megabytes por segundo. Ambos representan cantidades de datos, pero utilizan unidades diferentes.",
+    "paraQueSirve": "Permite medir o interpretar la velocidad de transferencia de datos.",
+    "revisarN1": "Verificar que no se confundan Mbps con MB/s al comparar la velocidad contratada con una prueba de velocidad."
+  },
+  {
+    "titulo": "Ethernet",
+    "categoria": "Redes básicas",
+    "queEs": "Ethernet es una tecnología utilizada para conectar dispositivos mediante una red cableada.",
+    "paraQueSirve": "Permite transmitir datos entre dispositivos utilizando cables de red.",
+    "revisarN1": "Comprobar el cable, el puerto Ethernet, los indicadores de conexión y la configuración de red."
+  },
+  {
+    "titulo": "Router",
+    "categoria": "Equipos de red",
+    "queEs": "Un router es un dispositivo que conecta diferentes redes y dirige los datos hacia su destino.",
+    "paraQueSirve": "Permite conectar una red local con otras redes, como Internet, y gestionar el tráfico de los dispositivos.",
+    "revisarN1": "Comprobar alimentación, conexión, estado de los puertos y conectividad de los dispositivos."
+  },
+  {
+    "titulo": "Módem",
+    "categoria": "Equipos de red",
+    "queEs": "Un módem es un dispositivo que permite establecer la conexión entre la red del proveedor de Internet y la red del usuario.",
+    "paraQueSirve": "Permite recibir la señal proporcionada por el operador y establecer la conexión de Internet.",
+    "revisarN1": "Comprobar alimentación, indicadores de estado y conexión entre el módem y el router o dispositivo."
+  },
+  {
+    "titulo": "RJ45",
+    "categoria": "Cableado",
+    "queEs": "RJ45 es el conector utilizado habitualmente en los cables de red Ethernet.",
+    "paraQueSirve": "Permite conectar cables Ethernet a dispositivos como routers, switches y computadores.",
+    "revisarN1": "Revisar que el conector esté correctamente insertado, que no esté dañado y que el cable tenga continuidad."
+  },
+  {
+    "titulo": "Categorías de cables Ethernet",
+    "categoria": "Cableado",
+    "queEs": "Las categorías de cables Ethernet indican características como velocidad y frecuencia de funcionamiento del cable.",
+    "paraQueSirve": "Permiten elegir un cable adecuado según las necesidades de una red.",
+    "revisarN1": "Comprobar la categoría del cable y verificar que sea compatible con la velocidad y el equipo utilizado."
+  },
+  {
+    "titulo": "Cat5e",
+    "categoria": "Cableado",
+    "queEs": "Cat5e es una categoría de cable Ethernet utilizada comúnmente para redes de hasta 1 Gbps en condiciones adecuadas.",
+    "paraQueSirve": "Permite conectar dispositivos en redes Ethernet domésticas y empresariales.",
+    "revisarN1": "Comprobar el estado del cable y que su categoría sea suficiente para la velocidad requerida."
+  },
+  {
+    "titulo": "Cat6",
+    "categoria": "Cableado",
+    "queEs": "Cat6 es una categoría de cable Ethernet con mejores características de transmisión que Cat5e y mayor capacidad frente a interferencias.",
+    "paraQueSirve": "Se utiliza en redes que necesitan mayores velocidades o mejores condiciones de transmisión.",
+    "revisarN1": "Verificar la categoría del cable, su estado físico y la compatibilidad con los equipos."
+  },
+  {
+    "titulo": "Cat6A",
+    "categoria": "Cableado",
+    "queEs": "Cat6A es una categoría de cable Ethernet diseñada para soportar velocidades de hasta 10 Gbps en distancias de hasta 100 metros bajo condiciones especificadas.",
+    "paraQueSirve": "Se utiliza en redes de alto rendimiento que necesitan mayor capacidad de transmisión.",
+    "revisarN1": "Comprobar que el cable y los equipos sean compatibles con la velocidad requerida."
+  },
+  {
+    "titulo": "Wi-Fi 2.4 GHz",
+    "categoria": "Wi-Fi",
+    "queEs": "La banda de 2.4 GHz es una frecuencia utilizada por redes Wi-Fi que ofrece mayor alcance pero suele estar más expuesta a interferencias.",
+    "paraQueSirve": "Permite conectar dispositivos mediante Wi-Fi, especialmente cuando se necesita mayor cobertura.",
+    "revisarN1": "Comprobar interferencias, saturación de canales y distancia respecto al router."
+  },
+  {
+    "titulo": "Wi-Fi 5 GHz",
+    "categoria": "Wi-Fi",
+    "queEs": "La banda de 5 GHz es una frecuencia Wi-Fi que normalmente ofrece mayores velocidades y menos interferencias que 2.4 GHz, aunque tiene menor alcance.",
+    "paraQueSirve": "Es útil para dispositivos cercanos al router que necesitan mayor velocidad.",
+    "revisarN1": "Comprobar distancia, obstáculos, compatibilidad del dispositivo y saturación de la banda."
+  },
+  {
+    "titulo": "Wi-Fi 6",
+    "categoria": "Wi-Fi",
+    "queEs": "Wi-Fi 6 es una generación de tecnología Wi-Fi diseñada para mejorar la eficiencia, capacidad y rendimiento de las redes inalámbricas.",
+    "paraQueSirve": "Permite gestionar mejor redes con muchos dispositivos conectados.",
+    "revisarN1": "Comprobar compatibilidad del router y del dispositivo y revisar la configuración inalámbrica."
+  },
+  {
+    "titulo": "Wi-Fi 6E",
+    "categoria": "Wi-Fi",
+    "queEs": "Wi-Fi 6E extiende las capacidades de Wi-Fi 6 utilizando también la banda de 6 GHz en los países y dispositivos compatibles.",
+    "paraQueSirve": "Permite disponer de más espectro para conexiones Wi-Fi compatibles.",
+    "revisarN1": "Comprobar compatibilidad con 6 GHz, configuración del router y compatibilidad del dispositivo."
+  },
+  {
+    "titulo": "FTTH",
+    "categoria": "Tecnologías de acceso",
+    "queEs": "FTTH significa Fiber To The Home y describe una conexión de fibra óptica que llega directamente hasta el hogar o lugar del cliente.",
+    "paraQueSirve": "Permite ofrecer conexiones de Internet de alta velocidad mediante fibra óptica.",
+    "revisarN1": "Comprobar el estado de la ONT, conexiones de fibra e indicadores del equipo."
+  },
+  {
+    "titulo": "HFC",
+    "categoria": "Tecnologías de acceso",
+    "queEs": "HFC significa Hybrid Fiber Coaxial y combina fibra óptica con cable coaxial para llevar el servicio hasta el usuario.",
+    "paraQueSirve": "Permite proporcionar servicios de Internet mediante una red que combina fibra y cable coaxial.",
+    "revisarN1": "Comprobar conexiones, niveles de señal y estado del módem según las herramientas disponibles."
+  },
+  {
+    "titulo": "Fibra óptica",
+    "categoria": "Tecnologías de acceso",
+    "queEs": "La fibra óptica transmite información utilizando pulsos de luz a través de fibras muy delgadas.",
+    "paraQueSirve": "Permite transmitir grandes cantidades de información a altas velocidades y largas distancias.",
+    "revisarN1": "Comprobar conexiones, estado físico de la fibra y los indicadores de la ONT o equipo asociado."
+  },
+  {
+    "titulo": "ONT",
+    "categoria": "Tecnologías de acceso",
+    "queEs": "La ONT es el equipo que recibe la señal de fibra óptica y la convierte para que pueda ser utilizada por los dispositivos de red del usuario.",
+    "paraQueSirve": "Permite conectar una instalación de fibra óptica con la red local del usuario.",
+    "revisarN1": "Comprobar alimentación, indicadores ópticos y conexión entre la ONT y el router."
+  },
+  {
+    "titulo": "SSID",
+    "categoria": "Wi-Fi",
+    "queEs": "SSID es el nombre que identifica una red Wi-Fi.",
+    "paraQueSirve": "Permite distinguir una red inalámbrica de otras redes disponibles.",
+    "revisarN1": "Comprobar que el SSID sea visible, esté correctamente configurado y corresponda a la red esperada."
+  },
+  {
+    "titulo": "WPA2 / WPA3",
+    "categoria": "Wi-Fi",
+    "queEs": "WPA2 y WPA3 son estándares de seguridad utilizados para proteger las redes Wi-Fi mediante autenticación y cifrado.",
+    "paraQueSirve": "Ayudan a proteger la red inalámbrica y evitar accesos no autorizados.",
+    "revisarN1": "Comprobar el método de seguridad configurado y la compatibilidad del dispositivo con el estándar utilizado."
+  },
+  {
+    "titulo": "Canales Wi-Fi",
+    "categoria": "Wi-Fi",
+    "queEs": "Los canales Wi-Fi son partes del espectro de radio utilizadas por las redes inalámbricas para transmitir información.",
+    "paraQueSirve": "Permiten organizar las transmisiones inalámbricas y reducir conflictos entre redes cercanas.",
+    "revisarN1": "Comprobar si existen redes cercanas utilizando canales que puedan generar saturación o interferencias."
+  },
+  {
+    "titulo": "Interferencias",
+    "categoria": "Wi-Fi",
+    "queEs": "Las interferencias son señales o condiciones que afectan la comunicación inalámbrica y pueden reducir su calidad.",
+    "paraQueSirve": "Identificarlas ayuda a solucionar problemas de velocidad, estabilidad o alcance de una red Wi-Fi.",
+    "revisarN1": "Revisar distancia, obstáculos, redes cercanas, saturación de canales y posibles fuentes de interferencia."
+  },
+  {
+    "titulo": "4G / 5G",
+    "categoria": "Redes móviles",
+    "queEs": "4G y 5G son generaciones de tecnología utilizadas por las redes móviles para proporcionar conectividad inalámbrica.",
+    "paraQueSirve": "Permiten acceder a Internet y otros servicios mediante redes celulares.",
+    "revisarN1": "Comprobar cobertura, señal, compatibilidad del dispositivo, configuración de red móvil y disponibilidad del servicio."
+  },
+  {
+    "titulo": "Hardware de dispositivos",
+    "categoria": "Hardware",
+    "queEs": "El hardware son las partes físicas de un dispositivo, como procesador, memoria, almacenamiento, tarjeta de red y antenas.",
+    "paraQueSirve": "Cada componente permite que el dispositivo pueda ejecutar programas, almacenar información y comunicarse con otras redes.",
+    "revisarN1": "Identificar si el problema puede estar relacionado con las capacidades o limitaciones físicas del dispositivo."
+  }
+]
