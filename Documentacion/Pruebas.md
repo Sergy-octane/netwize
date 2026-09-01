@@ -586,3 +586,90 @@ Los conceptos deben generarse automáticamente a partir de los datos almacenados
 Las pruebas realizadas durante la Semana 19 permitieron verificar el funcionamiento de la Enciclopedia N1, su navegación, carga dinámica de información y comportamiento responsive.
 
 La nueva funcionalidad se integra correctamente con las demás vistas de NetWize.
+
+---
+
+## Semana 20 — Pruebas de optimización y limpieza
+
+### Prueba 1 — Consola del navegador
+
+**Objetivo:** Verificar que no existan errores visibles en la consola.
+
+**Procedimiento:**
+
+1. Abrir NetWize.
+2. Abrir las herramientas de desarrollo del navegador.
+3. Revisar la consola.
+4. Navegar entre las diferentes vistas.
+
+**Resultado esperado:**
+
+No deben aparecer errores relacionados con la aplicación.
+
+**Resultado obtenido:** Correcto.
+
+---
+
+### Prueba 2 — Funcionamiento general
+
+**Objetivo:** Verificar que las funcionalidades principales continúen funcionando después de la limpieza.
+
+**Procedimiento:**
+
+1. Abrir el Dashboard.
+2. Abrir el Simulador.
+3. Completar una simulación.
+4. Abrir la Enciclopedia.
+5. Navegar entre las diferentes vistas.
+
+**Resultado esperado:**
+
+Todas las funcionalidades deben continuar funcionando correctamente.
+
+**Resultado obtenido:** Correcto.
+
+---
+
+### Prueba 3 — Persistencia del historial
+
+**Objetivo:** Verificar que el historial continúe funcionando después de la revisión del código.
+
+**Procedimiento:**
+
+1. Completar una simulación.
+2. Revisar el historial.
+3. Recargar la aplicación.
+4. Revisar nuevamente el historial.
+
+**Resultado esperado:**
+
+El registro debe mantenerse almacenado después de recargar la aplicación.
+
+**Resultado obtenido:** Correcto.
+
+---
+
+### Prueba 4 — Responsive
+
+**Objetivo:** Verificar que la limpieza del código no afecte la adaptación de la interfaz.
+
+**Procedimiento:**
+
+1. Probar NetWize en celular.
+2. Probar NetWize en tablet.
+3. Probar NetWize en portátil.
+4. Revisar las diferentes vistas.
+
+**Resultado esperado:**
+
+La interfaz debe mantener su comportamiento responsive.
+
+**Resultado obtenido:** Correcto.
+
+---
+
+### Resultado general
+
+Las pruebas realizadas durante la Semana 20 permitieron comprobar que las funcionalidades principales continúan funcionando correctamente después de la optimización y limpieza del código.
+
+No se detectaron errores que afecten el funcionamiento de NetWize.

@@ -1,6 +1,6 @@
 import encyclopediaData from "../data/encyclopedia.json";
 
-function Encyclopedia({ setCurrentPage }) {
+function Encyclopedia() {
 
   return (
     <div>

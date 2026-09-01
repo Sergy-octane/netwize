@@ -371,3 +371,30 @@ NetWize cuenta con una Enciclopedia N1 funcional y dinámica que permite consult
 La información se encuentra separada de la interfaz mediante `encyclopedia.json`, permitiendo agregar nuevos conceptos sin modificar la estructura principal del componente.
 
 La Enciclopedia mantiene un comportamiento responsive y se integra correctamente con la navegación de la aplicación.
+
+## Semana 20
+
+### Objetivos
+
+- Realizar una revisión general de NetWize.
+- Detectar y corregir posibles errores.
+- Limpiar código innecesario.
+- Verificar el funcionamiento de las funcionalidades existentes.
+
+### Desarrollo
+
+- Se realizó una revisión general de la aplicación.
+- Se verificó la consola del navegador para detectar errores o advertencias.
+- Se eliminaron registros `console.log` utilizados durante la etapa de desarrollo y depuración.
+- Se eliminó una propiedad `setCurrentPage` que no estaba siendo utilizada en el componente `Encyclopedia`.
+- Se revisaron los componentes principales de la aplicación para detectar código innecesario.
+- Se realizaron pruebas manuales del Dashboard, Simulador y Enciclopedia.
+- Se verificó la navegación entre las diferentes vistas.
+- Se comprobó nuevamente el funcionamiento del historial y LocalStorage.
+- Se verificó el comportamiento responsive de la aplicación.
+
+### Resultado
+
+NetWize quedó con una estructura de código más limpia y sin errores visibles en la consola del navegador.
+
+Las funcionalidades principales fueron verificadas y continúan funcionando correctamente después de la limpieza y revisión general.

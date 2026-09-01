@@ -29,7 +29,7 @@ function Layout() {
 
           {currentPage === "simulator" && <Simulator setCurrentPage={setCurrentPage} />}
 
-          {currentPage === "encyclopedia" && (<Encyclopedia setCurrentPage={setCurrentPage} />)}
+          {currentPage === "encyclopedia" && <Encyclopedia />}
 
         </main>
       </div>

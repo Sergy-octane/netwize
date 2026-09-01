@@ -175,3 +175,21 @@ Se implementaron:
 - Estado visual para el historial cuando no existen simulaciones registradas.
 
 Estas mejoras no modifican la lógica principal de la aplicación y permiten una interacción más clara con los elementos de la interfaz.
+
+---
+
+## Optimización y limpieza
+
+Durante la Semana 20 se realizó una revisión general del código y del funcionamiento de NetWize.
+
+Se realizaron las siguientes mejoras:
+
+- Eliminación de registros `console.log` utilizados durante la depuración.
+- Eliminación de propiedades que no estaban siendo utilizadas.
+- Revisión de los componentes principales.
+- Verificación de la navegación.
+- Verificación del funcionamiento del Dashboard, Simulador y Enciclopedia.
+- Revisión del historial y almacenamiento mediante LocalStorage.
+- Revisión del comportamiento responsive.
+
+Estas mejoras permiten mantener una estructura de código más limpia sin modificar la lógica principal de la aplicación.

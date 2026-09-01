@@ -136,10 +136,9 @@ localStorage.setItem(
         {/* Botón volver */}
         <div className="mt-8 text-center">
           <button
-            onClick={() => {
-              console.log("Click");
-              setCurrentPage("dashboard");
-            }}
+           onClick={() => {
+             setCurrentPage("dashboard");
+              }}
             className="bg-gray-700 hover:bg-gray-800 text-white px-6 py-3 rounded-lg transition"
           >
             Volver al Dashboard
