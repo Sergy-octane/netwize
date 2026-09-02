@@ -1,7 +1,12 @@
-import encyclopediaData from "../data/encyclopedia.json";
+import { useState } from "react";
+import conceptos from "../data/encyclopedia.json";
 
 function Encyclopedia() {
 
+  const [busqueda, setBusqueda] = useState("");
+    const conceptosFiltrados = conceptos.filter((concepto) =>
+    concepto.titulo.toLowerCase().includes(busqueda.toLowerCase())
+  );
   return (
     <div>
       <h1 className="text-3xl font-bold mb-2">
@@ -12,9 +17,18 @@ function Encyclopedia() {
         Conceptos básicos para soporte técnico de Nivel 1.
       </p>
 
+      <input
+        type="text"
+        placeholder="Buscar concepto..."
+          value={busqueda}
+        onChange={(e) => setBusqueda(e.target.value)}
+        className="w-full p-3 mb-8 border rounded-lg"
+      />
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
-        {encyclopediaData.map((concepto) => (
+        {conceptosFiltrados.length > 0 ? (
+        conceptosFiltrados.map((concepto) => (
 
           <div
             key={concepto.titulo}
@@ -55,7 +69,12 @@ function Encyclopedia() {
 
           </div>
 
-        ))}
+        ))
+        ) : (
+  <p className="text-gray-500 col-span-full text-center">
+    🔍 No se encontraron conceptos.
+  </p>
+)}
 
       </div>
     </div>
