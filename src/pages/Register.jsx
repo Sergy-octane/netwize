@@ -89,10 +89,22 @@ function Register({ setCurrentPage }) {
 >
   Crear cuenta
 </button>
-          <button
+<div className="text-center mt-6">
+  <p className="text-sm text-gray-500">
+    ¿Ya tienes una cuenta?{" "}
+    <button
+      type="button"
+      onClick={() => setCurrentPage("login")}
+      className="text-blue-600 hover:underline"
+    >
+      Inicia sesión
+    </button>
+  </p>
+</div>
+
+<button
   onClick={() => setCurrentPage("terms")}
-  className="text-sm text-blue-600 hover:underline mt-4"
->
+  className="text-sm text-blue-600 hover:underline mt-4">
   Leer términos y condiciones
 </button>
         </div>

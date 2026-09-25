@@ -58,6 +58,15 @@ function Login({ setCurrentPage }) {
 </button>
   </p>
 
+  <div className="mt-4">
+  <button
+    onClick={() => setCurrentPage("welcome")}
+    className="text-sm text-blue-600 hover:underline"
+  >
+    ¿Qué es NetWize?
+  </button>
+</div>
+
 </div>
         </div>
 

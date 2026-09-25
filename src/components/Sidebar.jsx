@@ -42,7 +42,12 @@ function Sidebar({ setCurrentPage, currentPage }) {
 >
   Enciclopedia
 </li>
-
+        <li
+          onClick={() => setCurrentPage("login")}
+          className="cursor-pointer transition-all duration-200 hover:text-red-400 hover:translate-x-1"
+        >
+          Cerrar sesión
+        </li>
       </ul>
 
     </aside>
