@@ -398,3 +398,59 @@ La Enciclopedia mantiene un comportamiento responsive y se integra correctamente
 NetWize quedó con una estructura de código más limpia y sin errores visibles en la consola del navegador.
 
 Las funcionalidades principales fueron verificadas y continúan funcionando correctamente después de la limpieza y revisión general.
+
+## Semana 21
+
+### Objetivos
+
+- Incorporar un flujo inicial de acceso a NetWize.
+- Crear las vistas de inicio de sesión y registro.
+- Incorporar una vista de términos y condiciones.
+- Agregar una opción de recuperación de contraseña.
+- Implementar un acceso general a ayuda mediante WhatsApp.
+- Mantener la navegación existente de NetWize.
+- Verificar la integración de las nuevas vistas con la estructura actual de la aplicación.
+
+### Desarrollo
+
+- Se inició la implementación de nuevas vistas relacionadas con el acceso a la aplicación.
+
+- Se creó la vista **Welcome**, utilizada como pantalla de presentación de NetWize. Esta vista presenta brevemente el propósito de la aplicación y sus principales funcionalidades.
+
+- Se creó la vista **Login**, incorporando campos para correo electrónico y contraseña, un botón de inicio de sesión, una opción para recuperar la contraseña y un enlace para crear una nueva cuenta.
+
+- Se actualizó el componente `Layout` para permitir la navegación entre las nuevas vistas mediante el estado `currentPage`.
+
+- Se estableció la vista de inicio de sesión como la pantalla inicial de NetWize.
+
+- Se desarrolló la vista **Register** para estructurar el proceso de creación de una cuenta.
+
+- La vista de registro incorpora campos para nombre, correo electrónico, contraseña y confirmación de contraseña.
+
+- Se agregó la aceptación de términos y condiciones mediante una casilla de verificación.
+
+- Se implementó un estado mediante React para controlar la aceptación de los términos y condiciones.
+
+- El botón **Crear cuenta** permanece deshabilitado mientras los términos no hayan sido aceptados y cambia a un estado activo después de marcar la casilla correspondiente.
+
+- Se creó la vista **Terms**, destinada a presentar información relacionada con el uso educativo de NetWize y las condiciones generales de utilización de la aplicación.
+
+- Se creó la vista **ForgotPassword**, destinada a estructurar una futura función de recuperación de contraseña.
+
+- La vista de recuperación incorpora un campo para correo electrónico, un botón para enviar instrucciones y una opción para regresar al inicio de sesión.
+
+- Se creó el componente reutilizable `HelpButton`, que permite acceder a un canal de ayuda mediante WhatsApp.
+
+- El componente de ayuda fue integrado en `Layout`, permitiendo que el botón se encuentre disponible en las diferentes vistas de la aplicación sin necesidad de duplicar código.
+
+- Se realizaron pruebas de navegación entre las nuevas vistas para verificar su correcta integración con el sistema existente.
+
+### Resultado
+
+Durante la Semana 21 se incorporó un flujo inicial de acceso y navegación para NetWize compuesto por las vistas de inicio de sesión, registro, términos y condiciones y recuperación de contraseña.
+
+También se agregó un mecanismo general de acceso a ayuda mediante WhatsApp.
+
+Las nuevas vistas mantienen el estilo visual utilizado previamente en NetWize y se integran con el sistema de navegación existente mediante React.
+
+La implementación realizada corresponde actualmente a la estructura visual y de navegación del sistema. Las funciones de autenticación real, almacenamiento de usuarios y recuperación de contraseñas mediante servidor quedan pendientes para una futura etapa si son requeridas por el alcance del proyecto.

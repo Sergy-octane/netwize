@@ -673,3 +673,72 @@ La interfaz debe mantener su comportamiento responsive.
 Las pruebas realizadas durante la Semana 20 permitieron comprobar que las funcionalidades principales continúan funcionando correctamente después de la optimización y limpieza del código.
 
 No se detectaron errores que afecten el funcionamiento de NetWize.
+
+### Prueba 5 — Navegación del flujo de acceso
+
+**Objetivo:** Verificar la navegación entre las nuevas vistas de acceso.
+
+**Procedimiento:**
+
+1. Abrir NetWize.
+2. Verificar que se muestre Login.
+3. Acceder a Registro.
+4. Acceder a Términos y condiciones.
+5. Regresar al Registro.
+6. Acceder a Recuperación de contraseña.
+7. Regresar al Login.
+
+**Resultado esperado:**
+
+Las diferentes vistas deben cargarse correctamente y permitir regresar a las pantallas correspondientes.
+
+**Resultado obtenido:** Correcto.
+
+---
+
+### Prueba 6 — Aceptación de términos
+
+**Objetivo:** Verificar que el registro requiera la aceptación de los términos y condiciones.
+
+**Procedimiento:**
+
+1. Abrir la vista Registro.
+2. Verificar el estado inicial del botón Crear cuenta.
+3. Marcar la casilla de términos y condiciones.
+4. Verificar el cambio de estado del botón.
+5. Desmarcar la casilla.
+
+**Resultado esperado:**
+
+El botón Crear cuenta debe permanecer deshabilitado mientras los términos no sean aceptados y habilitarse al marcar la casilla.
+
+**Resultado obtenido:** Correcto.
+
+---
+
+### Prueba 7 — Acceso a ayuda
+
+**Objetivo:** Verificar el funcionamiento del botón de ayuda mediante WhatsApp.
+
+**Procedimiento:**
+
+1. Abrir diferentes vistas de NetWize.
+2. Verificar que el botón de ayuda esté disponible.
+3. Seleccionar el botón.
+4. Comprobar que WhatsApp se abra en una nueva pestaña.
+
+**Resultado esperado:**
+
+El botón de ayuda debe estar disponible en las diferentes vistas y abrir correctamente el canal de contacto configurado.
+
+**Resultado obtenido:** Correcto.
+
+---
+
+### Resultado general
+
+Las pruebas realizadas durante la Semana 21 permitieron verificar el funcionamiento de las nuevas vistas de acceso y su integración con la navegación existente.
+
+Se comprobó el funcionamiento de Login, Registro, Términos y condiciones, Recuperación de contraseña y el acceso general a ayuda mediante WhatsApp.
+
+También se verificó que la aceptación de los términos controle correctamente el estado del botón de creación de cuenta.

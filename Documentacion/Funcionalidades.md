@@ -193,3 +193,60 @@ Se realizaron las siguientes mejoras:
 - Revisión del comportamiento responsive.
 
 Estas mejoras permiten mantener una estructura de código más limpia sin modificar la lógica principal de la aplicación.
+
+## Flujo de acceso
+
+NetWize incorpora un conjunto de vistas relacionadas con el acceso y navegación inicial de los usuarios.
+
+Actualmente se encuentran disponibles:
+
+- Inicio de sesión.
+- Registro.
+- Términos y condiciones.
+- Recuperación de contraseña.
+
+La navegación entre estas vistas se controla mediante el estado `currentPage` de React.
+
+### Inicio de sesión
+
+La vista de inicio de sesión permite ingresar un correo electrónico y una contraseña.
+
+También proporciona accesos para:
+
+- Recuperar contraseña.
+- Crear una cuenta.
+
+Actualmente esta vista corresponde a la interfaz de acceso y navegación del sistema. No realiza autenticación contra un servidor.
+
+### Registro
+
+La vista de registro permite ingresar:
+
+- Nombre.
+- Correo electrónico.
+- Contraseña.
+- Confirmación de contraseña.
+
+También incorpora la aceptación de términos y condiciones.
+
+El botón de creación de cuenta permanece deshabilitado hasta que el usuario acepta los términos.
+
+### Términos y condiciones
+
+NetWize incorpora una vista independiente para consultar información relacionada con el uso de la aplicación.
+
+La vista puede ser accedida desde el proceso de registro.
+
+### Recuperación de contraseña
+
+NetWize incorpora una vista para solicitar la recuperación de una cuenta mediante correo electrónico.
+
+Actualmente corresponde a una estructura visual, ya que no existe un servicio backend encargado del envío de instrucciones de recuperación.
+
+### Ayuda mediante WhatsApp
+
+NetWize incorpora un botón de ayuda reutilizable mediante WhatsApp.
+
+El componente se integra desde `Layout.jsx`, permitiendo mostrar el acceso a ayuda en las diferentes vistas de la aplicación sin duplicar el código.
+
+El botón abre el canal de contacto en una nueva pestaña.
