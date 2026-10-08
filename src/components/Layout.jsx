@@ -15,7 +15,24 @@ import HelpButton from "./HelpButton";
 
 function Layout() {
 
-  const [currentPage, setCurrentPage] = useState("login");
+  const savedSession = localStorage.getItem("netwizeSession");
+
+  const [currentPage, setCurrentPage] = useState(
+    savedSession ? "dashboard" : "login"
+  );
+   const goToPage = (page) => {
+    const session = localStorage.getItem("netwizeSession");
+
+    if (
+      ["dashboard", "simulator", "encyclopedia"].includes(page) &&
+      !session
+    ) {
+      setCurrentPage("login");
+      return;
+    }
+
+    setCurrentPage(page);
+  };
   
 
   return (
@@ -28,9 +45,9 @@ function Layout() {
           
       {["dashboard", "simulator", "encyclopedia"].includes(currentPage) && (
   <Sidebar
-    setCurrentPage={setCurrentPage}
-    currentPage={currentPage}
-  />
+  setCurrentPage={goToPage}
+  currentPage={currentPage}
+/>
 )}
 
         <main className="flex-1 p-6 bg-gray-50">
@@ -45,9 +62,9 @@ function Layout() {
 
           {currentPage === "forgotPassword" && (<ForgotPassword setCurrentPage={setCurrentPage} />)}
           
-          {currentPage === "dashboard" && <Dashboard setCurrentPage={setCurrentPage} />}
+          {currentPage === "dashboard" && <Dashboard setCurrentPage={goToPage} />}
 
-          {currentPage === "simulator" && <Simulator setCurrentPage={setCurrentPage} />}
+         {currentPage === "simulator" && <Simulator setCurrentPage={goToPage} />}
 
           {currentPage === "encyclopedia" && <Encyclopedia />}
 
