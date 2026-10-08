@@ -250,3 +250,51 @@ NetWize incorpora un botón de ayuda reutilizable mediante WhatsApp.
 El componente se integra desde `Layout.jsx`, permitiendo mostrar el acceso a ayuda en las diferentes vistas de la aplicación sin duplicar el código.
 
 El botón abre el canal de contacto en una nueva pestaña.
+
+## Acceso y autenticación
+
+### Inicio de sesión
+
+NetWize permite iniciar sesión mediante el correo electrónico y la contraseña registrados previamente.
+
+El sistema valida las credenciales almacenadas localmente y, cuando son correctas, crea una sesión para el usuario y permite acceder al Dashboard.
+
+Si los datos ingresados son incorrectos, se muestra un mensaje informando que el correo o la contraseña no son correctos.
+
+### Registro de usuario
+
+La aplicación permite crear una cuenta proporcionando:
+
+- Nombre.
+- Correo electrónico.
+- Contraseña.
+- Confirmación de contraseña.
+- Aceptación de términos y condiciones.
+
+Antes de crear la cuenta se validan los campos requeridos y la coincidencia entre las contraseñas.
+
+El sistema también verifica que el correo electrónico no haya sido registrado anteriormente.
+
+La información del usuario se almacena localmente mediante `LocalStorage`.
+
+La contraseña no se almacena directamente, sino mediante un hash SHA-256 generado con la API nativa `crypto.subtle` del navegador.
+
+### Sesión de usuario
+
+Después de iniciar sesión correctamente, NetWize almacena una sesión local mediante `netwizeSession`.
+
+La sesión permite mantener el acceso al Dashboard y a los módulos internos después de recargar la aplicación.
+
+Cuando no existe una sesión activa, las vistas internas no deben estar disponibles.
+
+### Cerrar sesión
+
+La opción **Cerrar sesión**, disponible desde el Sidebar, elimina la sesión almacenada localmente y devuelve al usuario a la vista de Login.
+
+Al recargar la aplicación después de cerrar sesión, NetWize permanece en Login.
+
+### Recuperación de contraseña
+
+NetWize cuenta con una vista de recuperación de contraseña mediante correo electrónico como parte de la estructura de acceso.
+
+Actualmente esta función se encuentra preparada visualmente, pero no realiza recuperación real mediante correo electrónico debido a que el proyecto no utiliza un servidor de autenticación.

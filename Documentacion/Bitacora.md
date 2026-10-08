@@ -454,3 +454,49 @@ También se agregó un mecanismo general de acceso a ayuda mediante WhatsApp.
 Las nuevas vistas mantienen el estilo visual utilizado previamente en NetWize y se integran con el sistema de navegación existente mediante React.
 
 La implementación realizada corresponde actualmente a la estructura visual y de navegación del sistema. Las funciones de autenticación real, almacenamiento de usuarios y recuperación de contraseñas mediante servidor quedan pendientes para una futura etapa si son requeridas por el alcance del proyecto.
+
+### Implementación de autenticación local
+
+- Después de completar la estructura visual del acceso a NetWize, se decidió implementar un flujo funcional de autenticación local para que el inicio de sesión no quedara únicamente como una vista visual.
+- Se actualizó la vista **Register** para permitir la creación de una cuenta utilizando nombre, correo electrónico, contraseña y confirmación de contraseña.
+- Se incorporaron validaciones para comprobar que los campos requeridos estén completos, que las contraseñas coincidan y que los términos y condiciones hayan sido aceptados.
+- Se agregó una validación para evitar registrar nuevamente un correo electrónico que ya se encuentre almacenado.
+- La información básica del usuario se almacena localmente mediante `LocalStorage`.
+- Para evitar almacenar la contraseña directamente, se implementó un proceso de generación de hash SHA-256 utilizando la API nativa `crypto.subtle` del navegador.
+- Se actualizó la vista **Login** para consultar el usuario almacenado y comparar el correo electrónico y la contraseña ingresados con los datos registrados.
+- Cuando las credenciales son correctas, se crea una sesión local mediante `netwizeSession` y el usuario es dirigido al Dashboard.
+- Se agregaron mensajes de error para informar cuando los campos están vacíos, cuando no existe una cuenta registrada o cuando las credenciales son incorrectas.
+- Se actualizó `Layout` para comprobar la existencia de una sesión al cargar la aplicación.
+- Cuando existe una sesión activa, NetWize permite ingresar directamente al Dashboard después de recargar la página.
+- Cuando no existe una sesión, la aplicación inicia desde la vista de Login.
+- Se actualizó el componente `Sidebar` para que la opción **Cerrar sesión** elimine la sesión almacenada y regrese al Login.
+- Se incorporó una validación de navegación mediante `goToPage` para impedir el acceso a las vistas internas cuando no existe una sesión activa.
+- Se realizaron pruebas de registro, inicio de sesión, cierre de sesión y persistencia de sesión después de recargar la aplicación.
+
+### Resultado
+
+Con estos cambios, el flujo de acceso de NetWize pasó de ser únicamente una estructura visual a contar con una autenticación local funcional.
+
+Actualmente el flujo permite:
+
+```text
+Crear cuenta
+      ↓
+Guardar usuario localmente
+      ↓
+Iniciar sesión
+      ↓
+Validar credenciales
+      ↓
+Crear sesión
+      ↓
+Dashboard
+      ↓
+Cerrar sesión
+      ↓
+Eliminar sesión
+      ↓
+Login
+```
+
+La autenticación implementada está orientada al funcionamiento local y académico del proyecto. No corresponde a un sistema de autenticación con servidor, base de datos remota o recuperación real de contraseña mediante correo electrónico.

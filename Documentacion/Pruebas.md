@@ -742,3 +742,101 @@ Las pruebas realizadas durante la Semana 21 permitieron verificar el funcionamie
 Se comprobó el funcionamiento de Login, Registro, Términos y condiciones, Recuperación de contraseña y el acceso general a ayuda mediante WhatsApp.
 
 También se verificó que la aceptación de los términos controle correctamente el estado del botón de creación de cuenta.
+
+## Pruebas de autenticación local
+
+### Registro de usuario
+
+**Prueba:** Crear una cuenta con datos válidos.
+
+**Resultado esperado:**
+La cuenta debe crearse correctamente, almacenarse localmente y el usuario debe ser dirigido al Login.
+
+**Resultado obtenido:**
+La cuenta se creó correctamente y el sistema mostró el mensaje de confirmación antes de regresar al Login.
+
+**Estado:** ✅ Correcto.
+
+---
+
+### Almacenamiento de usuario
+
+**Prueba:** Revisar el contenido de `LocalStorage` después del registro.
+
+**Resultado esperado:**
+Debe existir un registro `netwizeUser` con los datos básicos del usuario y la contraseña almacenada mediante hash.
+
+**Resultado obtenido:**
+Se verificó la existencia de `netwizeUser` y se confirmó que la contraseña no se almacena directamente, sino como un hash SHA-256.
+
+**Estado:** ✅ Correcto.
+
+---
+
+### Inicio de sesión con credenciales correctas
+
+**Prueba:** Ingresar utilizando el correo y contraseña registrados.
+
+**Resultado esperado:**
+El sistema debe validar las credenciales, crear una sesión y dirigir al Dashboard.
+
+**Resultado obtenido:**
+El inicio de sesión fue exitoso y el usuario fue dirigido al Dashboard.
+
+**Estado:** ✅ Correcto.
+
+---
+
+### Inicio de sesión con credenciales incorrectas
+
+**Prueba:** Ingresar con un correo o contraseña incorrectos.
+
+**Resultado esperado:**
+El sistema debe impedir el acceso y mostrar un mensaje de error.
+
+**Resultado obtenido:**
+El acceso fue rechazado y se mostró el mensaje correspondiente.
+
+**Estado:** ✅ Correcto.
+
+---
+
+### Persistencia de sesión
+
+**Prueba:** Recargar la aplicación después de iniciar sesión.
+
+**Resultado esperado:**
+El sistema debe conservar la sesión y mostrar el Dashboard.
+
+**Resultado obtenido:**
+Después de recargar la aplicación, NetWize permaneció en el Dashboard.
+
+**Estado:** ✅ Correcto.
+
+---
+
+### Cierre de sesión
+
+**Prueba:** Seleccionar la opción **Cerrar sesión** desde el Sidebar.
+
+**Resultado esperado:**
+La sesión debe eliminarse y el usuario debe regresar al Login.
+
+**Resultado obtenido:**
+El usuario regresó al Login y la sesión fue eliminada de `LocalStorage`.
+
+**Estado:** ✅ Correcto.
+
+---
+
+### Acceso después de cerrar sesión
+
+**Prueba:** Recargar la aplicación después de cerrar sesión.
+
+**Resultado esperado:**
+La aplicación debe permanecer en Login.
+
+**Resultado obtenido:**
+Después de recargar, NetWize permaneció en Login y no permitió continuar hacia los módulos internos.
+
+**Estado:** ✅ Correcto.
