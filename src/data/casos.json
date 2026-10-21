@@ -4,7 +4,7 @@
     "titulo": "No tengo internet",
     "categoria": "Red",
     "nivel": "N1",
-    "descripcion": "El usuario no tiene conexión a internet",
+    "descripcion": "El usuario no puede acceder a internet y necesita identificar el origen probable de la falla.",
     "nodos": [
       {
         "id": 1,
@@ -16,14 +16,14 @@
           },
           {
             "texto": "No",
-            "diagnostico": "El router se encuentra apagado.",
-            "solucion": "Enciende el router y espera 2 minutos."
+            "diagnostico": "El router está apagado o no recibe alimentación eléctrica.",
+            "solucion": "Comprobar que el adaptador esté conectado, revisar la toma eléctrica y encender el equipo. Esperar a que los indicadores se estabilicen."
           }
         ]
       },
       {
         "id": 2,
-        "pregunta": "¿Las luces del router están normales?",
+        "pregunta": "¿Los indicadores del router y del equipo de acceso muestran un estado normal?",
         "opciones": [
           {
             "texto": "Sí",
@@ -31,8 +31,7 @@
           },
           {
             "texto": "No",
-            "diagnostico": "El router presenta un estado anormal en sus indicadores luminosos.",
-            "solucion": "Reiniciar el router y verificar el estado de las luces. Si el problema continúa, contactar al proveedor del servicio."
+            "siguiente": 4
           }
         ]
       },
@@ -42,28 +41,89 @@
         "opciones": [
           {
             "texto": "Sí",
-            "siguiente": 4
+            "siguiente": 5
           },
           {
             "texto": "No",
-            "diagnostico": "La falla parece estar limitada a un único dispositivo.",
-            "solucion": "Revisar la configuración de red del dispositivo, olvidar la red WiFi y volver a conectarlo."
+            "siguiente": 6
           }
         ]
       },
       {
         "id": 4,
-        "pregunta": "¿El dispositivo está conectado por WiFi?",
+        "pregunta": "¿Hay alguna luz roja, alarma óptica o indicador que señale pérdida de conexión?",
         "opciones": [
           {
             "texto": "Sí",
-            "diagnostico": "El problema afecta la conexión inalámbrica de toda la red.",
-            "solucion": "Reiniciar el router y verificar la configuración de la red WiFi."
+            "diagnostico": "Los indicadores sugieren una posible falla del enlace o del servicio de acceso.",
+            "solucion": "Registrar qué indicador está encendido y su comportamiento. Comprobar las conexiones visibles sin manipular la fibra óptica y consultar el procedimiento del proveedor. Si persiste, escalar la incidencia."
           },
           {
             "texto": "No",
-            "diagnostico": "El problema afecta la conexión por cable.",
-            "solucion": "Verificar el cable de red, cambiar el puerto Ethernet o reiniciar el router."
+            "diagnostico": "Los indicadores presentan un comportamiento diferente del esperado, pero no permiten identificar con certeza el origen de la falla.",
+            "solucion": "Consultar el significado de los indicadores del modelo del equipo, comprobar sus conexiones y realizar las verificaciones autorizadas antes de escalar."
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "pregunta": "¿El dispositivo obtiene una dirección IP válida y una puerta de enlace?",
+        "opciones": [
+          {
+            "texto": "Sí",
+            "siguiente": 7
+          },
+          {
+            "texto": "No",
+            "diagnostico": "El dispositivo no dispone de una configuración IP adecuada para acceder a la red.",
+            "solucion": "Revisar la configuración IP, comprobar si DHCP está habilitado cuando corresponda y renovar la concesión siguiendo el procedimiento autorizado. Si continúa sin obtener configuración, revisar el router o escalar."
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "pregunta": "¿El dispositivo afectado está conectado por WiFi?",
+        "opciones": [
+          {
+            "texto": "Sí",
+            "diagnostico": "La incidencia parece limitada a un dispositivo conectado por WiFi.",
+            "solucion": "Comprobar que el WiFi esté habilitado, olvidar y volver a conectar la red, revisar la configuración IP y comparar el funcionamiento con otro dispositivo."
+          },
+          {
+            "texto": "No",
+            "diagnostico": "La incidencia parece limitada a un dispositivo conectado por cable o a su configuración de red.",
+            "solucion": "Verificar el cable Ethernet, probar otro puerto disponible y comprobar la configuración IP del dispositivo."
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "pregunta": "¿Puedes acceder a un destino externo mediante su dirección IP?",
+        "opciones": [
+          {
+            "texto": "Sí",
+            "siguiente": 8
+          },
+          {
+            "texto": "No",
+            "diagnostico": "El dispositivo tiene configuración IP, pero no consigue comunicarse con el destino externo probado. Puede existir una falla de conectividad, enrutamiento o del servicio.",
+            "solucion": "Comprobar la puerta de enlace, realizar pruebas de conectividad adicionales y verificar si existe una incidencia del proveedor. Un ping sin respuesta no confirma por sí solo que el servicio esté caído."
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "pregunta": "¿Puedes resolver nombres de dominio mediante una consulta DNS?",
+        "opciones": [
+          {
+            "texto": "Sí",
+            "diagnostico": "La configuración IP y las pruebas realizadas no muestran una causa evidente. Puede existir un problema con el navegador, el tráfico web, el dispositivo o un servicio específico.",
+            "solucion": "Probar otro navegador y otro destino, comprobar la fecha y hora del equipo y revisar las pruebas disponibles. Si persiste, documentar los resultados y escalar."
+          },
+          {
+            "texto": "No",
+            "diagnostico": "Existe conectividad IP hacia el destino probado, pero falla la consulta DNS, lo que apunta a un posible problema de resolución de nombres.",
+            "solucion": "Verificar el servidor DNS configurado, repetir la consulta con nslookup y comparar los resultados con otro servidor permitido por el procedimiento del proveedor."
           }
         ]
       }
@@ -75,8 +135,7 @@
     "titulo": "WiFi lento",
     "categoria": "Red",
     "nivel": "N1",
-    "descripcion": "El usuario tiene internet pero la conexión es lenta",
-    "preguntaInicial": "¿El problema ocurre en todos los dispositivos?",
+    "descripcion": "El usuario tiene conexión a internet, pero experimenta lentitud al navegar.",
     "nodos": [
       {
         "id": 1,
@@ -84,14 +143,88 @@
         "opciones": [
           {
             "texto": "Sí",
-            "diagnostico": "La lentitud afecta a todos los dispositivos.",
-            "solucion": "Revisar el router o la saturación de la red."
+            "siguiente": 2
           },
-
           {
             "texto": "No",
-            "diagnostico": "El problema solo afecta un dispositivo.",
-            "solucion": "Revisar la configuración del dispositivo afectado."
+            "siguiente": 5
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "pregunta": "¿La conexión también es lenta por cable Ethernet?",
+        "opciones": [
+          {
+            "texto": "Sí",
+            "siguiente": 3
+          },
+          {
+            "texto": "No",
+            "siguiente": 4
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "pregunta": "¿La lentitud se presenta incluso cuando pocos dispositivos utilizan la red?",
+        "opciones": [
+          {
+            "texto": "Sí",
+            "diagnostico": "La lentitud afecta a varios dispositivos y también se presenta por cable. Puede existir un problema con el servicio de internet o con el equipo de acceso.",
+            "solucion": "Realizar una prueba de velocidad por cable, comparar el resultado con el plan contratado y revisar si existen incidencias del proveedor. Si persiste, escalar con las pruebas realizadas."
+          },
+          {
+            "texto": "No",
+            "diagnostico": "La lentitud podría estar relacionada con la saturación de la red por el uso simultáneo de varios dispositivos.",
+            "solucion": "Identificar los dispositivos y aplicaciones que consumen más ancho de banda, repetir la prueba con menor uso de la red y verificar si mejora el rendimiento."
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "pregunta": "¿El dispositivo está lejos del router o tiene obstáculos entre ambos?",
+        "opciones": [
+          {
+            "texto": "Sí",
+            "diagnostico": "La lentitud podría estar relacionada con una señal WiFi débil debido a la distancia o a los obstáculos.",
+            "solucion": "Acercar el dispositivo al router y repetir la prueba. Si mejora, recomendar una ubicación más adecuada para el router o evaluar una solución para ampliar la cobertura."
+          },
+          {
+            "texto": "No",
+            "diagnostico": "La conexión por cable funciona mejor que la conexión WiFi y la distancia no parece ser la causa principal.",
+            "solucion": "Comprobar la banda WiFi utilizada, las posibles interferencias y la congestión del canal. Probar otra banda compatible y comparar los resultados."
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "pregunta": "¿El problema mejora al acercar el dispositivo al router?",
+        "opciones": [
+          {
+            "texto": "Sí",
+            "diagnostico": "La lentitud parece estar relacionada con la cobertura WiFi en la ubicación original.",
+            "solucion": "Reubicar el router si es posible, reducir los obstáculos y comprobar la señal en la zona afectada."
+          },
+          {
+            "texto": "No",
+            "siguiente": 6
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "pregunta": "¿Otros dispositivos funcionan correctamente en esa misma ubicación?",
+        "opciones": [
+          {
+            "texto": "Sí",
+            "diagnostico": "La incidencia parece estar relacionada con el dispositivo afectado y no necesariamente con la cobertura general.",
+            "solucion": "Olvidar y volver a conectar la red WiFi, comprobar la configuración de red y actualizar los controladores si corresponde."
+          },
+          {
+            "texto": "No",
+            "diagnostico": "Varios dispositivos presentan lentitud en la misma ubicación, lo que apunta a un posible problema de cobertura o interferencias.",
+            "solucion": "Comparar la señal en distintas zonas, revisar obstáculos e interferencias y evaluar un cambio de ubicación del router o una solución de cobertura."
           }
         ]
       }
@@ -103,37 +236,11 @@
     "titulo": "Problemas DNS",
     "categoria": "DNS",
     "nivel": "N1",
-    "descripcion": "Tiene conexión pero no puede abrir páginas",
-    "preguntaInicial": "¿Puedes hacer ping a una dirección IP?",
+    "descripcion": "El usuario tiene conexión de red, pero experimenta problemas para acceder a páginas web.",
     "nodos": [
       {
         "id": 1,
-        "pregunta": "¿Puedes hacer ping a una dirección IP?",
-        "opciones": [
-          {
-            "texto": "Sí",
-            "diagnostico": "Existe conectividad, pero falla la resolución de nombres DNS.",
-            "solucion": "Cambiar los servidores DNS o reiniciar el router."
-          },
-          {
-            "texto": "No",
-            "diagnostico": "No existe conectividad hacia la red.",
-            "solucion": "Revisar la conexión de red."
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": 4,
-    "titulo": "Internet intermitente",
-    "categoria": "Red",
-    "nivel": "N1",
-    "descripcion": "La conexión a internet se pierde por momentos y luego vuelve.",
-    "nodos": [
-      {
-        "id": 1,
-        "pregunta": "¿La conexión se cae en todos los dispositivos?",
+        "pregunta": "¿El problema ocurre con todas las páginas web?",
         "opciones": [
           {
             "texto": "Sí",
@@ -141,14 +248,13 @@
           },
           {
             "texto": "No",
-            "diagnostico": "La falla parece estar limitada a un único dispositivo.",
-            "solucion": "Revisar la configuración de red del dispositivo afectado y actualizar sus controladores de red si es necesario."
+            "siguiente": 5
           }
         ]
       },
       {
         "id": 2,
-        "pregunta": "¿La falla ocurre siempre en el mismo horario?",
+        "pregunta": "¿Puedes hacer ping a la puerta de enlace del router?",
         "opciones": [
           {
             "texto": "Sí",
@@ -156,23 +262,746 @@
           },
           {
             "texto": "No",
-            "diagnostico": "La falla es intermitente pero no sigue un patrón de horario.",
-            "solucion": "Revisar el estado del router y comprobar si existen cortes reportados por el proveedor."
+            "diagnostico": "No se ha obtenido respuesta de la puerta de enlace. Esto puede indicar un problema de conectividad local, aunque también es posible que el equipo no responda a solicitudes ping.",
+            "solucion": "Verificar la dirección IP del equipo, la puerta de enlace configurada y la conexión WiFi o Ethernet. Comprobar la conectividad con otras pruebas antes de concluir que existe una falla."
           }
         ]
       },
       {
         "id": 3,
-        "pregunta": "¿El router se reinicia solo durante la falla?",
+        "pregunta": "¿Puedes resolver un nombre de dominio usando nslookup?",
         "opciones": [
           {
             "texto": "Sí",
-            "diagnostico": "El router presenta reinicios inesperados.",
-            "solucion": "Restablecer el router a valores de fábrica. Si continúa reiniciándose, gestionar el reemplazo del equipo."
+            "siguiente": 4
+          },
+          {
+            "texto": "No",
+            "diagnostico": "La resolución DNS está fallando o no se obtiene una respuesta del servidor DNS consultado.",
+            "solucion": "Verificar qué servidor DNS está configurado, repetir la consulta con nslookup y comprobar si el problema afecta a un servidor específico. Si corresponde, renovar la configuración de red o escalar la incidencia."
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "pregunta": "¿Puedes acceder a las páginas utilizando su dirección IP directamente?",
+        "opciones": [
+          {
+            "texto": "Sí",
+            "diagnostico": "La conectividad IP parece funcionar y el acceso por dirección IP contrasta con el fallo por nombre. Esto refuerza la sospecha de un problema de resolución DNS.",
+            "solucion": "Comparar las consultas DNS, verificar la configuración del equipo y probar otro servidor DNS únicamente si está permitido por el procedimiento del proveedor."
+          },
+          {
+            "texto": "No",
+            "diagnostico": "Aunque la puerta de enlace responde y nslookup obtiene resultados, el acceso a las páginas sigue fallando. El problema podría estar relacionado con la conectividad externa, el navegador, el filtrado de tráfico o el destino.",
+            "solucion": "Probar la conectividad hacia un destino externo conocido, comprobar si ocurre en otro navegador y revisar posibles incidencias del proveedor antes de atribuir la falla a DNS."
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "pregunta": "¿Las otras páginas web funcionan correctamente?",
+        "opciones": [
+          {
+            "texto": "Sí",
+            "diagnostico": "El problema parece limitado a una página o dominio específico y no demuestra una falla general de DNS.",
+            "solucion": "Comprobar si el sitio está disponible, probar desde otro navegador y dispositivo, y consultar su nombre mediante nslookup para identificar posibles errores de resolución."
+          },
+          {
+            "texto": "No",
+            "siguiente": 2
+          }
+        ]
+      }
+    ]
+  },
+
+  {
+    "id": 4,
+    "titulo": "Internet intermitente",
+    "categoria": "Red",
+    "nivel": "N1",
+    "descripcion": "La conexión a internet se pierde durante algunos momentos y luego se restablece.",
+    "nodos": [
+      {
+        "id": 1,
+        "pregunta": "¿La conexión se pierde en todos los dispositivos?",
+        "opciones": [
+          {
+            "texto": "Sí",
+            "siguiente": 2
+          },
+          {
+            "texto": "No",
+            "siguiente": 6
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "pregunta": "¿El router o el equipo de acceso se reinicia cuando ocurre la falla?",
+        "opciones": [
+          {
+            "texto": "Sí",
+            "siguiente": 3
           },
           {
             "texto": "No",
             "siguiente": 4
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "pregunta": "¿El equipo pierde alimentación eléctrica o muestra indicadores de encendido que se reinician?",
+        "opciones": [
+          {
+            "texto": "Sí",
+            "diagnostico": "Los síntomas apuntan a una posible interrupción de alimentación o a un problema del equipo.",
+            "solucion": "Comprobar la toma eléctrica, el adaptador y las conexiones de alimentación. Verificar si el equipo se sobrecalienta o vuelve a reiniciarse. No restablecerlo a valores de fábrica sin autorización; si persiste, escalar o gestionar la revisión del equipo."
+          },
+          {
+            "texto": "No",
+            "diagnostico": "Se observan reinicios o cambios en el equipo, pero la causa no está confirmada.",
+            "solucion": "Registrar la hora de los eventos, revisar los indicadores y consultar los registros disponibles según el procedimiento del proveedor. Si los reinicios continúan, escalar la incidencia."
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "pregunta": "¿La conexión está conectada por WiFi cuando ocurre la falla?",
+        "opciones": [
+          {
+            "texto": "Sí",
+            "siguiente": 5
+          },
+          {
+            "texto": "No",
+            "diagnostico": "La conexión presenta interrupciones incluso por cable, por lo que la causa podría estar en el equipo de acceso, el enlace o el servicio del proveedor.",
+            "solucion": "Comprobar las conexiones Ethernet, registrar cuándo ocurren los cortes y revisar las incidencias del proveedor. Realizar pruebas de conectividad antes, durante y después de la interrupción y escalar si persiste."
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "pregunta": "¿La señal WiFi es débil o la falla ocurre principalmente lejos del router?",
+        "opciones": [
+          {
+            "texto": "Sí",
+            "diagnostico": "La intermitencia podría estar relacionada con cobertura inalámbrica insuficiente u obstáculos.",
+            "solucion": "Comparar la conexión cerca y lejos del router, reducir obstáculos y revisar las interferencias. Si mejora cerca del equipo, evaluar una ubicación más adecuada o una solución de cobertura."
+          },
+          {
+            "texto": "No",
+            "diagnostico": "La falla inalámbrica no parece explicarse únicamente por la distancia o la intensidad de señal.",
+            "solucion": "Comprobar si otros dispositivos presentan el mismo comportamiento, revisar la banda y las interferencias WiFi y comparar los resultados con una conexión por cable si está disponible."
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "pregunta": "¿El dispositivo afectado está conectado por WiFi?",
+        "opciones": [
+          {
+            "texto": "Sí",
+            "siguiente": 7
+          },
+          {
+            "texto": "No",
+            "diagnostico": "La interrupción parece limitada a un dispositivo conectado por cable o a su configuración de red.",
+            "solucion": "Revisar el cable y el puerto Ethernet, comprobar la configuración IP y comparar el comportamiento con otro dispositivo conectado al mismo equipo."
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "pregunta": "¿Otros dispositivos mantienen una conexión estable en la misma ubicación?",
+        "opciones": [
+          {
+            "texto": "Sí",
+            "diagnostico": "La falla parece estar limitada al dispositivo afectado y no necesariamente a la red WiFi completa.",
+            "solucion": "Revisar la configuración de red del dispositivo, actualizar los controladores cuando corresponda y volver a conectar la red WiFi. Comprobar si el problema se repite."
+          },
+          {
+            "texto": "No",
+            "diagnostico": "Varios dispositivos presentan interrupciones inalámbricas, lo que apunta a un posible problema de señal, interferencias o funcionamiento del router.",
+            "solucion": "Comparar la conexión cerca del router, revisar los indicadores y comprobar si también se producen cortes por cable. Documentar los resultados y escalar si la falla continúa."
+          }
+        ]
+      }
+    ]
+  },
+
+  {
+    "id": 5,
+    "titulo": "No obtiene dirección IP",
+    "categoria": "Red",
+    "nivel": "N1",
+    "descripcion": "El dispositivo está conectado a la red, pero no obtiene una configuración IP válida para comunicarse correctamente.",
+    "nodos": [
+      {
+        "id": 1,
+        "pregunta": "¿El dispositivo está conectado a la red WiFi o al cable Ethernet?",
+        "opciones": [
+          {
+            "texto": "Sí, está conectado",
+            "siguiente": 2
+          },
+          {
+            "texto": "No, no logra conectarse",
+            "diagnostico": "El dispositivo no ha establecido una conexión con la red. Todavía no se puede confirmar que el problema sea la asignación de IP.",
+            "solucion": "Si utiliza WiFi, verificar que esté seleccionada la red correcta y comprobar la contraseña. Si utiliza Ethernet, revisar el cable y los indicadores del puerto. Repetir la comprobación después de restablecer la conexión."
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "pregunta": "¿El dispositivo tiene una dirección IPv4 válida para la red?",
+        "opciones": [
+          {
+            "texto": "Sí",
+            "siguiente": 3
+          },
+          {
+            "texto": "No",
+            "siguiente": 4
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "pregunta": "¿El dispositivo tiene una puerta de enlace predeterminada configurada?",
+        "opciones": [
+          {
+            "texto": "Sí",
+            "siguiente": 5
+          },
+          {
+            "texto": "No",
+            "diagnostico": "El dispositivo tiene una dirección IP, pero no dispone de una puerta de enlace predeterminada. Esto puede impedir el acceso a otras redes.",
+            "solucion": "Verificar los parámetros de red recibidos y la configuración DHCP. Si la dirección es estática, comprobar los valores autorizados para esa red antes de modificarlos."
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "pregunta": "¿La dirección IPv4 comienza por 169.254?",
+        "opciones": [
+          {
+            "texto": "Sí",
+            "diagnostico": "La dirección pertenece al rango APIPA, que puede asignarse automáticamente cuando no se obtiene una concesión DHCP en IPv4.",
+            "solucion": "Comprobar la conectividad con la red, verificar si DHCP está habilitado y revisar que el servidor DHCP o router funcione correctamente. Renovar la concesión si el procedimiento lo permite."
+          },
+          {
+            "texto": "No",
+            "diagnostico": "El dispositivo no presenta una dirección IPv4 del rango APIPA, pero su configuración podría ser incorrecta o incompleta.",
+            "solucion": "Consultar la dirección IP, la máscara de subred y el origen de la configuración. Si utiliza DHCP, revisar la concesión y la disponibilidad del servicio; si utiliza IP estática, comparar los parámetros con los autorizados."
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "pregunta": "¿El dispositivo puede comunicarse con su puerta de enlace?",
+        "opciones": [
+          {
+            "texto": "Sí",
+            "siguiente": 6
+          },
+          {
+            "texto": "No",
+            "diagnostico": "El dispositivo tiene una configuración IP y una puerta de enlace, pero no obtiene respuesta de ella. Puede existir un problema local de conectividad o el equipo podría no responder a ping.",
+            "solucion": "Verificar que la puerta de enlace sea correcta, revisar el enlace WiFi o Ethernet y realizar otras pruebas de conectividad. No concluir que la puerta de enlace está caída únicamente por un ping fallido."
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "pregunta": "¿El dispositivo puede comunicarse con un destino externo mediante su dirección IP?",
+        "opciones": [
+          {
+            "texto": "Sí",
+            "diagnostico": "La comunicación con la puerta de enlace y con un destino externo funciona. La configuración IP parece operativa, por lo que el problema inicial podría estar resuelto o afectar otro servicio.",
+            "solucion": "Comprobar el acceso a páginas web y la resolución DNS. Si el usuario continúa reportando fallos, documentar las pruebas y determinar qué servicio sigue afectado."
+          },
+          {
+            "texto": "No",
+            "diagnostico": "La configuración IP local parece estar presente, pero no se ha confirmado la conectividad externa. Puede existir un problema de enrutamiento, del servicio o del destino probado.",
+            "solucion": "Verificar la configuración IP y la puerta de enlace, realizar pruebas adicionales y consultar posibles incidencias del proveedor. Registrar los resultados y escalar si el problema persiste."
+          }
+        ]
+      }
+    ]
+  },
+
+  {
+    "id": 6,
+    "titulo": "WiFi conectado sin Internet",
+    "categoria": "WiFi",
+    "nivel": "N1",
+    "descripcion": "El dispositivo se conecta a la red WiFi, pero no puede acceder a páginas web ni utilizar servicios de internet.",
+    "nodos": [
+      {
+        "id": 1,
+        "pregunta": "¿Otros dispositivos conectados a la misma red WiFi pueden acceder a Internet?",
+        "opciones": [
+          {
+            "texto": "Sí",
+            "siguiente": 2
+          },
+          {
+            "texto": "No",
+            "siguiente": 4
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "pregunta": "¿El dispositivo tiene una dirección IP y una puerta de enlace válidas?",
+        "opciones": [
+          {
+            "texto": "Sí",
+            "siguiente": 3
+          },
+          {
+            "texto": "No",
+            "diagnostico": "El problema parece estar relacionado con la configuración IP del dispositivo afectado.",
+            "solucion": "Comprobar la configuración IP, verificar si DHCP está habilitado cuando corresponda y renovar la concesión siguiendo el procedimiento autorizado. Después, volver a probar la conexión."
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "pregunta": "¿El dispositivo puede comunicarse con su puerta de enlace?",
+        "opciones": [
+          {
+            "texto": "Sí",
+            "diagnostico": "El dispositivo se comunica con la red local, pero continúa sin acceso a Internet. La causa podría estar en la resolución DNS, el enrutamiento, la configuración del dispositivo o un servicio externo.",
+            "solucion": "Probar la conectividad hacia un destino externo, consultar DNS con nslookup y comprobar si el problema afecta a todos los servicios. Registrar los resultados antes de escalar."
+          },
+          {
+            "texto": "No",
+            "diagnostico": "La configuración IP parece presente, pero no se obtiene respuesta de la puerta de enlace. Puede existir un problema de comunicación local o el router podría no responder a ping.",
+            "solucion": "Verificar la dirección de la puerta de enlace, comprobar la conexión WiFi y volver a conectarse a la red. Realizar otras pruebas de conectividad antes de concluir que el router está fallando."
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "pregunta": "¿Los indicadores del router o del equipo de acceso muestran una alarma o un estado anormal?",
+        "opciones": [
+          {
+            "texto": "Sí",
+            "diagnostico": "Los indicadores sugieren una posible incidencia en el equipo de acceso o en el servicio del proveedor.",
+            "solucion": "Registrar el estado de los indicadores, verificar las conexiones visibles y consultar si existe una incidencia reportada. Seguir el procedimiento del proveedor y escalar si corresponde."
+          },
+          {
+            "texto": "No",
+            "siguiente": 5
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "pregunta": "¿Los dispositivos tienen una configuración IP válida y una puerta de enlace?",
+        "opciones": [
+          {
+            "texto": "Sí",
+            "diagnostico": "Varios dispositivos tienen configuración IP, pero ninguno accede a Internet. Esto sugiere un posible problema de enrutamiento, del equipo de acceso o del servicio del proveedor.",
+            "solucion": "Comprobar la conectividad con la puerta de enlace y con destinos externos, revisar posibles incidencias del proveedor y documentar las pruebas. Si persiste, escalar la incidencia."
+          },
+          {
+            "texto": "No",
+            "diagnostico": "Varios dispositivos presentan una configuración IP incompleta o inválida, lo que puede indicar un problema con DHCP o con la configuración de la red local.",
+            "solucion": "Comprobar el servicio DHCP del router o de la red, verificar la configuración de los dispositivos y renovar las concesiones cuando esté permitido. Si no se recupera la configuración, escalar."
+          }
+        ]
+      }
+    ]
+  },
+
+  {
+    "id": 7,
+    "titulo": "No funciona la conexión por cable",
+    "categoria": "Red",
+    "nivel": "N1",
+    "descripcion": "El usuario conecta su equipo mediante un cable Ethernet, pero no consigue establecer una conexión de red funcional.",
+    "nodos": [
+      {
+        "id": 1,
+        "pregunta": "¿El cable Ethernet está conectado correctamente en ambos extremos?",
+        "opciones": [
+          {
+            "texto": "Sí",
+            "siguiente": 2
+          },
+          {
+            "texto": "No",
+            "diagnostico": "La conexión física puede estar incompleta.",
+            "solucion": "Conectar correctamente el cable al equipo y al puerto de red correspondiente. Comprobar que los conectores queden firmes y volver a verificar la conexión."
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "pregunta": "¿Se encienden los indicadores del puerto Ethernet?",
+        "opciones": [
+          {
+            "texto": "Sí",
+            "siguiente": 3
+          },
+          {
+            "texto": "No",
+            "siguiente": 4
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "pregunta": "¿El equipo obtiene una dirección IP válida?",
+        "opciones": [
+          {
+            "texto": "Sí",
+            "siguiente": 5
+          },
+          {
+            "texto": "No",
+            "diagnostico": "El enlace físico parece haberse establecido, pero el equipo no obtiene una configuración IP válida.",
+            "solucion": "Verificar la configuración IP y DHCP, comprobar si el adaptador está configurado para obtener una dirección automáticamente y renovar la concesión cuando corresponda."
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "pregunta": "¿Puedes probar con otro cable Ethernet que funcione correctamente?",
+        "opciones": [
+          {
+            "texto": "Sí, tengo otro cable",
+            "siguiente": 6
+          },
+          {
+            "texto": "No, no tengo otro cable",
+            "diagnostico": "No se ha confirmado si la falla se encuentra en el cable, el puerto o el adaptador de red.",
+            "solucion": "Revisar visualmente el cable y los conectores, comprobar que el puerto esté habilitado y solicitar otro cable o una prueba adicional según los recursos disponibles."
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "pregunta": "¿El equipo puede comunicarse con la puerta de enlace?",
+        "opciones": [
+          {
+            "texto": "Sí",
+            "diagnostico": "La conexión Ethernet y la comunicación con la red local parecen funcionar. La falla podría estar en la conectividad externa, DNS o algún servicio específico.",
+            "solucion": "Probar un destino externo, consultar la resolución DNS y verificar si otros dispositivos tienen acceso a Internet. Registrar los resultados y escalar si persiste."
+          },
+          {
+            "texto": "No",
+            "diagnostico": "El equipo tiene una dirección IP, pero no se ha confirmado la comunicación con la puerta de enlace.",
+            "solucion": "Verificar la dirección IP, la máscara y la puerta de enlace; comprobar el estado del adaptador y revisar la conectividad local. Un ping fallido por sí solo no confirma que el equipo de red esté caído."
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "pregunta": "¿La conexión funciona al utilizar el otro cable?",
+        "opciones": [
+          {
+            "texto": "Sí",
+            "diagnostico": "El cable original probablemente presenta una falla física.",
+            "solucion": "Sustituir el cable defectuoso y comprobar que la conexión permanezca estable. Registrar la incidencia si corresponde."
+          },
+          {
+            "texto": "No",
+            "diagnostico": "La falla podría estar relacionada con el puerto Ethernet, el adaptador de red o su configuración.",
+            "solucion": "Probar otro puerto disponible, comprobar que el adaptador esté habilitado y revisar su estado en el sistema operativo. Si no se recupera la conexión, escalar para una revisión adicional."
+          }
+        ]
+      }
+    ]
+  },
+
+  {
+    "id": 8,
+    "titulo": "Latencia alta y pérdida de paquetes",
+    "categoria": "Red",
+    "nivel": "N1",
+    "descripcion": "El usuario experimenta retrasos, interrupciones o respuestas irregulares al utilizar servicios de red.",
+    "nodos": [
+      {
+        "id": 1,
+        "pregunta": "¿La latencia elevada o la pérdida de paquetes se presenta en varios dispositivos?",
+        "opciones": [
+          {
+            "texto": "Sí",
+            "siguiente": 2
+          },
+          {
+            "texto": "No",
+            "siguiente": 5
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "pregunta": "¿El problema aparece también al conectarse por cable Ethernet?",
+        "opciones": [
+          {
+            "texto": "Sí",
+            "siguiente": 3
+          },
+          {
+            "texto": "No",
+            "diagnostico": "El problema parece estar relacionado con la conexión inalámbrica, aunque todavía debe comprobarse si existen otros factores.",
+            "solucion": "Comparar los resultados cerca del router, revisar la intensidad de señal y las interferencias, y repetir las pruebas en diferentes ubicaciones."
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "pregunta": "¿La latencia aumenta considerablemente cuando varios dispositivos utilizan Internet?",
+        "opciones": [
+          {
+            "texto": "Sí",
+            "diagnostico": "La congestión de la red o la saturación de la conexión podrían estar contribuyendo al aumento de latencia.",
+            "solucion": "Repetir las pruebas con menos tráfico, identificar usos intensivos del ancho de banda y comparar los resultados. Si ocurre de forma persistente, revisar el servicio contratado y escalar con las evidencias."
+          },
+          {
+            "texto": "No",
+            "siguiente": 4
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "pregunta": "¿La pérdida de paquetes también aparece al probar la comunicación con la puerta de enlace?",
+        "opciones": [
+          {
+            "texto": "Sí",
+            "diagnostico": "La pérdida de respuestas dentro de la red local podría indicar problemas de WiFi, cableado, interfaz de red o del equipo de acceso. También debe considerarse que algunos dispositivos limitan las respuestas a ping.",
+            "solucion": "Comparar pruebas por cable y WiFi, revisar los conectores y comprobar los resultados en diferentes momentos. Si la pérdida persiste y se confirma con otras pruebas, documentar y escalar."
+          },
+          {
+            "texto": "No",
+            "diagnostico": "La red local parece responder correctamente, mientras que el problema aparece al comunicarse con destinos externos.",
+            "solucion": "Repetir las pruebas hacia varios destinos, comparar latencia y pérdida de paquetes en distintos momentos y consultar posibles incidencias del proveedor."
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "pregunta": "¿El problema desaparece al acercarse al router o al conectarse por cable?",
+        "opciones": [
+          {
+            "texto": "Sí",
+            "diagnostico": "La mejora al cambiar la ubicación o utilizar cable sugiere un posible problema de cobertura o interferencias WiFi.",
+            "solucion": "Revisar la ubicación del router, los obstáculos y las interferencias. Comparar las mediciones en diferentes ubicaciones y recomendar la alternativa más estable."
+          },
+          {
+            "texto": "No",
+            "siguiente": 6
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "pregunta": "¿El problema se presenta únicamente al acceder a un servicio o destino específico?",
+        "opciones": [
+          {
+            "texto": "Sí",
+            "diagnostico": "La incidencia podría estar relacionada con el destino, su ruta de red o el servicio utilizado, en lugar de afectar a toda la conexión.",
+            "solucion": "Probar otros destinos, registrar las latencias y comprobar si el servicio específico presenta una incidencia. Escalar con las pruebas si el problema continúa."
+          },
+          {
+            "texto": "No",
+            "diagnostico": "La latencia elevada o la pérdida de paquetes afecta a varios destinos, por lo que podría existir un problema más general de conectividad.",
+            "solucion": "Realizar pruebas repetidas, comparar la comunicación con la puerta de enlace y con destinos externos, y revisar posibles incidencias del proveedor. Documentar los resultados antes de escalar."
+          }
+        ]
+      }
+    ]
+  },
+
+  {
+    "id": 9,
+    "titulo": "Un sitio web no abre",
+    "categoria": "Navegación",
+    "nivel": "N1",
+    "descripcion": "El usuario no puede acceder a una página web específica, aunque necesita determinar si la falla está en el sitio, el navegador, DNS o la conexión.",
+    "nodos": [
+      {
+        "id": 1,
+        "pregunta": "¿Puedes abrir otras páginas web normalmente?",
+        "opciones": [
+          {
+            "texto": "Sí",
+            "siguiente": 2
+          },
+          {
+            "texto": "No",
+            "siguiente": 5
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "pregunta": "¿La página problemática abre desde otro navegador?",
+        "opciones": [
+          {
+            "texto": "Sí",
+            "diagnostico": "La página funciona en otro navegador, por lo que la incidencia podría estar relacionada con la configuración, extensiones o caché del navegador original.",
+            "solucion": "Deshabilitar temporalmente las extensiones pertinentes, probar una ventana privada y borrar la caché del navegador afectado si corresponde. Comprobar nuevamente el acceso."
+          },
+          {
+            "texto": "No",
+            "siguiente": 3
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "pregunta": "¿El nombre del sitio se resuelve correctamente mediante nslookup?",
+        "opciones": [
+          {
+            "texto": "Sí",
+            "siguiente": 4
+          },
+          {
+            "texto": "No",
+            "diagnostico": "La consulta DNS no consigue resolver el nombre del sitio. Puede existir un problema de resolución, una configuración DNS incorrecta o una incidencia relacionada con el dominio.",
+            "solucion": "Repetir la consulta, verificar el servidor DNS utilizado y comparar con otra consulta permitida. Si otros dominios funcionan, comprobar si el problema se limita al dominio afectado."
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "pregunta": "¿La misma página tampoco abre desde otro dispositivo conectado a la misma red?",
+        "opciones": [
+          {
+            "texto": "Sí, tampoco abre",
+            "diagnostico": "La página se resuelve, pero falla desde varios dispositivos de la misma red. El problema podría estar en el sitio, en la ruta hacia él o en algún filtro de red.",
+            "solucion": "Comprobar si el sitio está disponible desde otra conexión autorizada, revisar el mensaje de error y consultar posibles restricciones de red. Si solo falla en esa red, documentar y escalar."
+          },
+          {
+            "texto": "No, en el otro dispositivo funciona",
+            "diagnostico": "La incidencia parece estar limitada al dispositivo original, aunque la causa exacta aún no está confirmada.",
+            "solucion": "Revisar el proxy, la configuración de red, las extensiones del navegador y posibles restricciones de seguridad del dispositivo. Repetir la prueba después de cada cambio autorizado."
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "pregunta": "¿El dispositivo puede acceder a un destino externo mediante su dirección IP?",
+        "opciones": [
+          {
+            "texto": "Sí",
+            "siguiente": 6
+          },
+          {
+            "texto": "No",
+            "diagnostico": "No se ha confirmado la conectividad externa. El problema podría afectar a la conexión, al enrutamiento o al destino utilizado para la prueba.",
+            "solucion": "Comprobar la configuración IP y la puerta de enlace, realizar otras pruebas de conectividad y verificar posibles incidencias del proveedor antes de atribuir la falla al navegador."
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "pregunta": "¿Las consultas DNS funcionan para otros dominios?",
+        "opciones": [
+          {
+            "texto": "Sí",
+            "diagnostico": "La conectividad IP y la resolución de otros dominios funcionan. La incidencia podría estar limitada al sitio específico o a su acceso desde la red.",
+            "solucion": "Verificar el dominio, revisar el mensaje de error, probar desde otro dispositivo o conexión autorizada y consultar si el sitio tiene una incidencia. Escalar si persiste."
+          },
+          {
+            "texto": "No",
+            "diagnostico": "La conectividad IP parece disponible, pero varios nombres de dominio no se resuelven. Existe una sospecha de problema general de DNS.",
+            "solucion": "Comprobar el servidor DNS configurado, repetir las consultas con nslookup y revisar la configuración del equipo o del router según el procedimiento autorizado."
+          }
+        ]
+      }
+    ]
+  },
+
+  {
+    "id": 10,
+    "titulo": "Posible falla de fibra óptica",
+    "categoria": "Fibra óptica",
+    "nivel": "N1",
+    "descripcion": "El usuario reporta pérdida de conexión en un servicio de fibra óptica y es necesario identificar posibles señales de una falla física o de servicio.",
+    "nodos": [
+      {
+        "id": 1,
+        "pregunta": "¿Los indicadores de la ONT muestran una alarma óptica, como LOS en rojo o parpadeando?",
+        "opciones": [
+          {
+            "texto": "Sí",
+            "diagnostico": "La alarma óptica puede indicar pérdida o degradación de la señal de fibra, aunque debe confirmarse mediante el procedimiento del proveedor.",
+            "solucion": "Registrar los indicadores observados, comprobar que el equipo tenga alimentación eléctrica y revisar visualmente el cableado accesible sin manipular la fibra. Reportar la posible falla óptica al área correspondiente."
+          },
+          {
+            "texto": "No",
+            "siguiente": 2
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "pregunta": "¿La pérdida de conexión afecta a todos los dispositivos conectados al servicio?",
+        "opciones": [
+          {
+            "texto": "Sí",
+            "siguiente": 3
+          },
+          {
+            "texto": "No",
+            "siguiente": 5
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "pregunta": "¿La ONT y el router tienen alimentación eléctrica y están encendidos?",
+        "opciones": [
+          {
+            "texto": "Sí",
+            "siguiente": 4
+          },
+          {
+            "texto": "No",
+            "diagnostico": "La falta de alimentación o un equipo apagado podría explicar la interrupción del servicio.",
+            "solucion": "Verificar de forma segura la conexión eléctrica y el estado de los equipos. Si la alimentación está disponible pero el equipo no enciende, seguir el procedimiento de soporte o escalar."
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "pregunta": "¿Los indicadores de la ONT muestran un estado normal según la guía del proveedor?",
+        "opciones": [
+          {
+            "texto": "Sí",
+            "diagnostico": "No se observa una alarma óptica evidente, pero la falla general podría estar relacionada con el router, la configuración, la red del proveedor o una incidencia del servicio.",
+            "solucion": "Comprobar los indicadores del router, la configuración de red y las incidencias conocidas del proveedor. Registrar las pruebas realizadas y escalar si el servicio continúa sin funcionar."
+          },
+          {
+            "texto": "No",
+            "diagnostico": "Los indicadores anormales de la ONT podrían señalar un problema de señal o de funcionamiento del equipo.",
+            "solucion": "Registrar los indicadores exactos y consultar la guía del proveedor. No manipular ni desconectar la fibra; reportar la incidencia para que se realicen las comprobaciones técnicas correspondientes."
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "pregunta": "¿El dispositivo afectado puede navegar cuando se conecta a otra red autorizada?",
+        "opciones": [
+          {
+            "texto": "Sí",
+            "diagnostico": "El dispositivo puede acceder a Internet mediante otra red, por lo que la incidencia podría estar relacionada con la configuración o la conexión del servicio original.",
+            "solucion": "Comparar la configuración IP y DNS del dispositivo con la de otros equipos de la red original. Verificar si el problema ocurre por WiFi o también por cable, según los recursos disponibles."
+          },
+          {
+            "texto": "No",
+            "diagnostico": "La falla podría estar limitada al dispositivo, su configuración o su adaptador de red, y no necesariamente a la fibra óptica.",
+            "solucion": "Revisar la configuración IP, DNS y el estado del adaptador. Probar otras aplicaciones y conexiones autorizadas antes de atribuir el problema al servicio FTTH."
           }
         ]
       }

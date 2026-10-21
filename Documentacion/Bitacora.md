@@ -500,3 +500,33 @@ Login
 ```
 
 La autenticación implementada está orientada al funcionamiento local y académico del proyecto. No corresponde a un sistema de autenticación con servidor, base de datos remota o recuperación real de contraseña mediante correo electrónico.
+
+## Semana 22
+
+### Objetivos
+
+- Ampliar los casos disponibles en el simulador de soporte técnico.
+- Fortalecer la enciclopedia mediante la incorporación de nuevos conceptos relacionados con redes y soporte técnico de nivel 1.
+- Mejorar el buscador de la enciclopedia para facilitar la consulta de información.
+- Validar la integridad y consistencia de los datos utilizados por la aplicación.
+- Realizar pruebas de funcionamiento de las funcionalidades ampliadas.
+
+### Desarrollo
+
+- Se amplió el archivo `casos.json` para aumentar la cantidad de situaciones de soporte técnico disponibles en el simulador.
+- Se completó una colección de 19 casos de soporte técnico, orientados a representar diferentes problemas que pueden presentarse durante la atención de usuarios.
+- Se amplió el contenido de la enciclopedia técnica mediante la incorporación de nuevos conceptos relacionados con redes, conectividad y procedimientos de diagnóstico.
+- Se consolidó una colección de 82 conceptos técnicos, cada uno con información organizada en los campos de título, categoría, definición, utilidad y recomendaciones de revisión para soporte N1.
+- Se modificó el buscador de la enciclopedia para permitir consultas sobre diferentes campos de información, en lugar de limitar la búsqueda únicamente al título del concepto.
+- Se incorporó la normalización del texto de búsqueda para permitir encontrar resultados sin necesidad de escribir correctamente las tildes.
+- Se realizaron validaciones sobre el archivo de datos de la enciclopedia para comprobar la existencia de títulos duplicados y campos obligatorios incompletos.
+- Se verificó que los 82 conceptos registrados no presentaran títulos duplicados ni campos obligatorios incompletos.
+- Se realizaron pruebas de navegación y funcionamiento de los casos del simulador y de las consultas de la enciclopedia.
+
+### Resultado
+
+Durante la Semana 22 se amplió el contenido educativo de NetWize mediante la incorporación de 19 casos de soporte técnico y una enciclopedia compuesta por 82 conceptos.
+
+También se mejoró el buscador para facilitar la localización de información técnica y se validó la integridad de los datos de la enciclopedia.
+
+Con estos cambios, NetWize dispone de una mayor variedad de situaciones de diagnóstico y de un recurso de consulta técnica más completo para apoyar el aprendizaje de procedimientos básicos de soporte de nivel 1.

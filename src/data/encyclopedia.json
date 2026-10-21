@@ -215,5 +215,366 @@
     "queEs": "El hardware son las partes físicas de un dispositivo, como procesador, memoria, almacenamiento, tarjeta de red y antenas.",
     "paraQueSirve": "Cada componente permite que el dispositivo pueda ejecutar programas, almacenar información y comunicarse con otras redes.",
     "revisarN1": "Identificar si el problema puede estar relacionado con las capacidades o limitaciones físicas del dispositivo."
+  },
+  {
+    "titulo": "Máscara de subred",
+    "categoria": "Redes básicas",
+    "queEs": "Es un dato que ayuda al dispositivo a distinguir qué equipos pertenecen a su red local. Es como una regla que permite separar las direcciones de la red.",
+    "paraQueSirve": "Permite determinar si un dispositivo puede comunicarse directamente con otro equipo de la red o si debe enviar los datos a la puerta de enlace.",
+    "revisarN1": "Comprobar que la máscara esté configurada correctamente junto con la dirección IP y la puerta de enlace. Una configuración incorrecta puede impedir la comunicación."
+  },
+  {
+    "titulo": "IPv4",
+    "categoria": "Redes básicas",
+    "queEs": "Es una versión del sistema de direcciones IP. Normalmente se escribe como cuatro números separados por puntos, por ejemplo, 192.168.1.20.",
+    "paraQueSirve": "Permite identificar dispositivos y dirigir información entre redes que utilizan IPv4.",
+    "revisarN1": "Verificar que la dirección tenga un formato válido y que corresponda a la red. Una dirección con formato correcto no garantiza por sí sola que exista conexión."
+  },
+  {
+    "titulo": "IPv6",
+    "categoria": "Redes básicas",
+    "queEs": "Es una versión más reciente del sistema de direcciones IP. Utiliza direcciones más largas, escritas con números y letras, como 2001:db8::1.",
+    "paraQueSirve": "Ofrece una cantidad mucho mayor de direcciones para conectar dispositivos a las redes.",
+    "revisarN1": "Comprobar si el equipo y la red tienen IPv6 habilitado y si la configuración es adecuada. Que IPv6 no esté disponible no significa automáticamente que IPv4 esté fallando."
+  },
+  {
+    "titulo": "Dirección APIPA",
+    "categoria": "Redes básicas",
+    "queEs": "Es una dirección que un equipo puede asignarse automáticamente cuando no consigue obtener una dirección IPv4 de un servidor DHCP. En muchos equipos comienza por 169.254.",
+    "paraQueSirve": "Permite que el equipo tenga una dirección local automática, aunque normalmente no le proporciona acceso a otras redes.",
+    "revisarN1": "Si aparece una dirección 169.254.x.x, comprobar la conexión física o Wi-Fi, revisar la configuración IP y verificar si el equipo puede recibir una dirección mediante DHCP."
+  },
+  {
+    "titulo": "IP privada",
+    "categoria": "Redes básicas",
+    "queEs": "Es una dirección utilizada dentro de redes privadas, como la red de una casa, una oficina o un colegio. Por ejemplo, 192.168.1.20.",
+    "paraQueSirve": "Permite identificar y comunicar los dispositivos dentro de una red privada sin necesitar una dirección pública diferente para cada uno.",
+    "revisarN1": "Comprobar que la dirección pertenezca al rango esperado para la red y que no exista un conflicto de direcciones. Tener una IP privada no garantiza que Internet funcione."
+  },
+  {
+    "titulo": "IP pública",
+    "categoria": "Redes básicas",
+    "queEs": "Es una dirección IP utilizada para identificar una conexión o interfaz de red en Internet. Puede ser asignada por el proveedor y cambiar con el tiempo.",
+    "paraQueSirve": "Permite que las redes se comuniquen a través de Internet utilizando direcciones públicas enrutables.",
+    "revisarN1": "Comprobar el estado de la conexión y, si las herramientas lo permiten, verificar la dirección pública y compararla con la configuración esperada. Su ausencia en un equipo doméstico no implica necesariamente una avería."
+  },
+  {
+    "titulo": "Ancho de banda",
+    "categoria": "Redes básicas",
+    "queEs": "Es la capacidad de una conexión para transportar datos durante un tiempo determinado. Se puede comparar con el número de carriles de una carretera: más capacidad permite transportar más datos a la vez.",
+    "paraQueSirve": "Ayuda a entender cuánta información puede transportar una conexión y por qué varios usuarios pueden competir por esa capacidad.",
+    "revisarN1": "Comparar la velocidad medida con la contratada usando una prueba adecuada, preferiblemente por cable cuando sea posible, y considerar el uso simultáneo de la conexión."
+  },
+  {
+    "titulo": "Pérdida de paquetes",
+    "categoria": "Redes básicas",
+    "queEs": "Ocurre cuando algunos pequeños bloques de información enviados por la red no llegan a su destino o no reciben respuesta.",
+    "paraQueSirve": "Identificarla ayuda a investigar cortes de audio o video, interrupciones en juegos y conexiones inestables.",
+    "revisarN1": "Repetir las pruebas, comparar la comunicación con la puerta de enlace y con varios destinos externos, y registrar los resultados. Un ping sin respuesta no demuestra por sí solo que exista pérdida de paquetes."
+  },
+  {
+    "titulo": "Jitter",
+    "categoria": "Redes básicas",
+    "queEs": "Es la variación en el tiempo que tardan en llegar los paquetes de datos. Si los datos fueran coches, sería como si unos llegaran rápidamente y otros tardaran mucho más de lo esperado.",
+    "paraQueSirve": "Ayuda a explicar problemas en llamadas, videollamadas y juegos en línea, donde importa que los datos lleguen de forma regular.",
+    "revisarN1": "Comparar mediciones de jitter en pruebas adecuadas, revisar si hay saturación y comprobar si el problema ocurre por Wi-Fi y por cable."
+  },
+  {
+    "titulo": "Switch de red",
+    "categoria": "Equipos de red",
+    "queEs": "Es un equipo que conecta varios dispositivos dentro de una red local mediante puertos de red. Se parece a una regleta eléctrica, pero para conexiones de datos.",
+    "paraQueSirve": "Permite que computadores, impresoras y otros equipos se comuniquen dentro de la misma red.",
+    "revisarN1": "Comprobar alimentación, indicadores de los puertos y cables conectados. Si varios equipos fallan al mismo tiempo, registrar qué dispositivos están afectados y escalar cuando corresponda."
+  },
+  {
+    "titulo": "Punto de acceso Wi-Fi",
+    "categoria": "Wi-Fi",
+    "queEs": "Es un dispositivo que permite conectar equipos inalámbricos a una red. Funciona como un punto de entrada entre los dispositivos Wi-Fi y la red cableada.",
+    "paraQueSirve": "Proporciona cobertura inalámbrica en una casa, oficina o edificio. Algunos routers ya incluyen esta función.",
+    "revisarN1": "Comprobar que esté encendido, que la red Wi-Fi esté disponible y que los dispositivos puedan conectarse. Si solo falla una zona, revisar cobertura y obstáculos."
+  },
+  {
+    "titulo": "Firewall",
+    "categoria": "Seguridad de redes",
+    "queEs": "Es un sistema de seguridad que controla qué conexiones de red se permiten y cuáles se bloquean, según unas reglas.",
+    "paraQueSirve": "Ayuda a proteger equipos y redes frente a conexiones no autorizadas y permite aplicar reglas de comunicación.",
+    "revisarN1": "Comprobar si el problema afecta a una aplicación o servicio específico y revisar las reglas autorizadas según el procedimiento de soporte. No desactivar el firewall como primera solución."
+  },
+
+  {
+    "titulo": "Servidor",
+    "categoria": "Redes básicas",
+    "queEs": "Un servidor es un equipo o programa que proporciona información o servicios a otros dispositivos. Por ejemplo, un servidor web entrega las páginas que visitas desde el navegador.",
+    "paraQueSirve": "Permite compartir páginas web, archivos, aplicaciones y otros recursos con los dispositivos que los solicitan.",
+    "revisarN1": "Comprobar si el problema afecta a un servicio concreto o a varios, revisar los mensajes de error y verificar si el servicio está disponible según las herramientas autorizadas."
+  },
+  {
+    "titulo": "Cliente de red",
+    "categoria": "Redes básicas",
+    "queEs": "Es el dispositivo o programa que solicita un servicio a otro equipo. Por ejemplo, el navegador de tu computador actúa como cliente cuando solicita una página web.",
+    "paraQueSirve": "Permite utilizar servicios proporcionados por otros equipos, como páginas web, archivos o aplicaciones.",
+    "revisarN1": "Comprobar si el problema aparece en un solo dispositivo o programa, comparar con otro cliente y revisar su configuración de red."
+  },
+  {
+    "titulo": "URL",
+    "categoria": "Navegación web",
+    "queEs": "Una URL es la dirección que indica dónde se encuentra un recurso en Internet. Por ejemplo, https://ejemplo.com identifica una dirección web.",
+    "paraQueSirve": "Permite al navegador localizar una página, una imagen, un archivo u otro recurso.",
+    "revisarN1": "Verificar que la dirección esté escrita correctamente, que incluya el dominio esperado y que el error no se deba a una URL incompleta o incorrecta."
+  },
+  {
+    "titulo": "HTTP y HTTPS",
+    "categoria": "Navegación web",
+    "queEs": "HTTP es un protocolo que permite intercambiar información entre un navegador y un servidor web. HTTPS añade una conexión protegida mediante cifrado y comprobaciones de identidad del servidor.",
+    "paraQueSirve": "Permite cargar páginas web y, con HTTPS, proteger la información transmitida frente a la lectura o modificación por terceros durante el transporte.",
+    "revisarN1": "Comprobar la dirección, el mensaje de error y la fecha y hora del equipo si aparece un aviso de certificado. No recomendar ignorar advertencias de seguridad sin investigar su causa."
+  },
+  {
+    "titulo": "Caché del navegador",
+    "categoria": "Navegación web",
+    "queEs": "Es un almacenamiento temporal que conserva elementos de páginas web, como imágenes y archivos, para no tener que descargarlos cada vez.",
+    "paraQueSirve": "Ayuda a que algunas páginas carguen más rápido y reduce la descarga repetida de los mismos recursos.",
+    "revisarN1": "Si una página muestra contenido antiguo o falla en un navegador, probar una ventana privada u otro navegador. Borrar la caché solo si resulta pertinente y teniendo en cuenta que algunos sitios podrían tardar más en cargar después."
+  },
+  {
+    "titulo": "Cookies",
+    "categoria": "Navegación web",
+    "queEs": "Son pequeños datos que un sitio web guarda en el navegador. Pueden recordar preferencias o mantener la sesión iniciada.",
+    "paraQueSirve": "Permiten que una página recuerde ciertas opciones y mantenga funciones como el inicio de sesión.",
+    "revisarN1": "Si falla el acceso a un sitio, comprobar si las cookies están bloqueadas y probar las opciones autorizadas del navegador. Borrarlas puede cerrar sesiones y eliminar preferencias."
+  },
+  {
+    "titulo": "Proxy",
+    "categoria": "Redes básicas",
+    "queEs": "Un proxy es un intermediario entre un dispositivo y otro servicio de red. Algunas organizaciones lo utilizan para controlar, filtrar o registrar el acceso a Internet.",
+    "paraQueSirve": "Puede aplicar políticas de acceso, filtrar solicitudes y actuar como intermediario en determinadas comunicaciones.",
+    "revisarN1": "Si solo algunas páginas o aplicaciones fallan, comprobar si la red requiere un proxy y si la configuración es correcta. No cambiar los ajustes corporativos sin autorización."
+  },
+  {
+    "titulo": "VPN",
+    "categoria": "Redes y seguridad",
+    "queEs": "Una VPN crea una conexión lógica protegida entre un dispositivo y otra red a través de una red existente, como Internet.",
+    "paraQueSirve": "Permite acceder de forma remota a recursos privados y proteger el tráfico entre los extremos de la conexión VPN.",
+    "revisarN1": "Comprobar si la VPN está conectada, si aparecen mensajes de error y si el usuario tiene acceso a Internet antes de conectarla. Verificar las credenciales y la configuración siguiendo el procedimiento autorizado."
+  },
+  {
+    "titulo": "nslookup",
+    "categoria": "Herramientas de diagnóstico",
+    "queEs": "Es un comando que permite consultar información DNS, como la dirección IP asociada a un nombre de dominio.",
+    "paraQueSirve": "Ayuda a investigar si un nombre de dominio se resuelve correctamente y qué servidor DNS responde a la consulta.",
+    "revisarN1": "Consultar un dominio conocido, observar el resultado y compararlo con otra consulta autorizada. Un resultado fallido puede deberse al DNS, al dominio consultado o a la conectividad con el servidor DNS."
+  },
+  {
+    "titulo": "ipconfig",
+    "categoria": "Herramientas de diagnóstico",
+    "queEs": "Es un comando de Windows que muestra información de la configuración de red del equipo, como la dirección IP, la máscara y la puerta de enlace.",
+    "paraQueSirve": "Ayuda a identificar si el dispositivo tiene una configuración de red adecuada o si parece no haber recibido los datos necesarios.",
+    "revisarN1": "Consultar la configuración con ipconfig y revisar la dirección IPv4, la máscara y la puerta de enlace. Si aparece una dirección 169.254.x.x, investigar si el equipo pudo obtener una dirección mediante DHCP."
+  },
+
+  {
+    "titulo": "Conflicto de dirección IP",
+    "categoria": "Redes básicas",
+    "queEs": "Ocurre cuando dos dispositivos de la misma red intentan utilizar la misma dirección IP. Es como si dos casas tuvieran exactamente el mismo número en la misma calle.",
+    "paraQueSirve": "Reconocer una posible causa de los problemas de conexión cuando un dispositivo no logra comunicarse correctamente con la red.",
+    "revisarN1": "Comprobar si el equipo muestra un aviso de conflicto de IP, revisar su configuración de red y verificar si obtiene una dirección automáticamente mediante DHCP."
+  },
+  {
+    "titulo": "Renovación de dirección IP",
+    "categoria": "Herramientas de diagnóstico",
+    "queEs": "Es el proceso de solicitar o actualizar la dirección IP que un dispositivo recibe automáticamente de la red.",
+    "paraQueSirve": "Puede ayudar a recuperar la conexión cuando el equipo tiene una configuración IP incorrecta o ha tenido problemas al obtener una dirección.",
+    "revisarN1": "En Windows, abrir la consola de comandos y utilizar ipconfig /release y después ipconfig /renew, si el procedimiento está permitido. Antes, comprobar que el caso requiere renovar la IP."
+  },
+  {
+    "titulo": "Adaptador de red",
+    "categoria": "Hardware de red",
+    "queEs": "Es la parte del equipo que permite conectarse a una red, ya sea mediante Wi-Fi o cable Ethernet.",
+    "paraQueSirve": "Permite que un computador, portátil u otro dispositivo envíe y reciba información por la red.",
+    "revisarN1": "Comprobar si el Wi-Fi está activado, si el cable está conectado y si el adaptador aparece habilitado en la configuración del sistema."
+  },
+  {
+    "titulo": "Puerto Ethernet",
+    "categoria": "Hardware de red",
+    "queEs": "Es la entrada donde se conecta el cable de red, normalmente con un conector RJ45.",
+    "paraQueSirve": "Permite conectar un dispositivo al router o a un switch mediante un cable de red.",
+    "revisarN1": "Revisar que el cable esté bien conectado en ambos extremos, probar otro puerto si está permitido y observar si hay luces de enlace. No todos los puertos tienen indicadores luminosos."
+  },
+  {
+    "titulo": "Indicador LOS de fibra óptica",
+    "categoria": "Fibra óptica",
+    "queEs": "LOS significa 'Loss of Signal', o pérdida de señal. Es una luz del equipo de fibra que puede avisar que no está recibiendo correctamente la señal óptica.",
+    "paraQueSirve": "Ayuda a identificar posibles problemas en la señal de fibra que llega a la vivienda.",
+    "revisarN1": "Observar si el indicador LOS está encendido o parpadeando y registrar el estado de las demás luces. No desconectar ni manipular el conector de fibra; seguir el procedimiento del operador."
+  },
+  {
+    "titulo": "Reiniciar y restablecer de fábrica",
+    "categoria": "Equipos de red",
+    "queEs": "Reiniciar significa apagar y encender el equipo. Restablecer de fábrica significa devolverlo a su configuración original y puede borrar el nombre y la contraseña del Wi-Fi.",
+    "paraQueSirve": "Reiniciar puede solucionar fallos temporales. El restablecimiento de fábrica se utiliza en situaciones específicas cuando otros procedimientos no han funcionado.",
+    "revisarN1": "Confirmar qué procedimiento está autorizado. Como primer paso, normalmente se considera el reinicio; no realizar un restablecimiento de fábrica sin autorización, porque puede dejar al cliente sin su configuración."
+  },
+  {
+    "titulo": "Velocidad de descarga y subida",
+    "categoria": "Rendimiento de red",
+    "queEs": "La descarga es la velocidad a la que recibes información, como al ver un vídeo. La subida es la velocidad a la que envías información, como al cargar una foto.",
+    "paraQueSirve": "Permite entender por qué una conexión puede funcionar bien al ver contenido, pero tener dificultades al enviar archivos o realizar videollamadas.",
+    "revisarN1": "Consultar las velocidades contratadas y comparar los resultados de una prueba de velocidad. Tener en cuenta si la prueba se hizo por Wi-Fi o cable y las condiciones del equipo."
+  },
+  {
+    "titulo": "Prueba de velocidad de Internet",
+    "categoria": "Herramientas de diagnóstico",
+    "queEs": "Es una prueba que estima la velocidad de descarga, la velocidad de subida y la latencia de una conexión.",
+    "paraQueSirve": "Ayuda a comprobar el rendimiento de Internet y a reunir datos cuando el cliente informa que la conexión está lenta.",
+    "revisarN1": "Realizar la prueba siguiendo el procedimiento del operador, cerrar actividades que consuman conexión y, si es posible, comparar por cable y por Wi-Fi. Un solo resultado no siempre demuestra dónde está la falla."
+  },
+  {
+    "titulo": "Cable coaxial",
+    "categoria": "Tipos de conexión",
+    "queEs": "Es un cable que transmite señales mediante un conductor central rodeado por materiales aislantes y una protección metálica. Se utiliza en algunas redes de televisión e Internet.",
+    "paraQueSirve": "En redes HFC, permite transportar la señal entre partes de la red y la instalación del usuario.",
+    "revisarN1": "Comprobar visualmente que las conexiones estén firmes y que el cable no tenga daños evidentes. Si hay intermitencia, registrar los síntomas y seguir el procedimiento del operador."
+  },
+  {
+    "titulo": "Congestión de red",
+    "categoria": "Rendimiento de red",
+    "queEs": "Sucede cuando muchos dispositivos o actividades utilizan la conexión al mismo tiempo y los recursos disponibles no alcanzan para todos con la misma calidad.",
+    "paraQueSirve": "Ayuda a explicar por qué Internet puede ponerse lento cuando varias personas ven vídeos, descargan archivos o juegan en línea simultáneamente.",
+    "revisarN1": "Preguntar si el problema ocurre cuando hay muchos dispositivos conectados, comparar horarios y comprobar si afecta a todos los equipos. No asumir que la congestión es la causa sin más comprobaciones."
+  },
+  {
+    "titulo": "Navegador web",
+    "categoria": "Navegación web",
+    "queEs": "Es el programa que utilizas para abrir páginas de Internet, como Chrome, Edge o Firefox.",
+    "paraQueSirve": "Permite visitar sitios web, acceder a aplicaciones en línea y consultar información.",
+    "revisarN1": "Si una página no abre, probar otra página y, si está permitido, otro navegador. Así se puede investigar si el problema afecta a un sitio concreto, al navegador o a la conexión."
+  },
+
+  {
+    "titulo": "Dirección IP automática",
+    "categoria": "Redes básicas",
+    "queEs": "Es una dirección IP que el dispositivo recibe automáticamente de la red, normalmente mediante DHCP, sin que la persona tenga que escribirla manualmente.",
+    "paraQueSirve": "Facilita que los equipos se conecten a una red sin tener que configurar cada dirección IP por separado.",
+    "revisarN1": "Comprobar si el equipo está configurado para obtener la dirección IP automáticamente y si ha recibido una dirección válida para esa red."
+  },
+  {
+    "titulo": "Dirección IP estática",
+    "categoria": "Redes básicas",
+    "queEs": "Es una dirección IP configurada manualmente o reservada para que un dispositivo utilice siempre la misma dirección dentro de la red.",
+    "paraQueSirve": "Puede facilitar la identificación y comunicación con equipos que necesitan una dirección estable.",
+    "revisarN1": "Comprobar si la configuración manual coincide con los datos correctos de la red. Una IP, máscara, puerta de enlace o DNS incorrectos pueden impedir la conexión."
+  },
+  {
+    "titulo": "Dirección IP 169.254.x.x",
+    "categoria": "Diagnóstico de red",
+    "queEs": "Es una dirección que Windows puede asignar al equipo cuando no consigue obtener una dirección IP de un servidor DHCP. Es como una dirección provisional para comunicarse en ciertas condiciones dentro de la red local.",
+    "paraQueSirve": "Ayuda a detectar posibles problemas al obtener una dirección IP automáticamente.",
+    "revisarN1": "Comprobar la conexión por cable o Wi-Fi, revisar si otros equipos reciben IP y verificar la disponibilidad de DHCP. Esta dirección no demuestra por sí sola cuál es la causa del problema."
+  },
+  {
+    "titulo": "Dirección MAC",
+    "categoria": "Redes básicas",
+    "queEs": "Es un identificador de la interfaz de red de un dispositivo, utilizado para comunicarse dentro de la red local. Normalmente se muestra como grupos de letras y números separados por dos puntos o guiones.",
+    "paraQueSirve": "Permite identificar una interfaz de red en tareas como el diagnóstico, el filtrado de acceso o las reservas DHCP.",
+    "revisarN1": "Consultar la dirección MAC del adaptador correcto y verificar que se está revisando la interfaz que realmente utiliza el equipo. Algunos dispositivos pueden usar direcciones aleatorias para Wi-Fi."
+  },
+  {
+    "titulo": "Red local (LAN)",
+    "categoria": "Redes básicas",
+    "queEs": "Es la red que conecta dispositivos dentro de un espacio limitado, como una casa, una oficina o un salón.",
+    "paraQueSirve": "Permite que equipos como computadores, impresoras y teléfonos se comuniquen entre sí y, normalmente, compartan una conexión a Internet.",
+    "revisarN1": "Comprobar si el equipo está conectado al router, si otros dispositivos de la misma red funcionan y si el problema afecta solo a un equipo o a varios."
+  },
+  {
+    "titulo": "Red de área amplia (WAN)",
+    "categoria": "Redes básicas",
+    "queEs": "Es una red que conecta redes o dispositivos que están en lugares geográficos diferentes. Internet es el ejemplo más conocido.",
+    "paraQueSirve": "Permite comunicar redes distantes, como la red de una vivienda con la infraestructura del proveedor de Internet.",
+    "revisarN1": "Si los dispositivos están conectados al router pero ninguno puede acceder a Internet, revisar el estado de la conexión WAN y seguir el procedimiento de diagnóstico del operador."
+  },
+  {
+    "titulo": "Servidor DNS",
+    "categoria": "Servicios de red",
+    "queEs": "Es un servidor que ayuda a encontrar la dirección IP correspondiente al nombre de un sitio web, como cuando buscas una dirección en una agenda.",
+    "paraQueSirve": "Permite acceder a sitios utilizando nombres fáciles de recordar en lugar de tener que escribir sus direcciones IP.",
+    "revisarN1": "Si una página no abre, comprobar si el problema ocurre con varios sitios y, cuando el procedimiento lo permita, usar nslookup para investigar si el nombre se resuelve correctamente."
+  },
+  {
+    "titulo": "Servidor DHCP",
+    "categoria": "Servicios de red",
+    "queEs": "Es el servicio que entrega automáticamente a los dispositivos datos de configuración de red, como una dirección IP, una máscara y, normalmente, una puerta de enlace y servidores DNS.",
+    "paraQueSirve": "Evita que sea necesario configurar manualmente cada dispositivo que se conecta a la red.",
+    "revisarN1": "Comprobar si el equipo obtiene una dirección IP válida y si otros dispositivos presentan el mismo problema. En una red doméstica, el router suele proporcionar DHCP."
+  },
+  {
+    "titulo": "Pérdida de conexión",
+    "categoria": "Diagnóstico de red",
+    "queEs": "Es cuando un dispositivo deja de comunicarse con la red o pierde el acceso a Internet, de forma temporal o continua.",
+    "paraQueSirve": "Ayuda a describir síntomas como desconexiones, páginas que dejan de cargar o aplicaciones que pierden comunicación.",
+    "revisarN1": "Preguntar cuándo sucede, cuánto dura y si afecta a uno o varios dispositivos. Comprobar el estado de las luces del equipo y registrar si la conexión vuelve sola o después de alguna acción."
+  },
+  {
+    "titulo": "Reinicio del router",
+    "categoria": "Equipos de red",
+    "queEs": "Es apagar y volver a encender el router siguiendo el procedimiento recomendado. Esto permite que el equipo vuelva a iniciar sus funciones.",
+    "paraQueSirve": "Puede solucionar algunos fallos temporales del router, pero no repara daños físicos ni problemas externos de la red.",
+    "revisarN1": "Confirmar si está permitido reiniciar el equipo, informar al usuario de que la conexión se interrumpirá brevemente y esperar el tiempo indicado por el operador para comprobar si vuelve el servicio."
+  },
+
+  {
+    "titulo": "Roaming Wi-Fi",
+    "categoria": "Wi-Fi",
+    "queEs": "Es el cambio de un dispositivo de un punto de acceso Wi-Fi a otro mientras se desplaza, por ejemplo, al caminar por una casa con varios puntos de acceso.",
+    "paraQueSirve": "Permite mantener la conexión mientras el dispositivo se mueve entre zonas con cobertura de distintos puntos de acceso.",
+    "revisarN1": "Preguntar si las desconexiones ocurren al desplazarse por la vivienda y comprobar la cobertura en las zonas afectadas. El cambio entre puntos de acceso depende del dispositivo y de la configuración de la red."
+  },
+  {
+    "titulo": "Cobertura Wi-Fi",
+    "categoria": "Wi-Fi",
+    "queEs": "Es la zona en la que una señal Wi-Fi llega con suficiente intensidad para permitir una conexión útil.",
+    "paraQueSirve": "Ayuda a entender por qué Internet puede funcionar bien cerca del router, pero mal en una habitación lejana.",
+    "revisarN1": "Comparar el funcionamiento cerca y lejos del router, comprobar si hay paredes u obstáculos y preguntar en qué lugares aparece el problema."
+  },
+  {
+    "titulo": "Repetidor Wi-Fi",
+    "categoria": "Wi-Fi",
+    "queEs": "Es un dispositivo que recibe una señal Wi-Fi y la vuelve a transmitir para ampliar la cobertura hacia otras zonas.",
+    "paraQueSirve": "Puede ayudar a llevar la conexión a lugares donde la señal del router llega débil.",
+    "revisarN1": "Comprobar que el repetidor esté encendido, conectado correctamente a la red principal y ubicado donde todavía reciba una señal adecuada. Un repetidor no garantiza más velocidad."
+  },
+  {
+    "titulo": "Mesh Wi-Fi",
+    "categoria": "Wi-Fi",
+    "queEs": "Es un sistema formado por varios equipos que trabajan juntos para ofrecer cobertura Wi-Fi en diferentes zonas de una vivienda u oficina.",
+    "paraQueSirve": "Ayuda a reducir las zonas sin cobertura y permite que los dispositivos se conecten a una red diseñada para cubrir un área más amplia.",
+    "revisarN1": "Comprobar que los nodos estén encendidos y conectados entre sí, revisar su ubicación y verificar si el problema afecta a toda la red o solo a una zona."
+  },
+  {
+    "titulo": "Canal Wi-Fi saturado",
+    "categoria": "Wi-Fi",
+    "queEs": "Ocurre cuando muchas redes o dispositivos utilizan canales que compiten entre sí, lo que puede afectar el rendimiento de la conexión inalámbrica.",
+    "paraQueSirve": "Ayuda a comprender por qué una conexión Wi-Fi puede ser lenta o inestable, especialmente en edificios con muchas redes cercanas.",
+    "revisarN1": "Comprobar si el problema ocurre por Wi-Fi y si mejora cerca del router. Cambiar el canal solo si el procedimiento lo permite; primero identificar la banda utilizada y evitar cambios innecesarios."
+  },
+  {
+    "titulo": "Conexión por cable frente a Wi-Fi",
+    "categoria": "Diagnóstico de red",
+    "queEs": "La conexión por cable utiliza un cable Ethernet; Wi-Fi transmite los datos de forma inalámbrica mediante ondas de radio.",
+    "paraQueSirve": "Comparar ambas conexiones ayuda a investigar si un problema está relacionado con la red en general o con la conexión inalámbrica.",
+    "revisarN1": "Si es posible y está autorizado, comparar el servicio por cable y por Wi-Fi en condiciones similares. Si por cable funciona bien y por Wi-Fi no, investigar cobertura, interferencias y configuración inalámbrica."
+  },
+  {
+    "titulo": "Caída del servicio del operador",
+    "categoria": "Diagnóstico de red",
+    "queEs": "Es una interrupción o avería en la red del proveedor que puede impedir que los usuarios accedan a Internet, aunque sus dispositivos estén conectados al router.",
+    "paraQueSirve": "Permite distinguir un posible problema externo de uno localizado en el dispositivo o en la red doméstica.",
+    "revisarN1": "Comprobar si hay avisos de avería mediante las herramientas autorizadas, preguntar si otros dispositivos están afectados y seguir el procedimiento de escalado. No asegurar que existe una caída sin verificarla."
+  },
+  {
+    "titulo": "Escalado a soporte de nivel 2",
+    "categoria": "Soporte técnico",
+    "queEs": "Es enviar un caso a un equipo con mayores permisos o conocimientos técnicos cuando el soporte de nivel 1 no puede resolverlo mediante los procedimientos disponibles.",
+    "paraQueSirve": "Permite que los problemas que necesitan análisis adicional, herramientas especializadas o intervención técnica continúen su proceso de resolución.",
+    "revisarN1": "Documentar el síntoma, las pruebas realizadas, los resultados, las luces de los equipos y los cambios efectuados. Seguir los criterios de escalado del operador y no repetir pruebas innecesariamente."
   }
 ]

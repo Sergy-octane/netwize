@@ -1,12 +1,34 @@
 import { useState } from "react";
 import conceptos from "../data/encyclopedia.json";
 
+function normalizarTexto(texto) {
+  return texto
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+}
+
 function Encyclopedia() {
 
+  
+  
   const [busqueda, setBusqueda] = useState("");
-    const conceptosFiltrados = conceptos.filter((concepto) =>
-    concepto.titulo.toLowerCase().includes(busqueda.toLowerCase())
+
+  
+const conceptosFiltrados = conceptos.filter((concepto) => {
+  const textoBusqueda = normalizarTexto(busqueda.trim());
+
+  return (
+    normalizarTexto(concepto.titulo).includes(textoBusqueda) ||
+    normalizarTexto(concepto.categoria).includes(textoBusqueda) ||
+    normalizarTexto(concepto.queEs).includes(textoBusqueda) ||
+    normalizarTexto(concepto.paraQueSirve).includes(textoBusqueda) ||
+    normalizarTexto(concepto.revisarN1).includes(textoBusqueda)
   );
+});
+
+
+
   return (
     <div>
       <h1 className="text-3xl font-bold mb-2">

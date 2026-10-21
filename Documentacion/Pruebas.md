@@ -840,3 +840,153 @@ La aplicación debe permanecer en Login.
 Después de recargar, NetWize permaneció en Login y no permitió continuar hacia los módulos internos.
 
 **Estado:** ✅ Correcto.
+
+## Pruebas de ampliación del simulador y la enciclopedia
+
+### Prueba 8 — Disponibilidad de casos del simulador
+
+**Objetivo:** Verificar que el simulador cargue los casos de soporte técnico disponibles.
+
+**Procedimiento:**
+
+1. Ingresar a NetWize con una sesión activa.
+2. Acceder al módulo Simulador.
+3. Revisar los casos disponibles.
+4. Seleccionar diferentes casos para comprobar que se puedan iniciar.
+
+**Resultado esperado:**
+
+El simulador debe mostrar los casos disponibles y permitir iniciar una simulación.
+
+**Resultado obtenido:**
+
+Se comprobó el funcionamiento de los casos del simulador durante las pruebas realizadas. El archivo de datos contiene 19 casos de soporte técnico.
+
+**Estado:** Correcto.
+
+---
+
+### Prueba 9 — Flujo de diagnóstico del simulador
+
+**Objetivo:** Verificar que las respuestas seleccionadas permitan avanzar por el flujo de diagnóstico de cada caso.
+
+**Procedimiento:**
+
+1. Ingresar al módulo Simulador.
+2. Seleccionar un caso de soporte técnico.
+3. Responder las preguntas presentadas.
+4. Continuar el flujo según las opciones disponibles.
+5. Comprobar que se pueda llegar al diagnóstico y a la solución correspondientes al caso.
+
+**Resultado esperado:**
+
+Las respuestas deben permitir avanzar por las rutas de decisión definidas para cada caso y llegar al resultado correspondiente.
+
+**Resultado obtenido:**
+
+Se realizaron pruebas de funcionamiento de los casos del simulador y se comprobó que los flujos probados funcionaran correctamente.
+
+**Estado:** Correcto.
+
+---
+
+### Prueba 10 — Visualización de conceptos de la enciclopedia
+
+**Objetivo:** Verificar que la enciclopedia cargue y presente correctamente los conceptos técnicos.
+
+**Procedimiento:**
+
+1. Acceder al módulo Enciclopedia.
+2. Revisar los conceptos disponibles.
+3. Abrir diferentes tarjetas de información.
+4. Comprobar la presencia de la definición, la utilidad y las recomendaciones de revisión N1.
+
+**Resultado esperado:**
+
+La enciclopedia debe presentar los conceptos con su información organizada y permitir su consulta.
+
+**Resultado obtenido:**
+
+Se verificó el funcionamiento de la enciclopedia ampliada, que contiene 82 conceptos técnicos con los campos de información requeridos.
+
+**Estado:** Correcto.
+
+---
+
+### Prueba 11 — Búsqueda por diferentes campos
+
+**Objetivo:** Verificar que el buscador permita encontrar conceptos mediante diferentes campos de información.
+
+**Procedimiento:**
+
+1. Acceder al módulo Enciclopedia.
+2. Buscar un concepto utilizando su título.
+3. Realizar una búsqueda utilizando una categoría.
+4. Buscar una palabra presente en la definición o en la utilidad de un concepto.
+5. Realizar una búsqueda utilizando una palabra presente en las recomendaciones de revisión N1.
+
+**Resultado esperado:**
+
+El buscador debe mostrar los conceptos que coincidan con el texto ingresado en cualquiera de los campos habilitados para la búsqueda.
+
+**Resultado obtenido:**
+
+Se comprobó que el buscador permite encontrar información mediante el título, la categoría, la definición, la utilidad y las recomendaciones de revisión N1.
+
+**Estado:** Correcto.
+
+---
+
+### Prueba 12 — Búsqueda sin distinguir tildes
+
+**Objetivo:** Verificar que el buscador permita encontrar conceptos aunque el usuario omita las tildes.
+
+**Procedimiento:**
+
+1. Acceder al módulo Enciclopedia.
+2. Ingresar en el buscador una palabra que contenga una vocal con tilde.
+3. Repetir la búsqueda escribiendo la misma palabra sin la tilde.
+4. Comparar los resultados obtenidos.
+
+**Resultado esperado:**
+
+El buscador debe encontrar los conceptos correspondientes tanto si la búsqueda incluye las tildes como si las omite.
+
+**Resultado obtenido:**
+
+Se comprobó el funcionamiento de la normalización del texto, que permite realizar búsquedas sin distinguir entre letras con tilde y letras sin tilde.
+
+**Estado:** Correcto.
+
+---
+
+### Prueba 13 — Validación de los datos de la enciclopedia
+
+**Objetivo:** Verificar la integridad básica de los datos almacenados en el archivo JSON de la enciclopedia.
+
+**Procedimiento:**
+
+1. Revisar el archivo `src/data/encyclopedia.json`.
+2. Contabilizar los conceptos registrados.
+3. Comprobar si existen títulos duplicados.
+4. Verificar que todos los conceptos incluyan los campos obligatorios: título, categoría, definición, utilidad y recomendaciones de revisión N1.
+
+**Resultado esperado:**
+
+Los datos deben contener los conceptos registrados sin títulos duplicados ni campos obligatorios incompletos.
+
+**Resultado obtenido:**
+
+La validación del archivo identificó 82 conceptos, sin títulos duplicados y sin campos obligatorios incompletos.
+
+**Estado:** Correcto.
+
+---
+
+### Resultado general
+
+Las pruebas realizadas durante la Semana 22 permitieron verificar el funcionamiento de las ampliaciones del simulador y de la enciclopedia técnica de NetWize.
+
+Se comprobó la disponibilidad de los casos de soporte técnico, el funcionamiento de los flujos de diagnóstico probados, la consulta de los conceptos de la enciclopedia y las mejoras incorporadas al buscador.
+
+También se validó la integridad básica de los datos de la enciclopedia, confirmando que los 82 conceptos registrados no presentaran títulos duplicados ni campos obligatorios incompletos.

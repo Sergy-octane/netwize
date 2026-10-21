@@ -119,46 +119,120 @@ Las barras se actualizan automáticamente cuando cambia la información almacena
 
 ## 5. Navegación
 
-La aplicación permite navegar entre las principales vistas mediante la barra lateral y los botones internos de la interfaz.
+NetWize permite navegar entre las diferentes vistas de la aplicación mediante la barra lateral, los botones internos y los enlaces disponibles en cada pantalla.
 
-Actualmente se encuentran disponibles:
+Las principales vistas de la aplicación son:
 
+- Bienvenida.
+- Inicio de sesión.
+- Registro.
+- Términos y condiciones.
+- Recuperación de contraseña.
 - Dashboard.
 - Simulador.
-- Enciclopedia.
+- Enciclopedia N1.
 
-La navegación se controla mediante el estado `currentPage` de React y la función `setCurrentPage`.
+La navegación se controla mediante el estado `currentPage` de React y las funciones encargadas de cambiar de vista.
 
-El Sidebar permite cambiar entre las vistas sin necesidad de recargar la aplicación.
+El componente `Sidebar` permite desplazarse entre los módulos principales sin necesidad de recargar la aplicación.
+
+El componente `Layout` centraliza la estructura general de la aplicación y controla el acceso a las vistas internas según el estado de la sesión del usuario.
+
+---
+
+## Simulador de soporte técnico
+
+NetWize incorpora un simulador interactivo orientado al aprendizaje de procedimientos básicos de diagnóstico y solución de problemas de conectividad.
+
+Actualmente dispone de 19 casos de soporte técnico relacionados con diferentes situaciones que puede encontrar un agente de nivel 1 (N1).
+
+El simulador permite:
+
+- Seleccionar un caso de soporte técnico.
+- Responder preguntas durante el proceso de diagnóstico.
+- Seguir diferentes rutas de decisión según las respuestas seleccionadas.
+- Identificar posibles causas del problema.
+- Consultar el diagnóstico y la solución correspondiente al caso.
+- Finalizar una simulación después de completar el flujo de diagnóstico.
+- Registrar las simulaciones realizadas en el historial.
+
+Los casos se almacenan en el archivo `src/data/casos.json` y se cargan dinámicamente desde el componente del simulador.
+
+La información se encuentra separada de la lógica principal del componente, lo que permite agregar o modificar casos mediante el archivo JSON sin tener que reconstruir desde cero la estructura del simulador.
+
+### Historial de simulaciones
+
+NetWize almacena localmente el historial de las simulaciones realizadas mediante `LocalStorage`.
+
+Los registros permiten conservar información de los casos completados y consultar la actividad desde el Dashboard.
+
+El historial permanece disponible en el navegador mientras se conserve la información almacenada localmente.
+
+---
+
+## Dashboard
+
+El Dashboard presenta un resumen de la actividad del usuario dentro de NetWize.
+
+Entre sus elementos se encuentran:
+
+- Indicadores relacionados con los casos resueltos y las simulaciones.
+- Información sobre la actividad registrada.
+- Estadísticas por categoría.
+- Historial de simulaciones.
+- Acceso para iniciar una nueva simulación.
+- Estado visual del historial cuando todavía no existen simulaciones registradas.
+
+La información del Dashboard utiliza los datos disponibles en el almacenamiento local de la aplicación para presentar los resultados de la actividad del usuario.
 
 ---
 
 ## Enciclopedia N1
 
-NetWize incorpora una Enciclopedia N1 orientada a la consulta y aprendizaje de conceptos básicos relacionados con soporte técnico y redes.
+NetWize incorpora una Enciclopedia N1 orientada a la consulta y aprendizaje de conceptos básicos e intermedios relacionados con redes, conectividad y soporte técnico.
 
-La información de la Enciclopedia se almacena en:
+La información se almacena en:
 
 `src/data/encyclopedia.json`
 
-Actualmente contiene conceptos relacionados con:
+Actualmente contiene 82 conceptos técnicos relacionados con diferentes áreas, entre ellas:
 
 - Redes básicas.
-- Cableado.
+- Direccionamiento IP y servicios de red.
+- Cableado y conectividad.
 - Wi-Fi.
-- Tecnologías de acceso.
+- Tecnologías de acceso a Internet.
 - Redes móviles.
-- Hardware.
+- Hardware y dispositivos de red.
+- Herramientas y procedimientos de diagnóstico.
 
-Cada concepto incluye:
+Cada concepto incluye los siguientes campos:
 
-- ¿Qué es?
-- ¿Para qué sirve?
-- ¿Qué debo revisar como N1?
+- **Título:** nombre del concepto.
+- **Categoría:** clasificación temática.
+- **¿Qué es?:** definición del concepto.
+- **¿Para qué sirve?:** explicación de su utilidad.
+- **¿Qué debo revisar como N1?:** recomendaciones para la revisión inicial del problema.
 
-La información se carga dinámicamente desde el archivo JSON, permitiendo agregar nuevos conceptos sin modificar la estructura principal del componente.
+La información se carga dinámicamente desde el archivo JSON, lo que permite agregar nuevos conceptos sin modificar la estructura principal del componente.
 
-Las tarjetas de la Enciclopedia utilizan un diseño responsive para adaptarse a diferentes tamaños de pantalla.
+Las tarjetas de la enciclopedia utilizan un diseño responsive para adaptarse a diferentes tamaños de pantalla.
+
+### Buscador de la enciclopedia
+
+La enciclopedia incorpora un buscador que permite localizar información mediante diferentes campos del contenido.
+
+La búsqueda se realiza sobre:
+
+- Título del concepto.
+- Categoría.
+- Definición.
+- Utilidad.
+- Recomendaciones de revisión N1.
+
+También se implementó una normalización del texto que permite realizar búsquedas sin distinguir entre letras con tilde y letras sin tilde.
+
+Esta funcionalidad facilita la consulta de conceptos incluso cuando el usuario no conoce su nombre exacto o recuerda únicamente una palabra relacionada con su definición o utilidad.
 
 ---
 
@@ -173,33 +247,40 @@ Se implementaron:
 - Indicador visual de la sección actualmente seleccionada en el Sidebar.
 - Transiciones en las barras de estadísticas.
 - Estado visual para el historial cuando no existen simulaciones registradas.
+- Diseño adaptable a diferentes tamaños de pantalla en los módulos principales.
 
-Estas mejoras no modifican la lógica principal de la aplicación y permiten una interacción más clara con los elementos de la interfaz.
+Estas mejoras buscan facilitar la interacción con la interfaz y mantener una presentación visual coherente entre las diferentes vistas de la aplicación.
 
 ---
 
 ## Optimización y limpieza
 
-Durante la Semana 20 se realizó una revisión general del código y del funcionamiento de NetWize.
+Durante el desarrollo se realizaron revisiones generales del código y del funcionamiento de NetWize.
 
-Se realizaron las siguientes mejoras:
+Entre las actividades realizadas se encuentran:
 
 - Eliminación de registros `console.log` utilizados durante la depuración.
 - Eliminación de propiedades que no estaban siendo utilizadas.
 - Revisión de los componentes principales.
 - Verificación de la navegación.
 - Verificación del funcionamiento del Dashboard, Simulador y Enciclopedia.
-- Revisión del historial y almacenamiento mediante LocalStorage.
+- Revisión del historial y almacenamiento mediante `LocalStorage`.
 - Revisión del comportamiento responsive.
+- Validación de los datos almacenados en los archivos JSON.
 
-Estas mejoras permiten mantener una estructura de código más limpia sin modificar la lógica principal de la aplicación.
+En el archivo de la enciclopedia se verificó que los 82 conceptos no presentaran títulos duplicados ni campos obligatorios incompletos.
+
+Estas actividades contribuyen a mantener una estructura de código más organizada y a reducir errores en el funcionamiento de la aplicación.
+
+---
 
 ## Flujo de acceso
 
-NetWize incorpora un conjunto de vistas relacionadas con el acceso y navegación inicial de los usuarios.
+NetWize incorpora un conjunto de vistas relacionadas con el acceso y la navegación inicial de los usuarios.
 
 Actualmente se encuentran disponibles:
 
+- Bienvenida.
 - Inicio de sesión.
 - Registro.
 - Términos y condiciones.
@@ -207,16 +288,22 @@ Actualmente se encuentran disponibles:
 
 La navegación entre estas vistas se controla mediante el estado `currentPage` de React.
 
+### Bienvenida
+
+La vista de bienvenida presenta el propósito de NetWize y sus principales funcionalidades.
+
+Desde esta pantalla, el usuario puede comenzar el flujo de acceso a la aplicación.
+
 ### Inicio de sesión
 
-La vista de inicio de sesión permite ingresar un correo electrónico y una contraseña.
+La vista de inicio de sesión permite ingresar un correo electrónico y una contraseña previamente registrados.
 
 También proporciona accesos para:
 
 - Recuperar contraseña.
 - Crear una cuenta.
 
-Actualmente esta vista corresponde a la interfaz de acceso y navegación del sistema. No realiza autenticación contra un servidor.
+La validación de credenciales se realiza mediante la información almacenada localmente en el navegador.
 
 ### Registro
 
@@ -229,47 +316,47 @@ La vista de registro permite ingresar:
 
 También incorpora la aceptación de términos y condiciones.
 
-El botón de creación de cuenta permanece deshabilitado hasta que el usuario acepta los términos.
+Antes de crear una cuenta, se comprueba que los campos requeridos estén completos, que las contraseñas coincidan y que el usuario haya aceptado los términos.
+
+El botón de creación de cuenta permanece deshabilitado mientras no se cumpla la aceptación de los términos.
+
+El sistema también verifica que el correo electrónico no haya sido registrado previamente.
 
 ### Términos y condiciones
 
-NetWize incorpora una vista independiente para consultar información relacionada con el uso de la aplicación.
+NetWize incorpora una vista independiente para consultar información relacionada con el uso educativo de la aplicación y sus condiciones generales.
 
-La vista puede ser accedida desde el proceso de registro.
+La vista puede consultarse desde el proceso de registro.
 
 ### Recuperación de contraseña
 
 NetWize incorpora una vista para solicitar la recuperación de una cuenta mediante correo electrónico.
 
-Actualmente corresponde a una estructura visual, ya que no existe un servicio backend encargado del envío de instrucciones de recuperación.
+Actualmente esta función corresponde a una interfaz visual. No envía instrucciones de recuperación ni modifica contraseñas, ya que el proyecto no cuenta con un servidor de autenticación ni con un servicio de recuperación por correo electrónico.
 
 ### Ayuda mediante WhatsApp
 
 NetWize incorpora un botón de ayuda reutilizable mediante WhatsApp.
 
-El componente se integra desde `Layout.jsx`, permitiendo mostrar el acceso a ayuda en las diferentes vistas de la aplicación sin duplicar el código.
+El componente `HelpButton` se integra desde `Layout.jsx`, permitiendo disponer del acceso a ayuda en las diferentes vistas sin duplicar el código.
 
-El botón abre el canal de contacto en una nueva pestaña.
+El botón abre el canal de contacto configurado en WhatsApp.
 
-## Acceso y autenticación
+---
+
+## Acceso y autenticación local
 
 ### Inicio de sesión
 
 NetWize permite iniciar sesión mediante el correo electrónico y la contraseña registrados previamente.
 
-El sistema valida las credenciales almacenadas localmente y, cuando son correctas, crea una sesión para el usuario y permite acceder al Dashboard.
+El sistema consulta las credenciales almacenadas localmente y, cuando son correctas, crea una sesión para el usuario y permite acceder al Dashboard.
 
-Si los datos ingresados son incorrectos, se muestra un mensaje informando que el correo o la contraseña no son correctos.
+Si los datos ingresados son incorrectos, se muestra un mensaje informando que las credenciales no son válidas.
 
 ### Registro de usuario
 
-La aplicación permite crear una cuenta proporcionando:
-
-- Nombre.
-- Correo electrónico.
-- Contraseña.
-- Confirmación de contraseña.
-- Aceptación de términos y condiciones.
+La aplicación permite crear una cuenta proporcionando nombre, correo electrónico, contraseña, confirmación de contraseña y aceptación de términos y condiciones.
 
 Antes de crear la cuenta se validan los campos requeridos y la coincidencia entre las contraseñas.
 
@@ -277,24 +364,28 @@ El sistema también verifica que el correo electrónico no haya sido registrado 
 
 La información del usuario se almacena localmente mediante `LocalStorage`.
 
-La contraseña no se almacena directamente, sino mediante un hash SHA-256 generado con la API nativa `crypto.subtle` del navegador.
+Para evitar almacenar la contraseña directamente, se genera un hash SHA-256 mediante la API nativa `crypto.subtle` del navegador.
 
 ### Sesión de usuario
 
 Después de iniciar sesión correctamente, NetWize almacena una sesión local mediante `netwizeSession`.
 
-La sesión permite mantener el acceso al Dashboard y a los módulos internos después de recargar la aplicación.
+La sesión permite mantener el acceso a las vistas internas después de recargar la aplicación.
 
-Cuando no existe una sesión activa, las vistas internas no deben estar disponibles.
+Cuando no existe una sesión activa, la aplicación dirige al usuario al inicio de sesión e impide el acceso a las vistas internas mediante la navegación normal de la interfaz.
 
 ### Cerrar sesión
 
-La opción **Cerrar sesión**, disponible desde el Sidebar, elimina la sesión almacenada localmente y devuelve al usuario a la vista de Login.
+La opción **Cerrar sesión**, disponible desde el Sidebar, elimina la sesión almacenada localmente y devuelve al usuario a la vista de inicio de sesión.
 
-Al recargar la aplicación después de cerrar sesión, NetWize permanece en Login.
+Después de cerrar sesión, al recargar la aplicación se solicita nuevamente el acceso.
 
-### Recuperación de contraseña
+### Alcance de la autenticación
 
-NetWize cuenta con una vista de recuperación de contraseña mediante correo electrónico como parte de la estructura de acceso.
+La autenticación implementada está orientada al funcionamiento académico y local de NetWize.
 
-Actualmente esta función se encuentra preparada visualmente, pero no realiza recuperación real mediante correo electrónico debido a que el proyecto no utiliza un servidor de autenticación.
+Los usuarios y las sesiones se almacenan en el navegador. La aplicación no cuenta con un backend de autenticación ni con una base de datos remota.
+
+El hash SHA-256 implementado evita almacenar la contraseña directamente, pero no convierte este mecanismo en un sistema de autenticación seguro para producción.
+
+Por lo tanto, la autenticación local se considera una funcionalidad demostrativa adecuada para el alcance actual del proyecto, no un sistema destinado a administrar cuentas reales en un entorno de producción.
