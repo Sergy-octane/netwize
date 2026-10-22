@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 
 async function hashPassword(password) {
@@ -18,6 +19,8 @@ function Register({ setCurrentPage }) {
   const [acceptedTerms, setAcceptedTerms] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const [mostrarPassword, setMostrarPassword] = useState(false);
+  const [mostrarConfirmacion, setMostrarConfirmacion] = useState(false);
 
   const handleRegister = async () => {
     setError("");
@@ -67,16 +70,51 @@ function Register({ setCurrentPage }) {
     }, 1500);
   };
 
+  const iconoOjo = (visible) =>
+    visible ? (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="22"
+        height="22"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M3 3l18 18" />
+        <path d="M10.6 10.6a2 2 0 002.8 2.8" />
+        <path d="M9.9 5.2A10.8 10.8 0 0112 5c5 0 8.3 4.5 9 7-.3 1.1-1 2.2-1.9 3.2" />
+        <path d="M6.6 6.6C4.2 8 2.5 10.2 2 12c.7 2.5 4 7 10 7 1.2 0 2.3-.2 3.3-.6" />
+      </svg>
+    ) : (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="22"
+        height="22"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7z" />
+        <circle cx="12" cy="12" r="3" />
+      </svg>
+    );
+
   return (
     <div className="min-h-[calc(100vh-80px)] flex items-center justify-center">
       <div className="w-full max-w-md">
-
         <h1 className="text-3xl font-bold text-gray-900 text-center mb-8">
           Crear cuenta
         </h1>
 
         <div className="bg-white p-8 rounded-xl shadow-sm">
-
           <div className="mb-5">
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Nombre
@@ -110,13 +148,29 @@ function Register({ setCurrentPage }) {
               Contraseña
             </label>
 
-            <input
-              type="password"
-              placeholder="••••••••"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
+            <div className="relative">
+              <input
+                type={mostrarPassword ? "text" : "password"}
+                placeholder="••••••••"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full p-3 pr-12 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+
+              <button
+                type="button"
+                onClick={() => setMostrarPassword(!mostrarPassword)}
+                aria-label={
+                  mostrarPassword
+                    ? "Ocultar contraseña"
+                    : "Mostrar contraseña"
+                }
+                aria-pressed={mostrarPassword}
+                className="absolute inset-y-0 right-0 flex items-center px-3 text-gray-500 hover:text-blue-600"
+              >
+                {iconoOjo(mostrarPassword)}
+              </button>
+            </div>
           </div>
 
           <div className="mb-6">
@@ -124,13 +178,31 @@ function Register({ setCurrentPage }) {
               Confirmar contraseña
             </label>
 
-            <input
-              type="password"
-              placeholder="••••••••"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
+            <div className="relative">
+              <input
+                type={mostrarConfirmacion ? "text" : "password"}
+                placeholder="••••••••"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                className="w-full p-3 pr-12 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+
+              <button
+                type="button"
+                onClick={() =>
+                  setMostrarConfirmacion(!mostrarConfirmacion)
+                }
+                aria-label={
+                  mostrarConfirmacion
+                    ? "Ocultar confirmación de contraseña"
+                    : "Mostrar confirmación de contraseña"
+                }
+                aria-pressed={mostrarConfirmacion}
+                className="absolute inset-y-0 right-0 flex items-center px-3 text-gray-500 hover:text-blue-600"
+              >
+                {iconoOjo(mostrarConfirmacion)}
+              </button>
+            </div>
           </div>
 
           <div className="mb-6 flex items-start gap-3">
@@ -200,7 +272,6 @@ function Register({ setCurrentPage }) {
               Leer términos y condiciones
             </button>
           </div>
-
         </div>
       </div>
     </div>

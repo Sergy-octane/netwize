@@ -1,59 +1,123 @@
-function Sidebar({ setCurrentPage, currentPage }) {
 
+function Sidebar({ setCurrentPage, currentPage, menuAbierto, setMenuAbierto }) {
+  const navegar = (pagina) => {
+    setCurrentPage(pagina);
+    setMenuAbierto(false);
+  };
+
+  const cerrarSesion = () => {
+    localStorage.removeItem("netwizeSession");
+    setMenuAbierto(false);
+    setCurrentPage("login");
+  };
 
   return (
-    <aside className="hidden sm:block bg-gray-900 text-white w-64 min-h-screen p-6">
+    <>
+      {/* Botón del menú móvil */}
+      <button
+        onClick={() => setMenuAbierto(!menuAbierto)}
+        className="sm:hidden fixed top-[76px] left-4 z-50 bg-gray-900 text-white p-3 rounded-lg shadow-lg"
+        aria-label={menuAbierto ? "Cerrar menú" : "Abrir menú"}
+        aria-expanded={menuAbierto}
+      >
+        {menuAbierto ? (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="w-6 h-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        ) : (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="w-6 h-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M4 6h16M4 12h16M4 18h16"
+            />
+          </svg>
+        )}
+      </button>
 
-      <h2 className="text-lg font-semibold mb-8">
-        Menú
-      </h2>
+      {/* Fondo oscuro al abrir el menú en móvil */}
+      {menuAbierto && (
+        <div
+          className="sm:hidden fixed inset-0 z-30 bg-black/40"
+          onClick={() => setMenuAbierto(false)}
+        />
+      )}
 
-      <ul className="space-y-4">
+      {/* Barra lateral */}
+      <aside
+        className={`
+          bg-gray-900 text-white w-64 p-6
+          fixed inset-y-0 left-0 z-40
+          transform transition-transform duration-300
+          sm:sticky sm:top-0 sm:translate-x-0 sm:min-h-screen
+          ${menuAbierto ? "translate-x-0" : "-translate-x-full"}
+        `}
+      >
+        <h2 className="text-lg font-semibold mb-8">
+          Menú
+        </h2>
 
-       <li
-  onClick={() => setCurrentPage("dashboard")}
-  className={`cursor-pointer transition-all duration-200 ${
-    currentPage === "dashboard"
-      ? "text-blue-400 font-semibold"
-      : "hover:text-blue-400 hover:translate-x-1"
-  }`}
->
-  Dashboard
-</li>
+        <ul className="space-y-4">
+          <li
+            onClick={() => navegar("dashboard")}
+            className={`cursor-pointer transition-all duration-200 ${
+              currentPage === "dashboard"
+                ? "text-blue-400 font-semibold"
+                : "hover:text-blue-400 hover:translate-x-1"
+            }`}
+          >
+            Dashboard
+          </li>
 
-        <li
-  onClick={() => setCurrentPage("simulator")}
-  className={`cursor-pointer transition-all duration-200 ${
-    currentPage === "simulator"
-      ? "text-blue-400 font-semibold"
-      : "hover:text-blue-400 hover:translate-x-1"
-  }`}
->
-  Simulador
-</li>
+          <li
+            onClick={() => navegar("simulator")}
+            className={`cursor-pointer transition-all duration-200 ${
+              currentPage === "simulator"
+                ? "text-blue-400 font-semibold"
+                : "hover:text-blue-400 hover:translate-x-1"
+            }`}
+          >
+            Simulador
+          </li>
 
-       <li
-  onClick={() => setCurrentPage("encyclopedia")}
-  className={`cursor-pointer transition-all duration-200 ${
-    currentPage === "encyclopedia"
-      ? "text-blue-400 font-semibold"
-      : "hover:text-blue-400 hover:translate-x-1"
-  }`}
->
-  Enciclopedia
-</li>
-       <li 
-  onClick={() => {
-    localStorage.removeItem("netwizeSession");
-    setCurrentPage("login");
-  }} 
-  className="cursor-pointer transition-all duration-200 hover:text-red-400 hover:translate-x-1" 
->
-  Cerrar sesión
-</li>
-      </ul>
+          <li
+            onClick={() => navegar("encyclopedia")}
+            className={`cursor-pointer transition-all duration-200 ${
+              currentPage === "encyclopedia"
+                ? "text-blue-400 font-semibold"
+                : "hover:text-blue-400 hover:translate-x-1"
+            }`}
+          >
+            Enciclopedia
+          </li>
 
-    </aside>
+          <li
+            onClick={cerrarSesion}
+            className="cursor-pointer transition-all duration-200 hover:text-red-400 hover:translate-x-1"
+          >
+            Cerrar sesión
+          </li>
+        </ul>
+      </aside>
+    </>
   );
 }
 

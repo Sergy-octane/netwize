@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 
 import Navbar from "./Navbar";
@@ -14,60 +15,76 @@ import ForgotPassword from "../pages/ForgotPassword";
 import HelpButton from "./HelpButton";
 
 function Layout() {
-
   const savedSession = localStorage.getItem("netwizeSession");
 
   const [currentPage, setCurrentPage] = useState(
     savedSession ? "dashboard" : "login"
   );
-   const goToPage = (page) => {
+
+  const [menuAbierto, setMenuAbierto] = useState(false);
+
+  const goToPage = (page) => {
     const session = localStorage.getItem("netwizeSession");
 
     if (
       ["dashboard", "simulator", "encyclopedia"].includes(page) &&
       !session
     ) {
+      setMenuAbierto(false);
       setCurrentPage("login");
       return;
     }
 
+    setMenuAbierto(false);
     setCurrentPage(page);
   };
-  
 
   return (
     <div>
       <Navbar />
-      
+
       <HelpButton />
 
       <div className="flex">
-          
-      {["dashboard", "simulator", "encyclopedia"].includes(currentPage) && (
-  <Sidebar
-  setCurrentPage={goToPage}
-  currentPage={currentPage}
-/>
-)}
+        {["dashboard", "simulator", "encyclopedia"].includes(currentPage) && (
+          <Sidebar
+            setCurrentPage={goToPage}
+            currentPage={currentPage}
+            menuAbierto={menuAbierto}
+            setMenuAbierto={setMenuAbierto}
+          />
+        )}
 
-        <main className="flex-1 p-6 bg-gray-50">
-          
-          {currentPage === "welcome" && (<Welcome setCurrentPage={setCurrentPage} />)}
+        <main className="flex-1 min-w-0 p-6 bg-gray-50">
+          {currentPage === "welcome" && (
+            <Welcome setCurrentPage={setCurrentPage} />
+          )}
 
-          {currentPage === "login" && (<Login setCurrentPage={setCurrentPage} />)}
+          {currentPage === "login" && (
+            <Login setCurrentPage={setCurrentPage} />
+          )}
 
-          {currentPage === "register" && (<Register setCurrentPage={setCurrentPage} />)}
+          {currentPage === "register" && (
+            <Register setCurrentPage={setCurrentPage} />
+          )}
 
-          {currentPage === "terms" && (<Terms setCurrentPage={setCurrentPage} />)}
+          {currentPage === "terms" && (
+            <Terms setCurrentPage={setCurrentPage} />
+          )}
 
-          {currentPage === "forgotPassword" && (<ForgotPassword setCurrentPage={setCurrentPage} />)}
-          
-          {currentPage === "dashboard" && <Dashboard setCurrentPage={goToPage} />}
+          {currentPage === "forgotPassword" && (
+            <ForgotPassword setCurrentPage={setCurrentPage} />
+          )}
 
-         {currentPage === "simulator" && <Simulator setCurrentPage={goToPage} />}
+          {currentPage === "dashboard" && (
+            <Dashboard setCurrentPage={goToPage} />
+          )}
+
+          {currentPage === "simulator" && (
+            <Simulator setCurrentPage={goToPage} />
+          )}
 
           {currentPage === "encyclopedia" && <Encyclopedia />}
-
         </main>
       </div>
     </div>

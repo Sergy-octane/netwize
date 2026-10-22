@@ -61,6 +61,19 @@ function Simulator({ setCurrentPage }) {
   {caso.descripcion}
 </p>
 
+<div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+  <p className="text-gray-700 mb-2">
+    ¿No entiendes algún término técnico?
+  </p>
+
+  <button
+    onClick={() => setCurrentPage("encyclopedia")}
+    className="text-blue-700 hover:text-blue-900 font-semibold underline"
+  >
+    Consultar la enciclopedia →
+  </button>
+</div>
+
 <p className="text-sm text-gray-500 mb-2">
   Paso {nodoActual + 1} de {caso.nodos.length}
 </p>
