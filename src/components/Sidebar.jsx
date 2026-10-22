@@ -16,7 +16,7 @@ function Sidebar({ setCurrentPage, currentPage, menuAbierto, setMenuAbierto }) {
       {/* Botón del menú móvil */}
       <button
         onClick={() => setMenuAbierto(!menuAbierto)}
-        className={`sm:hidden fixed top-[56px] right-3 z-50 bg-gray-900 text-white p-2 rounded-lg shadow-lg ${
+        className={`sm:hidden fixed top-[52px] right-3 z-50 bg-gray-900 text-white p-2 rounded-lg shadow-lg ${
   menuAbierto ? "hidden" : "block"
 }`}
         aria-label={menuAbierto ? "Cerrar menú" : "Abrir menú"}
