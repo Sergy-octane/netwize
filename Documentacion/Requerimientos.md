@@ -56,7 +56,7 @@ El sistema debe impedir el acceso a las vistas internas mediante la navegación 
 
 ### RF-14
 
-El sistema debe permitir acceder a una vista para la recuperación de contraseña mediante correo electrónico como parte de la estructura de acceso. Esta vista no implica el envío real de instrucciones de recuperación.
+El sistema debe permitir acceder a una vista para la recuperación de contraseña mediante correo electrónico como parte de la estructura de acceso. Esta vista valida el formato del correo y muestra una confirmación, pero no implica el envío real de instrucciones ni la modificación de la contraseña.
 
 ### RF-15
 
@@ -89,6 +89,18 @@ El sistema debe presentar información estadística e historial de actividad en 
 ### RF-22
 
 El sistema debe permitir navegar entre las vistas de bienvenida, inicio de sesión, registro, términos y condiciones, recuperación de contraseña y los módulos internos de la aplicación, según corresponda al estado de acceso del usuario.
+
+### RF-23
+
+El sistema debe permitir mostrar u ocultar los caracteres de las contraseñas ingresadas en los formularios de inicio de sesión y registro.
+
+### RF-24
+
+El sistema debe permitir abrir y cerrar el menú lateral en dispositivos móviles mediante un botón de menú, un control de cierre y una capa superpuesta. También debe cerrarlo automáticamente después de seleccionar una opción de navegación.
+
+### RF-25
+
+El sistema debe proporcionar un acceso contextual desde el Simulador hacia la Enciclopedia N1 para facilitar la consulta de conceptos técnicos durante el diagnóstico.
 
 ## Requerimientos No Funcionales
 

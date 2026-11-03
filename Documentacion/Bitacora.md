@@ -279,7 +279,7 @@ El Dashboard de NetWize cuenta con una representación visual de las categorías
 - Se implementó la navegación hacia el Simulador desde el Sidebar.
 - Se verificó el funcionamiento de los botones internos del Dashboard y del Simulador.
 - Se realizaron pruebas de navegación entre las principales vistas de NetWize.
-- Se revisó la opción Enciclopedia y se determinó que será desarrollada como una funcionalidad futura.
+- Se revisó la opción Enciclopedia y se determinó que su desarrollo quedaría pendiente para una etapa posterior.
 - Se realizó una revisión general del funcionamiento de la interfaz y la navegación.
 
 ### Resultado
@@ -288,7 +288,7 @@ La barra lateral de NetWize ahora permite navegar correctamente entre el Dashboa
 
 La navegación dejó de ser únicamente visual y pasó a controlar las vistas mostradas mediante el estado de React.
 
-La opción Enciclopedia permanece como una funcionalidad futura, cuya finalidad será proporcionar explicaciones sencillas sobre conceptos relacionados con redes y soporte técnico.
+La opción Enciclopedia quedó pendiente de desarrollo para una etapa posterior, en la que se incorporaría como un espacio para consultar explicaciones sencillas sobre conceptos relacionados con redes y soporte técnico.
 
 ## Semana 17
 
@@ -414,46 +414,21 @@ Las funcionalidades principales fueron verificadas y continúan funcionando corr
 ### Desarrollo
 
 - Se inició la implementación de nuevas vistas relacionadas con el acceso a la aplicación.
-
 - Se creó la vista **Welcome**, utilizada como pantalla de presentación de NetWize. Esta vista presenta brevemente el propósito de la aplicación y sus principales funcionalidades.
-
 - Se creó la vista **Login**, incorporando campos para correo electrónico y contraseña, un botón de inicio de sesión, una opción para recuperar la contraseña y un enlace para crear una nueva cuenta.
-
 - Se actualizó el componente `Layout` para permitir la navegación entre las nuevas vistas mediante el estado `currentPage`.
-
 - Se estableció la vista de inicio de sesión como la pantalla inicial de NetWize.
-
 - Se desarrolló la vista **Register** para estructurar el proceso de creación de una cuenta.
-
 - La vista de registro incorpora campos para nombre, correo electrónico, contraseña y confirmación de contraseña.
-
 - Se agregó la aceptación de términos y condiciones mediante una casilla de verificación.
-
 - Se implementó un estado mediante React para controlar la aceptación de los términos y condiciones.
-
 - El botón **Crear cuenta** permanece deshabilitado mientras los términos no hayan sido aceptados y cambia a un estado activo después de marcar la casilla correspondiente.
-
 - Se creó la vista **Terms**, destinada a presentar información relacionada con el uso educativo de NetWize y las condiciones generales de utilización de la aplicación.
-
-- Se creó la vista **ForgotPassword**, destinada a estructurar una futura función de recuperación de contraseña.
-
-- La vista de recuperación incorpora un campo para correo electrónico, un botón para enviar instrucciones y una opción para regresar al inicio de sesión.
-
+- Se creó la vista **ForgotPassword**, destinada a ofrecer una opción de recuperación de contraseña mediante el ingreso del correo electrónico.
+- La vista de recuperación incorpora validación del formato del correo electrónico y muestra un mensaje de confirmación después de procesar la solicitud. Esta funcionalidad no envía correos electrónicos ni modifica contraseñas.
 - Se creó el componente reutilizable `HelpButton`, que permite acceder a un canal de ayuda mediante WhatsApp.
-
 - El componente de ayuda fue integrado en `Layout`, permitiendo que el botón se encuentre disponible en las diferentes vistas de la aplicación sin necesidad de duplicar código.
-
 - Se realizaron pruebas de navegación entre las nuevas vistas para verificar su correcta integración con el sistema existente.
-
-### Resultado
-
-Durante la Semana 21 se incorporó un flujo inicial de acceso y navegación para NetWize compuesto por las vistas de inicio de sesión, registro, términos y condiciones y recuperación de contraseña.
-
-También se agregó un mecanismo general de acceso a ayuda mediante WhatsApp.
-
-Las nuevas vistas mantienen el estilo visual utilizado previamente en NetWize y se integran con el sistema de navegación existente mediante React.
-
-La implementación realizada corresponde actualmente a la estructura visual y de navegación del sistema. Las funciones de autenticación real, almacenamiento de usuarios y recuperación de contraseñas mediante servidor quedan pendientes para una futura etapa si son requeridas por el alcance del proyecto.
 
 ### Implementación de autenticación local
 
@@ -475,31 +450,37 @@ La implementación realizada corresponde actualmente a la estructura visual y de
 
 ### Resultado
 
-Con estos cambios, el flujo de acceso de NetWize pasó de ser únicamente una estructura visual a contar con una autenticación local funcional.
+Durante la Semana 21 se incorporó un flujo de acceso y navegación para NetWize compuesto por las vistas de bienvenida, inicio de sesión, registro, términos y condiciones y recuperación de contraseña.
 
-Actualmente el flujo permite:
+También se agregó un mecanismo general de acceso a ayuda mediante WhatsApp.
+
+La autenticación pasó de ser únicamente una estructura visual a contar con un funcionamiento local que permite registrar usuarios, validar credenciales, mantener sesiones y cerrar sesión.
+
+Actualmente, el flujo de acceso funciona de la siguiente manera:
 
 ```text
 Crear cuenta
-      ↓
+     ↓
 Guardar usuario localmente
-      ↓
+     ↓
 Iniciar sesión
-      ↓
+     ↓
 Validar credenciales
-      ↓
+     ↓
 Crear sesión
-      ↓
+     ↓
 Dashboard
-      ↓
+     ↓
 Cerrar sesión
-      ↓
+     ↓
 Eliminar sesión
-      ↓
+     ↓
 Login
 ```
 
-La autenticación implementada está orientada al funcionamiento local y académico del proyecto. No corresponde a un sistema de autenticación con servidor, base de datos remota o recuperación real de contraseña mediante correo electrónico.
+La implementación utiliza `LocalStorage` y SHA-256 mediante la API Web Crypto del navegador. Está orientada al funcionamiento local y académico del proyecto, por lo que no corresponde a un sistema de autenticación de producción con servidor o base de datos remota.
+
+La recuperación de contraseña cuenta con validación del correo electrónico y confirmación visual, pero no realiza una recuperación real mediante correo electrónico ni modifica la contraseña almacenada.
 
 ## Semana 22
 

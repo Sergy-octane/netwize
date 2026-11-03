@@ -123,6 +123,16 @@ Repositorio:
 
 https://github.com/Sergy-octane/netwize
 
+## Vercel
+
+Plataforma utilizada para desplegar y publicar NetWize en internet.
+
+Permite generar una versión accesible de la aplicación a partir del proyecto alojado en GitHub.
+
+Dirección pública:
+
+https://netwize.vercel.app/
+
 ## Herramientas de desarrollo
 
 ### Visual Studio Code

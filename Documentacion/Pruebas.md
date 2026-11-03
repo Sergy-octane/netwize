@@ -137,113 +137,117 @@ Cada registro debe mostrar el caso realizado y su fecha y hora.
 
 ### Prueba 1 — Contador de casos resueltos
 
-**Objetivo:** Verificar que el Dashboard muestre correctamente la cantidad de casos registrados.
+**Objetivo:** verificar que el Dashboard muestre correctamente la cantidad de casos registrados.
 
-**Resultado esperado:** El número mostrado debe coincidir con la cantidad de registros almacenados en el historial.
+**Resultado esperado:** el número mostrado debe coincidir con la cantidad de registros almacenados en el historial.
 
-**Resultado obtenido:** Correcto.
+**Resultado obtenido:** correcto.
 
 ---
 
 ### Prueba 2 — Contador de simulaciones
 
-**Objetivo:** Verificar que el Dashboard muestre la cantidad de simulaciones realizadas.
+**Objetivo:** verificar que el Dashboard muestre la cantidad de simulaciones realizadas.
 
-**Resultado esperado:** El contador debe actualizarse utilizando el historial almacenado.
+**Resultado esperado:** el contador debe actualizarse utilizando el historial almacenado.
 
-**Resultado obtenido:** Correcto.
+**Resultado obtenido:** correcto.
 
 ---
 
 ### Prueba 3 — Categoría más frecuente
 
-**Objetivo:** Verificar que NetWize identifique correctamente la categoría con mayor cantidad de casos.
+**Objetivo:** verificar que NetWize identifique correctamente la categoría con mayor cantidad de casos.
 
-**Resultado esperado:** El Dashboard debe mostrar la categoría con mayor frecuencia.
+**Resultado esperado:** el Dashboard debe mostrar la categoría con mayor frecuencia.
 
-**Resultado obtenido:** Correcto.
+**Resultado obtenido:** correcto.
 
 ---
 
 ### Prueba 4 — Barras de categorías
 
-**Objetivo:** Verificar la representación visual de la frecuencia de las categorías.
+**Objetivo:** verificar la representación visual de la frecuencia de las categorías.
 
-**Resultado esperado:** Cada categoría debe mostrar una barra proporcional a la cantidad de casos registrados.
+**Resultado esperado:** cada categoría debe mostrar una barra proporcional a la cantidad de casos registrados.
 
-**Resultado obtenido:** Correcto.
+**Resultado obtenido:** correcto.
 
 ---
 
 ### Prueba 5 — Persistencia de estadísticas
 
-**Objetivo:** Verificar que las estadísticas continúen disponibles después de recargar la aplicación.
+**Objetivo:** verificar que las estadísticas continúen disponibles después de recargar la aplicación.
 
-**Resultado esperado:** Los datos deben mantenerse debido al almacenamiento mediante `localStorage`.
+**Resultado esperado:** los datos deben mantenerse debido al almacenamiento mediante `localStorage`.
 
-**Resultado obtenido:** Correcto.
+**Resultado obtenido:** correcto.
 
 ## Resultado general
 
-Las pruebas realizadas hasta la Semana 13 permiten verificar el funcionamiento de las principales características implementadas en NetWize.
+Las pruebas realizadas hasta la Semana 14 permitieron verificar el funcionamiento de las principales características implementadas en NetWize.
 
 Las funcionalidades probadas se encuentran operativas.
+
+---
 
 ## Semana 15 — Pruebas de gráficas y estadísticas visuales
 
 ### Prueba 1 — Actualización de porcentajes
 
-**Objetivo:** Verificar que los porcentajes de las categorías se calculen automáticamente.
+**Objetivo:** verificar que los porcentajes de las categorías se calculen automáticamente.
 
-**Resultado esperado:** El porcentaje debe cambiar cuando se agregan nuevos casos al historial.
+**Resultado esperado:** el porcentaje debe cambiar cuando se agregan nuevos casos al historial.
 
-**Resultado obtenido:** Correcto.
+**Resultado obtenido:** correcto.
 
 ---
 
 ### Prueba 2 — Actualización de barras
 
-**Objetivo:** Verificar que el tamaño de las barras corresponda al porcentaje de cada categoría.
+**Objetivo:** verificar que el tamaño de las barras corresponda al porcentaje de cada categoría.
 
-**Resultado esperado:** Las barras deben aumentar o disminuir proporcionalmente según la cantidad de casos.
+**Resultado esperado:** las barras deben aumentar o disminuir proporcionalmente según la cantidad de casos.
 
-**Resultado obtenido:** Correcto.
+**Resultado obtenido:** correcto.
 
 ---
 
 ### Prueba 3 — Múltiples categorías
 
-**Objetivo:** Verificar la representación de varias categorías simultáneamente.
+**Objetivo:** verificar la representación de varias categorías simultáneamente.
 
-**Resultado esperado:** Cada categoría debe mostrar su propia cantidad, porcentaje y barra.
+**Resultado esperado:** cada categoría debe mostrar su propia cantidad, porcentaje y barra.
 
-**Resultado obtenido:** Correcto.
+**Resultado obtenido:** correcto.
 
 ---
 
 ### Prueba 4 — Sin librerías externas
 
-**Objetivo:** Verificar que las gráficas funcionen sin instalar librerías adicionales.
+**Objetivo:** verificar que las gráficas funcionen sin instalar librerías adicionales.
 
-**Resultado esperado:** Las gráficas deben generarse utilizando React, JavaScript y Tailwind CSS.
+**Resultado esperado:** las gráficas deben generarse utilizando React, JavaScript y Tailwind CSS.
 
-**Resultado obtenido:** Correcto.
+**Resultado obtenido:** correcto.
 
 ---
 
 ### Prueba 5 — Actualización dinámica
 
-**Objetivo:** Verificar que las estadísticas cambien al resolver diferentes casos.
+**Objetivo:** verificar que las estadísticas cambien al resolver diferentes casos.
 
-**Resultado esperado:** Las barras y porcentajes deben subir o disminuir dependiendo de los casos registrados.
+**Resultado esperado:** las barras y porcentajes deben subir o disminuir dependiendo de los casos registrados.
 
-**Resultado obtenido:** Correcto.
+**Resultado obtenido:** correcto.
+
+---
 
 ## Semana 16 — Pruebas de navegación
 
 ### Prueba 1 — Navegación al Dashboard desde el Sidebar
 
-**Objetivo:** Verificar que el usuario pueda acceder al Dashboard utilizando la barra lateral.
+**Objetivo:** verificar que el usuario pueda acceder al Dashboard utilizando la barra lateral.
 
 **Procedimiento:**
 
@@ -255,13 +259,13 @@ Las funcionalidades probadas se encuentran operativas.
 
 La aplicación debe mostrar correctamente el Dashboard.
 
-**Resultado obtenido:** Correcto.
+**Resultado obtenido:** correcto.
 
 ---
 
 ### Prueba 2 — Navegación al Simulador desde el Sidebar
 
-**Objetivo:** Verificar que el usuario pueda acceder al Simulador utilizando la barra lateral.
+**Objetivo:** verificar que el usuario pueda acceder al Simulador utilizando la barra lateral.
 
 **Procedimiento:**
 
@@ -273,13 +277,13 @@ La aplicación debe mostrar correctamente el Dashboard.
 
 La aplicación debe mostrar correctamente el Simulador.
 
-**Resultado obtenido:** Correcto.
+**Resultado obtenido:** correcto.
 
 ---
 
 ### Prueba 3 — Navegación mediante botones internos
 
-**Objetivo:** Verificar que los botones internos de la aplicación permitan desplazarse entre las vistas principales.
+**Objetivo:** verificar que los botones internos de la aplicación permitan desplazarse entre las vistas principales.
 
 **Procedimiento:**
 
@@ -292,13 +296,13 @@ La aplicación debe mostrar correctamente el Simulador.
 
 El usuario debe poder desplazarse correctamente entre Dashboard y Simulador.
 
-**Resultado obtenido:** Correcto.
+**Resultado obtenido:** correcto.
 
 ---
 
 ### Prueba 4 — Revisión de Enciclopedia
 
-**Objetivo:** Verificar el comportamiento actual de la opción Enciclopedia.
+**Objetivo:** verificar el comportamiento de la opción Enciclopedia durante esta etapa del desarrollo.
 
 **Procedimiento:**
 
@@ -310,7 +314,7 @@ El usuario debe poder desplazarse correctamente entre Dashboard y Simulador.
 
 La opción debe permanecer identificada como una funcionalidad pendiente de desarrollo.
 
-**Resultado obtenido:** Correcto. La opción se encuentra visible, pero todavía no cuenta con una vista o funcionalidad asociada.
+**Resultado obtenido:** correcto. En esta etapa, la opción se encontraba visible, pero todavía no contaba con una vista o funcionalidad asociada.
 
 ---
 
@@ -320,13 +324,15 @@ Las pruebas realizadas durante la Semana 16 permitieron verificar el funcionamie
 
 El Sidebar permite acceder correctamente al Dashboard y al Simulador, y los botones internos de navegación funcionan de acuerdo con lo esperado.
 
-La Enciclopedia queda definida como una funcionalidad futura.
+La Enciclopedia quedó definida como una funcionalidad futura y fue desarrollada posteriormente.
+
+---
 
 ## Semana 17 — Pruebas responsive
 
 ### Prueba 1 — Visualización en celular
 
-**Objetivo:** Verificar que la interfaz se adapte correctamente a pantallas pequeñas.
+**Objetivo:** verificar que la interfaz se adapte correctamente a pantallas pequeñas.
 
 **Procedimiento:**
 
@@ -338,13 +344,13 @@ La Enciclopedia queda definida como una funcionalidad futura.
 
 La interfaz debe adaptarse correctamente al tamaño disponible.
 
-**Resultado obtenido:** Correcto.
+**Resultado obtenido:** correcto.
 
 ---
 
 ### Prueba 2 — Visualización en tablet
 
-**Objetivo:** Verificar el comportamiento de la interfaz en tamaños de pantalla correspondientes a tablets.
+**Objetivo:** verificar el comportamiento de la interfaz en tamaños de pantalla correspondientes a tablets.
 
 **Procedimiento:**
 
@@ -356,13 +362,13 @@ La interfaz debe adaptarse correctamente al tamaño disponible.
 
 El Sidebar y el contenido principal deben mostrarse correctamente sin afectar la navegación.
 
-**Resultado obtenido:** Correcto.
+**Resultado obtenido:** correcto.
 
 ---
 
 ### Prueba 3 — Visualización en portátil
 
-**Objetivo:** Verificar que la interfaz mantenga su distribución en pantallas de mayor tamaño.
+**Objetivo:** verificar que la interfaz mantenga su distribución en pantallas de mayor tamaño.
 
 **Procedimiento:**
 
@@ -374,13 +380,13 @@ El Sidebar y el contenido principal deben mostrarse correctamente sin afectar la
 
 Todos los elementos deben mostrarse correctamente y mantener su distribución.
 
-**Resultado obtenido:** Correcto.
+**Resultado obtenido:** correcto.
 
 ---
 
 ### Prueba 4 — Corrección del Sidebar
 
-**Objetivo:** Verificar que el Sidebar se muestre correctamente después del ajuste del breakpoint responsive.
+**Objetivo:** verificar que el Sidebar se muestre correctamente después del ajuste del breakpoint responsive.
 
 **Procedimiento:**
 
@@ -392,13 +398,13 @@ Todos los elementos deben mostrarse correctamente y mantener su distribución.
 
 El Sidebar debe mostrarse correctamente en los tamaños establecidos para tablets y pantallas mayores.
 
-**Resultado obtenido:** Correcto.
+**Resultado obtenido:** correcto.
 
 ---
 
 ### Prueba 5 — Desbordamiento horizontal
 
-**Objetivo:** Verificar que ningún elemento genere desplazamiento horizontal innecesario.
+**Objetivo:** verificar que ningún elemento genere desplazamiento horizontal innecesario.
 
 **Procedimiento:**
 
@@ -410,7 +416,7 @@ El Sidebar debe mostrarse correctamente en los tamaños establecidos para tablet
 
 El contenido debe mantenerse dentro del ancho disponible.
 
-**Resultado obtenido:** Correcto.
+**Resultado obtenido:** correcto.
 
 ---
 
@@ -420,11 +426,13 @@ Las pruebas realizadas durante la Semana 17 permitieron verificar el comportamie
 
 Se corrigió el comportamiento del Sidebar y se confirmó que la interfaz mantiene una distribución adecuada sin realizar cambios estructurales en el diseño.
 
+---
+
 ## Semana 18 — Pruebas de interfaz y microinteracciones
 
 ### Prueba 1 — Estado activo del Sidebar
 
-**Objetivo:** Verificar que la opción correspondiente a la página actual se identifique visualmente.
+**Objetivo:** verificar que la opción correspondiente a la página actual se identifique visualmente.
 
 **Procedimiento:**
 
@@ -437,13 +445,13 @@ Se corrigió el comportamiento del Sidebar y se confirmó que la interfaz mantie
 
 La página seleccionada debe mostrarse resaltada visualmente.
 
-**Resultado obtenido:** Correcto.
+**Resultado obtenido:** correcto.
 
 ---
 
 ### Prueba 2 — Microinteracciones
 
-**Objetivo:** Verificar el funcionamiento de las animaciones y efectos hover.
+**Objetivo:** verificar el funcionamiento de las animaciones y efectos hover.
 
 **Procedimiento:**
 
@@ -455,13 +463,13 @@ La página seleccionada debe mostrarse resaltada visualmente.
 
 Los elementos deben responder suavemente a la interacción del usuario.
 
-**Resultado obtenido:** Correcto.
+**Resultado obtenido:** correcto.
 
 ---
 
 ### Prueba 3 — Estado vacío del historial
 
-**Objetivo:** Verificar la visualización del historial cuando no existen registros.
+**Objetivo:** verificar la visualización del historial cuando no existen registros.
 
 **Procedimiento:**
 
@@ -473,7 +481,7 @@ Los elementos deben responder suavemente a la interacción del usuario.
 
 Debe mostrarse un mensaje indicando que todavía no existen casos resueltos.
 
-**Resultado obtenido:** Correcto.
+**Resultado obtenido:** correcto.
 
 ---
 
@@ -483,11 +491,13 @@ Las pruebas realizadas durante la Semana 18 permitieron verificar las nuevas ani
 
 Las funcionalidades principales continúan funcionando correctamente después de las mejoras de interfaz.
 
+---
+
 ## Semana 19 — Pruebas de Enciclopedia N1
 
 ### Prueba 1 — Visualización de conceptos
 
-**Objetivo:** Verificar que los conceptos almacenados en `encyclopedia.json` se carguen correctamente.
+**Objetivo:** verificar que los conceptos almacenados en `encyclopedia.json` se carguen correctamente.
 
 **Procedimiento:**
 
@@ -499,13 +509,13 @@ Las funcionalidades principales continúan funcionando correctamente después de
 
 Los conceptos deben aparecer correctamente en la Enciclopedia.
 
-**Resultado obtenido:** Correcto.
+**Resultado obtenido:** correcto.
 
 ---
 
 ### Prueba 2 — Información de los conceptos
 
-**Objetivo:** Verificar que cada concepto muestre la información correspondiente.
+**Objetivo:** verificar que cada concepto muestre la información correspondiente.
 
 **Procedimiento:**
 
@@ -521,13 +531,13 @@ Cada tarjeta debe mostrar:
 - ¿Para qué sirve?
 - ¿Qué debo revisar como N1?
 
-**Resultado obtenido:** Correcto.
+**Resultado obtenido:** correcto.
 
 ---
 
 ### Prueba 3 — Navegación
 
-**Objetivo:** Verificar que la Enciclopedia pueda abrirse desde el Sidebar.
+**Objetivo:** verificar que la Enciclopedia pueda abrirse desde el Sidebar.
 
 **Procedimiento:**
 
@@ -540,13 +550,13 @@ Cada tarjeta debe mostrar:
 
 La navegación debe funcionar correctamente sin recargar la aplicación.
 
-**Resultado obtenido:** Correcto.
+**Resultado obtenido:** correcto.
 
 ---
 
 ### Prueba 4 — Responsive
 
-**Objetivo:** Verificar que las tarjetas se adapten a diferentes tamaños de pantalla.
+**Objetivo:** verificar que las tarjetas se adapten a diferentes tamaños de pantalla.
 
 **Procedimiento:**
 
@@ -559,13 +569,13 @@ La navegación debe funcionar correctamente sin recargar la aplicación.
 
 Las tarjetas deben adaptarse al ancho disponible sin generar desbordamiento horizontal.
 
-**Resultado obtenido:** Correcto.
+**Resultado obtenido:** correcto.
 
 ---
 
 ### Prueba 5 — Carga dinámica
 
-**Objetivo:** Verificar que la Enciclopedia genere las tarjetas a partir del archivo JSON.
+**Objetivo:** verificar que la Enciclopedia genere las tarjetas a partir del archivo JSON.
 
 **Procedimiento:**
 
@@ -577,7 +587,7 @@ Las tarjetas deben adaptarse al ancho disponible sin generar desbordamiento hori
 
 Los conceptos deben generarse automáticamente a partir de los datos almacenados en el archivo JSON.
 
-**Resultado obtenido:** Correcto.
+**Resultado obtenido:** correcto.
 
 ---
 
@@ -593,7 +603,7 @@ La nueva funcionalidad se integra correctamente con las demás vistas de NetWize
 
 ### Prueba 1 — Consola del navegador
 
-**Objetivo:** Verificar que no existan errores visibles en la consola.
+**Objetivo:** verificar que no existan errores visibles en la consola.
 
 **Procedimiento:**
 
@@ -606,13 +616,13 @@ La nueva funcionalidad se integra correctamente con las demás vistas de NetWize
 
 No deben aparecer errores relacionados con la aplicación.
 
-**Resultado obtenido:** Correcto.
+**Resultado obtenido:** correcto.
 
 ---
 
 ### Prueba 2 — Funcionamiento general
 
-**Objetivo:** Verificar que las funcionalidades principales continúen funcionando después de la limpieza.
+**Objetivo:** verificar que las funcionalidades principales continúen funcionando después de la limpieza.
 
 **Procedimiento:**
 
@@ -626,13 +636,13 @@ No deben aparecer errores relacionados con la aplicación.
 
 Todas las funcionalidades deben continuar funcionando correctamente.
 
-**Resultado obtenido:** Correcto.
+**Resultado obtenido:** correcto.
 
 ---
 
 ### Prueba 3 — Persistencia del historial
 
-**Objetivo:** Verificar que el historial continúe funcionando después de la revisión del código.
+**Objetivo:** verificar que el historial continúe funcionando después de la revisión del código.
 
 **Procedimiento:**
 
@@ -645,13 +655,13 @@ Todas las funcionalidades deben continuar funcionando correctamente.
 
 El registro debe mantenerse almacenado después de recargar la aplicación.
 
-**Resultado obtenido:** Correcto.
+**Resultado obtenido:** correcto.
 
 ---
 
 ### Prueba 4 — Responsive
 
-**Objetivo:** Verificar que la limpieza del código no afecte la adaptación de la interfaz.
+**Objetivo:** verificar que la limpieza del código no afecte la adaptación de la interfaz.
 
 **Procedimiento:**
 
@@ -664,19 +674,13 @@ El registro debe mantenerse almacenado después de recargar la aplicación.
 
 La interfaz debe mantener su comportamiento responsive.
 
-**Resultado obtenido:** Correcto.
+**Resultado obtenido:** correcto.
 
 ---
 
-### Resultado general
-
-Las pruebas realizadas durante la Semana 20 permitieron comprobar que las funcionalidades principales continúan funcionando correctamente después de la optimización y limpieza del código.
-
-No se detectaron errores que afecten el funcionamiento de NetWize.
-
 ### Prueba 5 — Navegación del flujo de acceso
 
-**Objetivo:** Verificar la navegación entre las nuevas vistas de acceso.
+**Objetivo:** verificar la navegación entre las nuevas vistas de acceso.
 
 **Procedimiento:**
 
@@ -692,13 +696,13 @@ No se detectaron errores que afecten el funcionamiento de NetWize.
 
 Las diferentes vistas deben cargarse correctamente y permitir regresar a las pantallas correspondientes.
 
-**Resultado obtenido:** Correcto.
+**Resultado obtenido:** correcto.
 
 ---
 
 ### Prueba 6 — Aceptación de términos
 
-**Objetivo:** Verificar que el registro requiera la aceptación de los términos y condiciones.
+**Objetivo:** verificar que el registro requiera la aceptación de los términos y condiciones.
 
 **Procedimiento:**
 
@@ -712,13 +716,13 @@ Las diferentes vistas deben cargarse correctamente y permitir regresar a las pan
 
 El botón Crear cuenta debe permanecer deshabilitado mientras los términos no sean aceptados y habilitarse al marcar la casilla.
 
-**Resultado obtenido:** Correcto.
+**Resultado obtenido:** correcto.
 
 ---
 
 ### Prueba 7 — Acceso a ayuda
 
-**Objetivo:** Verificar el funcionamiento del botón de ayuda mediante WhatsApp.
+**Objetivo:** verificar el funcionamiento del botón de ayuda mediante WhatsApp.
 
 **Procedimiento:**
 
@@ -731,121 +735,238 @@ El botón Crear cuenta debe permanecer deshabilitado mientras los términos no s
 
 El botón de ayuda debe estar disponible en las diferentes vistas y abrir correctamente el canal de contacto configurado.
 
-**Resultado obtenido:** Correcto.
+**Resultado obtenido:** correcto.
 
 ---
 
 ### Resultado general
 
-Las pruebas realizadas durante la Semana 21 permitieron verificar el funcionamiento de las nuevas vistas de acceso y su integración con la navegación existente.
+Las pruebas realizadas durante la Semana 20 permitieron comprobar que las funcionalidades principales continúan funcionando correctamente después de la optimización y limpieza del código.
 
-Se comprobó el funcionamiento de Login, Registro, Términos y condiciones, Recuperación de contraseña y el acceso general a ayuda mediante WhatsApp.
+También se verificó la navegación de las nuevas vistas de acceso, la aceptación de términos y el acceso a ayuda mediante WhatsApp.
 
-También se verificó que la aceptación de los términos controle correctamente el estado del botón de creación de cuenta.
+---
 
-## Pruebas de autenticación local
+## Semana 21 — Pruebas de autenticación local
 
-### Registro de usuario
+### Prueba 1 — Registro de usuario
 
-**Prueba:** Crear una cuenta con datos válidos.
+**Objetivo:** verificar que el sistema permita crear una cuenta con datos válidos.
+
+**Procedimiento:**
+
+1. Abrir la vista Registro.
+2. Ingresar nombre, correo electrónico y contraseña.
+3. Confirmar la contraseña.
+4. Aceptar los términos y condiciones.
+5. Seleccionar Crear cuenta.
 
 **Resultado esperado:**
+
 La cuenta debe crearse correctamente, almacenarse localmente y el usuario debe ser dirigido al Login.
 
-**Resultado obtenido:**
-La cuenta se creó correctamente y el sistema mostró el mensaje de confirmación antes de regresar al Login.
+**Resultado obtenido:** correcto. La cuenta se creó correctamente y el sistema mostró el mensaje de confirmación antes de regresar al Login.
 
-**Estado:** ✅ Correcto.
+**Estado:** aprobado.
 
 ---
 
-### Almacenamiento de usuario
+### Prueba 2 — Almacenamiento de usuario
 
-**Prueba:** Revisar el contenido de `LocalStorage` después del registro.
+**Objetivo:** verificar el almacenamiento local de los datos del usuario después del registro.
+
+**Procedimiento:**
+
+1. Crear una cuenta.
+2. Revisar el contenido de LocalStorage.
+3. Consultar el registro `netwizeUser`.
 
 **Resultado esperado:**
+
 Debe existir un registro `netwizeUser` con los datos básicos del usuario y la contraseña almacenada mediante hash.
 
-**Resultado obtenido:**
-Se verificó la existencia de `netwizeUser` y se confirmó que la contraseña no se almacena directamente, sino como un hash SHA-256.
+**Resultado obtenido:** correcto. Se verificó la existencia de `netwizeUser` y se confirmó que la contraseña no se almacena directamente, sino como un hash SHA-256.
 
-**Estado:** ✅ Correcto.
+**Estado:** aprobado.
 
 ---
 
-### Inicio de sesión con credenciales correctas
+### Prueba 3 — Inicio de sesión con credenciales correctas
 
-**Prueba:** Ingresar utilizando el correo y contraseña registrados.
+**Objetivo:** verificar que el usuario pueda ingresar utilizando sus credenciales registradas.
+
+**Procedimiento:**
+
+1. Ingresar el correo y contraseña registrados.
+2. Seleccionar Iniciar sesión.
+3. Revisar la vista mostrada.
 
 **Resultado esperado:**
+
 El sistema debe validar las credenciales, crear una sesión y dirigir al Dashboard.
 
-**Resultado obtenido:**
-El inicio de sesión fue exitoso y el usuario fue dirigido al Dashboard.
+**Resultado obtenido:** correcto. El inicio de sesión fue exitoso y el usuario fue dirigido al Dashboard.
 
-**Estado:** ✅ Correcto.
+**Estado:** aprobado.
 
 ---
 
-### Inicio de sesión con credenciales incorrectas
+### Prueba 4 — Inicio de sesión con credenciales incorrectas
 
-**Prueba:** Ingresar con un correo o contraseña incorrectos.
+**Objetivo:** verificar que el sistema rechace credenciales incorrectas.
+
+**Procedimiento:**
+
+1. Ingresar un correo o contraseña incorrectos.
+2. Seleccionar Iniciar sesión.
+3. Revisar el mensaje mostrado.
 
 **Resultado esperado:**
+
 El sistema debe impedir el acceso y mostrar un mensaje de error.
 
-**Resultado obtenido:**
-El acceso fue rechazado y se mostró el mensaje correspondiente.
+**Resultado obtenido:** correcto. El acceso fue rechazado y se mostró el mensaje correspondiente.
 
-**Estado:** ✅ Correcto.
+**Estado:** aprobado.
 
 ---
 
-### Persistencia de sesión
+### Prueba 5 — Persistencia de sesión
 
-**Prueba:** Recargar la aplicación después de iniciar sesión.
+**Objetivo:** verificar que la sesión se mantenga después de recargar la aplicación.
+
+**Procedimiento:**
+
+1. Iniciar sesión correctamente.
+2. Recargar la aplicación.
+3. Revisar la vista mostrada.
 
 **Resultado esperado:**
+
 El sistema debe conservar la sesión y mostrar el Dashboard.
 
-**Resultado obtenido:**
-Después de recargar la aplicación, NetWize permaneció en el Dashboard.
+**Resultado obtenido:** correcto. Después de recargar la aplicación, NetWize permaneció en el Dashboard.
 
-**Estado:** ✅ Correcto.
+**Estado:** aprobado.
 
 ---
 
-### Cierre de sesión
+### Prueba 6 — Cierre de sesión
 
-**Prueba:** Seleccionar la opción **Cerrar sesión** desde el Sidebar.
+**Objetivo:** verificar que el usuario pueda cerrar su sesión.
+
+**Procedimiento:**
+
+1. Ingresar al Dashboard.
+2. Seleccionar la opción Cerrar sesión desde el Sidebar.
+3. Revisar la vista mostrada.
+4. Consultar LocalStorage.
 
 **Resultado esperado:**
+
 La sesión debe eliminarse y el usuario debe regresar al Login.
 
-**Resultado obtenido:**
-El usuario regresó al Login y la sesión fue eliminada de `LocalStorage`.
+**Resultado obtenido:** correcto. El usuario regresó al Login y la sesión fue eliminada de LocalStorage.
 
-**Estado:** ✅ Correcto.
+**Estado:** aprobado.
 
 ---
 
-### Acceso después de cerrar sesión
+### Prueba 7 — Acceso después de cerrar sesión
 
-**Prueba:** Recargar la aplicación después de cerrar sesión.
+**Objetivo:** verificar que la aplicación solicite nuevamente el acceso después de cerrar sesión.
+
+**Procedimiento:**
+
+1. Cerrar sesión.
+2. Recargar la aplicación.
+3. Revisar la vista inicial.
 
 **Resultado esperado:**
+
 La aplicación debe permanecer en Login.
 
-**Resultado obtenido:**
-Después de recargar, NetWize permaneció en Login y no permitió continuar hacia los módulos internos.
+**Resultado obtenido:** correcto. Después de recargar, NetWize permaneció en Login y no permitió continuar hacia los módulos internos mediante la navegación normal de la interfaz.
 
-**Estado:** ✅ Correcto.
+**Estado:** aprobado.
 
-## Pruebas de ampliación del simulador y la enciclopedia
+---
 
-### Prueba 8 — Disponibilidad de casos del simulador
+### Prueba 8 — Visibilidad de contraseñas en Login
 
-**Objetivo:** Verificar que el simulador cargue los casos de soporte técnico disponibles.
+**Objetivo:** verificar que el usuario pueda mostrar u ocultar la contraseña ingresada durante el inicio de sesión.
+
+**Procedimiento:**
+
+1. Abrir la vista Login.
+2. Ingresar una contraseña.
+3. Activar el control de visibilidad.
+4. Volver a ocultar la contraseña.
+
+**Resultado esperado:**
+
+El control debe alternar correctamente entre mostrar y ocultar los caracteres de la contraseña.
+
+**Estado:** aprobado.
+
+---
+
+### Prueba 9 — Visibilidad de contraseñas en Register
+
+**Objetivo:** verificar que el usuario pueda mostrar u ocultar la contraseña y su confirmación durante el registro.
+
+**Procedimiento:**
+
+1. Abrir la vista Register.
+2. Ingresar una contraseña y su confirmación.
+3. Activar el control de visibilidad de la contraseña.
+4. Activar el control de visibilidad de la confirmación.
+5. Volver a ocultar ambos campos.
+
+**Resultado esperado:**
+
+Cada control debe permitir mostrar y ocultar su respectivo campo de contraseña de manera independiente.
+
+**Estado:** aprobado.
+
+---
+
+### Prueba 10 — Validación de recuperación de contraseña
+
+**Objetivo:** verificar la validación del correo electrónico y el mensaje de confirmación de la vista de recuperación.
+
+**Procedimiento:**
+
+1. Abrir la vista ForgotPassword.
+2. Ingresar un correo con formato incorrecto.
+3. Verificar la validación correspondiente.
+4. Ingresar un correo con formato válido.
+5. Enviar la solicitud.
+6. Revisar el mensaje mostrado.
+
+**Resultado esperado:**
+
+El sistema debe validar el formato del correo electrónico y mostrar una confirmación cuando la solicitud sea procesada. No debe realizar un envío real de correo ni modificar la contraseña.
+
+**Estado:** aprobado.
+
+---
+
+### Resultado general
+
+Las pruebas realizadas durante la Semana 21 permitieron verificar el funcionamiento de la autenticación local de NetWize, incluyendo el registro de usuarios, validación de credenciales, persistencia de sesión y cierre de sesión.
+
+También se verificaron los controles de visibilidad de contraseñas y el comportamiento de la vista de recuperación de contraseña.
+
+La autenticación funciona mediante almacenamiento local y no representa un sistema de autenticación con servidor o base de datos remota.
+
+---
+
+## Semana 22 — Pruebas de ampliación del simulador y la enciclopedia
+
+### Prueba 1 — Disponibilidad de casos del simulador
+
+**Objetivo:** verificar que el simulador cargue los casos de soporte técnico disponibles.
 
 **Procedimiento:**
 
@@ -858,17 +979,15 @@ Después de recargar, NetWize permaneció en Login y no permitió continuar haci
 
 El simulador debe mostrar los casos disponibles y permitir iniciar una simulación.
 
-**Resultado obtenido:**
+**Resultado obtenido:** correcto. El archivo de datos contiene 19 casos de soporte técnico y se comprobó su disponibilidad durante las pruebas realizadas.
 
-Se comprobó el funcionamiento de los casos del simulador durante las pruebas realizadas. El archivo de datos contiene 19 casos de soporte técnico.
-
-**Estado:** Correcto.
+**Estado:** aprobado.
 
 ---
 
-### Prueba 9 — Flujo de diagnóstico del simulador
+### Prueba 2 — Flujo de diagnóstico del simulador
 
-**Objetivo:** Verificar que las respuestas seleccionadas permitan avanzar por el flujo de diagnóstico de cada caso.
+**Objetivo:** verificar que las respuestas seleccionadas permitan avanzar por el flujo de diagnóstico de los casos.
 
 **Procedimiento:**
 
@@ -876,46 +995,42 @@ Se comprobó el funcionamiento de los casos del simulador durante las pruebas re
 2. Seleccionar un caso de soporte técnico.
 3. Responder las preguntas presentadas.
 4. Continuar el flujo según las opciones disponibles.
-5. Comprobar que se pueda llegar al diagnóstico y a la solución correspondientes al caso.
+5. Comprobar que se pueda llegar al diagnóstico y a la solución correspondientes.
 
 **Resultado esperado:**
 
 Las respuestas deben permitir avanzar por las rutas de decisión definidas para cada caso y llegar al resultado correspondiente.
 
-**Resultado obtenido:**
+**Resultado obtenido:** correcto. Se realizaron pruebas de funcionamiento de los casos del simulador y se comprobó que los flujos probados funcionaran correctamente.
 
-Se realizaron pruebas de funcionamiento de los casos del simulador y se comprobó que los flujos probados funcionaran correctamente.
-
-**Estado:** Correcto.
+**Estado:** aprobado.
 
 ---
 
-### Prueba 10 — Visualización de conceptos de la enciclopedia
+### Prueba 3 — Visualización de conceptos de la enciclopedia
 
-**Objetivo:** Verificar que la enciclopedia cargue y presente correctamente los conceptos técnicos.
+**Objetivo:** verificar que la enciclopedia cargue y presente correctamente los conceptos técnicos.
 
 **Procedimiento:**
 
 1. Acceder al módulo Enciclopedia.
 2. Revisar los conceptos disponibles.
-3. Abrir diferentes tarjetas de información.
+3. Consultar diferentes tarjetas de información.
 4. Comprobar la presencia de la definición, la utilidad y las recomendaciones de revisión N1.
 
 **Resultado esperado:**
 
 La enciclopedia debe presentar los conceptos con su información organizada y permitir su consulta.
 
-**Resultado obtenido:**
+**Resultado obtenido:** correcto. Se verificó el funcionamiento de la enciclopedia ampliada, que contiene 82 conceptos técnicos con los campos de información requeridos.
 
-Se verificó el funcionamiento de la enciclopedia ampliada, que contiene 82 conceptos técnicos con los campos de información requeridos.
-
-**Estado:** Correcto.
+**Estado:** aprobado.
 
 ---
 
-### Prueba 11 — Búsqueda por diferentes campos
+### Prueba 4 — Búsqueda por diferentes campos
 
-**Objetivo:** Verificar que el buscador permita encontrar conceptos mediante diferentes campos de información.
+**Objetivo:** verificar que el buscador permita encontrar conceptos mediante diferentes campos de información.
 
 **Procedimiento:**
 
@@ -929,17 +1044,15 @@ Se verificó el funcionamiento de la enciclopedia ampliada, que contiene 82 conc
 
 El buscador debe mostrar los conceptos que coincidan con el texto ingresado en cualquiera de los campos habilitados para la búsqueda.
 
-**Resultado obtenido:**
+**Resultado obtenido:** correcto. Se comprobó que el buscador permite encontrar información mediante el título, la categoría, la definición, la utilidad y las recomendaciones de revisión N1.
 
-Se comprobó que el buscador permite encontrar información mediante el título, la categoría, la definición, la utilidad y las recomendaciones de revisión N1.
-
-**Estado:** Correcto.
+**Estado:** aprobado.
 
 ---
 
-### Prueba 12 — Búsqueda sin distinguir tildes
+### Prueba 5 — Búsqueda sin distinguir tildes
 
-**Objetivo:** Verificar que el buscador permita encontrar conceptos aunque el usuario omita las tildes.
+**Objetivo:** verificar que el buscador permita encontrar conceptos aunque el usuario omita las tildes.
 
 **Procedimiento:**
 
@@ -952,17 +1065,15 @@ Se comprobó que el buscador permite encontrar información mediante el título,
 
 El buscador debe encontrar los conceptos correspondientes tanto si la búsqueda incluye las tildes como si las omite.
 
-**Resultado obtenido:**
+**Resultado obtenido:** correcto. Se comprobó el funcionamiento de la normalización del texto, que permite realizar búsquedas sin distinguir entre letras con tilde y letras sin tilde.
 
-Se comprobó el funcionamiento de la normalización del texto, que permite realizar búsquedas sin distinguir entre letras con tilde y letras sin tilde.
-
-**Estado:** Correcto.
+**Estado:** aprobado.
 
 ---
 
-### Prueba 13 — Validación de los datos de la enciclopedia
+### Prueba 6 — Validación de los datos de la enciclopedia
 
-**Objetivo:** Verificar la integridad básica de los datos almacenados en el archivo JSON de la enciclopedia.
+**Objetivo:** verificar la integridad básica de los datos almacenados en el archivo JSON de la enciclopedia.
 
 **Procedimiento:**
 
@@ -975,11 +1086,29 @@ Se comprobó el funcionamiento de la normalización del texto, que permite reali
 
 Los datos deben contener los conceptos registrados sin títulos duplicados ni campos obligatorios incompletos.
 
-**Resultado obtenido:**
+**Resultado obtenido:** correcto. La validación del archivo identificó 82 conceptos, sin títulos duplicados y sin campos obligatorios incompletos.
 
-La validación del archivo identificó 82 conceptos, sin títulos duplicados y sin campos obligatorios incompletos.
+**Estado:** aprobado.
 
-**Estado:** Correcto.
+---
+
+### Prueba 7 — Acceso contextual a la Enciclopedia desde el Simulador
+
+**Objetivo:** verificar que el usuario pueda acceder a la Enciclopedia N1 desde el Simulador mediante el acceso contextual disponible.
+
+**Procedimiento:**
+
+1. Ingresar al Simulador.
+2. Seleccionar un caso de soporte técnico.
+3. Ubicar el acceso contextual a la Enciclopedia.
+4. Seleccionar la opción.
+5. Verificar que se muestre la Enciclopedia N1.
+
+**Resultado esperado:**
+
+El usuario debe poder acceder a la Enciclopedia desde el Simulador sin tener que regresar primero al menú principal.
+
+**Estado:** pendiente de comprobación final.
 
 ---
 

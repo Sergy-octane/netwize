@@ -6,141 +6,7 @@ NetWize es una aplicación web desarrollada para simular procesos de diagnóstic
 
 La aplicación permite al usuario practicar diferentes escenarios de soporte y obtener diagnósticos y soluciones de acuerdo con las respuestas seleccionadas.
 
----
-
-## 1. Selección de casos
-
-El simulador permite seleccionar diferentes casos de soporte técnico.
-
-Actualmente se encuentran implementados:
-
-- No tengo internet
-- WiFi lento
-- Problemas DNS
-- Internet intermitente
-
-Los casos se almacenan en un archivo JSON, permitiendo separar la información de los casos de la lógica de la aplicación.
-
----
-
-## 2. Árboles de decisión
-
-Cada caso contiene diferentes nodos de decisión.
-
-El usuario responde las preguntas planteadas y el sistema determina cuál será el siguiente paso del diagnóstico.
-
-Las opciones pueden:
-
-- Llevar al siguiente nodo.
-- Mostrar un diagnóstico.
-- Mostrar una solución.
-
----
-
-## 3. Diagnóstico y solución
-
-Cuando el usuario selecciona una opción que finaliza el proceso de diagnóstico, NetWize muestra:
-
-- Diagnóstico identificado.
-- Solución recomendada.
-
-Esto permite simular el proceso básico de atención de un caso de soporte técnico.
-
----
-
-## 4. Dashboard
-
-La aplicación cuenta con un Dashboard que funciona como panel principal.
-
-Actualmente permite:
-
-- Visualizar información general del simulador.
-- Consultar el historial de simulaciones.
-- Acceder nuevamente al simulador.
-
----
-
-## 5. Navegación
-
-La aplicación permite navegar entre:
-
-- Dashboard.
-- Simulador.
-
-La navegación se controla mediante el estado de la aplicación utilizando React.
-
----
-
-## 6. Historial de simulaciones
-
-NetWize registra las simulaciones finalizadas.
-
-Cada registro almacena:
-
-- Nombre del caso.
-- Fecha y hora de la simulación.
-
-Ejemplo:
-
-``text
-Caso: WiFi lento
-Fecha: 12/08/2026, 08:15:32
-
-## Estadísticas del Dashboard
-
----
-
-NetWize cuenta con un sistema de estadísticas básicas basado en el historial de simulaciones.
-
-Las estadísticas disponibles son:
-
-- Cantidad de casos resueltos.
-- Cantidad de simulaciones realizadas.
-- Categoría de soporte más frecuente.
-- Cantidad de casos por categoría.
-- Representación visual mediante barras de frecuencia.
-
-Los datos utilizados para generar estas estadísticas provienen del historial almacenado localmente mediante `localStorage`.
-
-## Gráficas y estadísticas visuales
-
-NetWize incorpora gráficas simples para representar visualmente la frecuencia de las categorías de soporte.
-
-Las gráficas se construyen sin librerías externas y utilizan:
-
-- React para generar los elementos dinámicamente.
-- JavaScript para calcular los porcentajes.
-- Tailwind CSS para representar las barras visuales.
-- LocalStorage como fuente de los datos del historial.
-
-Cada categoría muestra su cantidad de casos y el porcentaje correspondiente.
-
-Las barras se actualizan automáticamente cuando cambia la información almacenada en el historial.
-
-## 5. Navegación
-
-NetWize permite navegar entre las diferentes vistas de la aplicación mediante la barra lateral, los botones internos y los enlaces disponibles en cada pantalla.
-
-Las principales vistas de la aplicación son:
-
-- Bienvenida.
-- Inicio de sesión.
-- Registro.
-- Términos y condiciones.
-- Recuperación de contraseña.
-- Dashboard.
-- Simulador.
-- Enciclopedia N1.
-
-La navegación se controla mediante el estado `currentPage` de React y las funciones encargadas de cambiar de vista.
-
-El componente `Sidebar` permite desplazarse entre los módulos principales sin necesidad de recargar la aplicación.
-
-El componente `Layout` centraliza la estructura general de la aplicación y controla el acceso a las vistas internas según el estado de la sesión del usuario.
-
----
-
-## Simulador de soporte técnico
+## 1. Simulador de soporte técnico
 
 NetWize incorpora un simulador interactivo orientado al aprendizaje de procedimientos básicos de diagnóstico y solución de problemas de conectividad.
 
@@ -160,17 +26,41 @@ Los casos se almacenan en el archivo `src/data/casos.json` y se cargan dinámica
 
 La información se encuentra separada de la lógica principal del componente, lo que permite agregar o modificar casos mediante el archivo JSON sin tener que reconstruir desde cero la estructura del simulador.
 
-### Historial de simulaciones
+### Árboles de decisión
+
+Cada caso contiene diferentes nodos de decisión.
+
+El usuario responde las preguntas planteadas y el sistema determina cuál será el siguiente paso del diagnóstico.
+
+Las opciones pueden:
+
+- Llevar al siguiente nodo.
+- Mostrar un diagnóstico.
+- Mostrar una solución.
+
+### Diagnóstico y solución
+
+Cuando el usuario selecciona una opción que finaliza el proceso de diagnóstico, NetWize muestra:
+
+- Diagnóstico identificado.
+- Solución recomendada.
+
+Esto permite simular el proceso básico de atención de un caso de soporte técnico.
+
+## 2. Historial de simulaciones
 
 NetWize almacena localmente el historial de las simulaciones realizadas mediante `LocalStorage`.
 
-Los registros permiten conservar información de los casos completados y consultar la actividad desde el Dashboard.
+Cada registro almacena:
 
-El historial permanece disponible en el navegador mientras se conserve la información almacenada localmente.
+- Nombre del caso.
+- Fecha y hora de la simulación.
 
----
+El historial permite conservar información de los casos completados y consultar la actividad desde el Dashboard.
 
-## Dashboard
+Los registros permanecen disponibles en el navegador mientras se conserve la información almacenada localmente.
+
+## 3. Dashboard
 
 El Dashboard presenta un resumen de la actividad del usuario dentro de NetWize.
 
@@ -185,9 +75,36 @@ Entre sus elementos se encuentran:
 
 La información del Dashboard utiliza los datos disponibles en el almacenamiento local de la aplicación para presentar los resultados de la actividad del usuario.
 
----
+### Estadísticas del Dashboard
 
-## Enciclopedia N1
+NetWize cuenta con un sistema de estadísticas básicas basado en el historial de simulaciones.
+
+Las estadísticas disponibles son:
+
+- Cantidad de casos resueltos.
+- Cantidad de simulaciones realizadas.
+- Categoría de soporte más frecuente.
+- Cantidad de casos por categoría.
+- Representación visual mediante barras de frecuencia.
+
+Los datos utilizados para generar estas estadísticas provienen del historial almacenado localmente mediante `LocalStorage`.
+
+### Gráficas y estadísticas visuales
+
+NetWize incorpora gráficas simples para representar visualmente la frecuencia de las categorías de soporte.
+
+Las gráficas se construyen sin librerías externas y utilizan:
+
+- React para generar los elementos dinámicamente.
+- JavaScript para calcular los porcentajes.
+- Tailwind CSS para representar las barras visuales.
+- LocalStorage como fuente de los datos del historial.
+
+Cada categoría muestra su cantidad de casos y el porcentaje correspondiente.
+
+Las barras se actualizan automáticamente cuando cambia la información utilizada para generar las estadísticas.
+
+## 4. Enciclopedia N1
 
 NetWize incorpora una Enciclopedia N1 orientada a la consulta y aprendizaje de conceptos básicos e intermedios relacionados con redes, conectividad y soporte técnico.
 
@@ -234,9 +151,47 @@ También se implementó una normalización del texto que permite realizar búsqu
 
 Esta funcionalidad facilita la consulta de conceptos incluso cuando el usuario no conoce su nombre exacto o recuerda únicamente una palabra relacionada con su definición o utilidad.
 
----
+## 5. Navegación
 
-## Mejoras visuales e interacciones
+NetWize permite navegar entre las diferentes vistas de la aplicación mediante la barra lateral, los botones internos y los enlaces disponibles en cada pantalla.
+
+Las principales vistas de la aplicación son:
+
+- Bienvenida.
+- Inicio de sesión.
+- Registro.
+- Términos y condiciones.
+- Recuperación de contraseña.
+- Dashboard.
+- Simulador.
+- Enciclopedia N1.
+
+La navegación se controla mediante el estado `currentPage` de React y las funciones encargadas de cambiar de vista.
+
+El componente `Sidebar` permite desplazarse entre los módulos principales sin necesidad de recargar la aplicación.
+
+El componente `Layout` centraliza la estructura general de la aplicación y controla el acceso a las vistas internas según el estado de la sesión del usuario.
+
+### Navegación contextual hacia la Enciclopedia
+
+Desde el Simulador se incorpora un acceso contextual a la Enciclopedia N1.
+
+Esta opción permite consultar conceptos técnicos relacionados con el diagnóstico y los procedimientos de soporte sin tener que regresar primero al menú principal.
+
+### Menú lateral adaptable
+
+La barra lateral se adapta a diferentes tamaños de pantalla.
+
+En dispositivos móviles incorpora:
+
+- Botón de menú para abrir la barra lateral.
+- Control para cerrar el menú.
+- Capa superpuesta para facilitar el cierre.
+- Cierre automático después de seleccionar una opción de navegación.
+
+En pantallas de escritorio, la barra lateral mantiene su presentación habitual.
+
+## 6. Mejoras visuales e interacciones
 
 NetWize incorpora mejoras visuales orientadas a proporcionar una experiencia de usuario más dinámica y clara.
 
@@ -248,12 +203,12 @@ Se implementaron:
 - Transiciones en las barras de estadísticas.
 - Estado visual para el historial cuando no existen simulaciones registradas.
 - Diseño adaptable a diferentes tamaños de pantalla en los módulos principales.
+- Controles para mostrar u ocultar la contraseña en el inicio de sesión.
+- Controles independientes para mostrar u ocultar la contraseña y su confirmación durante el registro.
 
 Estas mejoras buscan facilitar la interacción con la interfaz y mantener una presentación visual coherente entre las diferentes vistas de la aplicación.
 
----
-
-## Optimización y limpieza
+## 7. Optimización y limpieza
 
 Durante el desarrollo se realizaron revisiones generales del código y del funcionamiento de NetWize.
 
@@ -272,9 +227,7 @@ En el archivo de la enciclopedia se verificó que los 82 conceptos no presentara
 
 Estas actividades contribuyen a mantener una estructura de código más organizada y a reducir errores en el funcionamiento de la aplicación.
 
----
-
-## Flujo de acceso
+## 8. Flujo de acceso
 
 NetWize incorpora un conjunto de vistas relacionadas con el acceso y la navegación inicial de los usuarios.
 
@@ -305,6 +258,8 @@ También proporciona accesos para:
 
 La validación de credenciales se realiza mediante la información almacenada localmente en el navegador.
 
+Se incorpora un control que permite mostrar u ocultar la contraseña ingresada.
+
 ### Registro
 
 La vista de registro permite ingresar:
@@ -322,6 +277,8 @@ El botón de creación de cuenta permanece deshabilitado mientras no se cumpla l
 
 El sistema también verifica que el correo electrónico no haya sido registrado previamente.
 
+Se incorporan controles independientes para mostrar u ocultar la contraseña y su confirmación.
+
 ### Términos y condiciones
 
 NetWize incorpora una vista independiente para consultar información relacionada con el uso educativo de la aplicación y sus condiciones generales.
@@ -332,7 +289,9 @@ La vista puede consultarse desde el proceso de registro.
 
 NetWize incorpora una vista para solicitar la recuperación de una cuenta mediante correo electrónico.
 
-Actualmente esta función corresponde a una interfaz visual. No envía instrucciones de recuperación ni modifica contraseñas, ya que el proyecto no cuenta con un servidor de autenticación ni con un servicio de recuperación por correo electrónico.
+Actualmente esta función valida que el correo electrónico tenga un formato correcto y muestra un mensaje de confirmación después de procesar la solicitud.
+
+Sin embargo, no envía instrucciones de recuperación ni modifica contraseñas, ya que el proyecto no cuenta con un servidor de autenticación ni con un servicio de recuperación por correo electrónico.
 
 ### Ayuda mediante WhatsApp
 
@@ -342,9 +301,7 @@ El componente `HelpButton` se integra desde `Layout.jsx`, permitiendo disponer d
 
 El botón abre el canal de contacto configurado en WhatsApp.
 
----
-
-## Acceso y autenticación local
+## 9. Acceso y autenticación local
 
 ### Inicio de sesión
 
