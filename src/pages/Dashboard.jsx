@@ -1,8 +1,10 @@
   import { useState } from "react";
   import casos from "../data/casos.json";
   function Dashboard({ setCurrentPage }) {
+    const [mostrarHistorialCompleto, setMostrarHistorialCompleto] = useState(false);
   const [historial] = useState(() => {
     const historialGuardado = localStorage.getItem("historial");
+    
 
     return historialGuardado
       ? JSON.parse(historialGuardado)
@@ -163,42 +165,62 @@ const categoriaFrecuente = Object.entries(conteoCategorias)
 
 
       </div>
-      <div className="mt-10 bg-white rounded-xl shadow p-6">
+      
+<div className="mt-10 bg-white rounded-xl shadow p-6">
   <h2 className="text-xl font-bold mb-4">
     Historial de casos
   </h2>
 
   {historial.length === 0 ? (
-   <div className="text-center py-8">
-  <p className="text-4xl mb-3">📋</p>
+    <div className="text-center py-8">
+      <p className="text-4xl mb-3">📋</p>
 
-  <p className="text-gray-600 font-medium">
-    Aún no has resuelto ningún caso.
-  </p>
+      <p className="text-gray-600 font-medium">
+        Aún no has resuelto ningún caso.
+      </p>
 
-  <p className="text-sm text-gray-400 mt-1">
-    Completa una simulación para comenzar tu historial.
-  </p>
-</div>
+      <p className="text-sm text-gray-400 mt-1">
+        Completa una simulación para comenzar tu historial.
+      </p>
+    </div>
   ) : (
-    <ul className="space-y-3">
-      {historial.map((registro, index) => (
-  <li
-    key={index}
-    className="p-3 bg-gray-50 rounded-lg"
-  >
-    <p className="font-semibold">
-      ✅ {registro.caso}
-    </p>
+    <>
+      <ul className="space-y-3">
+        {(mostrarHistorialCompleto
+          ? historial
+          : historial.slice(-5).reverse()
+        ).map((registro, index) => (
+          <li
+            key={`${registro.fecha}-${index}`}
+            className="p-3 bg-gray-50 rounded-lg"
+          >
+            <p className="font-semibold">
+              ✅ {registro.caso}
+            </p>
 
-    <p className="text-sm text-gray-500 mt-1">
-      {registro.fecha}
-    </p>
-  </li>
-))}
-    </ul>
+            <p className="text-sm text-gray-500 mt-1">
+              {registro.fecha}
+            </p>
+          </li>
+        ))}
+      </ul>
+
+      {historial.length > 5 && (
+        <button
+          onClick={() =>
+            setMostrarHistorialCompleto(!mostrarHistorialCompleto)
+          }
+          className="mt-5 text-blue-600 hover:text-blue-800 font-semibold"
+        >
+          {mostrarHistorialCompleto
+            ? "Mostrar menos ↑"
+            : "Ver historial completo ↓"}
+        </button>
+      )}
+    </>
   )}
 </div>
+
      <div className="mt-10">
   <button
     onClick={() => setCurrentPage("simulator")}

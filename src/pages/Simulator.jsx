@@ -27,8 +27,9 @@ function Simulator({ setCurrentPage }) {
         Practica diagnósticos de soporte técnico nivel 1.
       </p>
 
-      {/* Botones para seleccionar el caso */}
-      <div className="flex flex-wrap gap-3 mb-8">
+      
+{/* Botones para seleccionar el caso */}
+<div className="flex flex-wrap gap-3 mb-8">
   {casos.map((casoItem, index) => (
     <button
       key={casoItem.id}
@@ -38,12 +39,19 @@ function Simulator({ setCurrentPage }) {
         setSolucion("");
         setDiagnostico("");
       }}
-      className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg"
+      className={`px-4 py-2 rounded-lg font-medium border-2 transition-all duration-200
+        ${
+          casoSeleccionado === index
+            ? "bg-blue-800 border-blue-900 text-white shadow-lg scale-105 ring-2 ring-blue-300"
+            : "bg-blue-600 border-blue-600 hover:bg-blue-700 hover:border-blue-800 text-white"
+        }`}
     >
       {casoItem.titulo}
+      {casoSeleccionado === index && " ✓"}
     </button>
   ))}
 </div>
+
 
       {/* Tarjeta principal */}
       <div className="bg-white rounded-xl shadow-lg p-8 max-w-3xl mx-auto">
@@ -145,6 +153,25 @@ localStorage.setItem(
             <p>{solucion}</p>
           </div>
         )}
+
+{/* Opción para escalar el caso */}
+<div className="mt-6 p-5 bg-orange-50 border border-orange-200 rounded-lg">
+  <h3 className="font-bold text-gray-800 mb-2">
+    ¿No pudiste solucionar el problema?
+  </h3>
+
+  <p className="text-gray-600 text-sm mb-4">
+    Si el procedimiento no permitió resolver el inconveniente,
+    puedes registrar un ticket para documentar el caso y darle seguimiento.
+  </p>
+
+  <button
+    onClick={() => setCurrentPage("tickets")}
+    className="bg-orange-600 hover:bg-orange-700 text-white px-5 py-3 rounded-lg transition"
+  >
+    🎫 Crear ticket de soporte
+  </button>
+</div>
 
         {/* Botón volver */}
         <div className="mt-8 text-center">

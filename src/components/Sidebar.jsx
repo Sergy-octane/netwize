@@ -79,48 +79,72 @@ function Sidebar({ setCurrentPage, currentPage, menuAbierto, setMenuAbierto }) {
           Menú
         </h2>
 
-        <ul className="space-y-4 mt-10">
-          <li
-            onClick={() => navegar("dashboard")}
-            className={`cursor-pointer transition-all duration-200 ${
-              currentPage === "dashboard"
-                ? "text-blue-400 font-semibold"
-                : "hover:text-blue-400 hover:translate-x-1"
-            }`}
-          >
-            Dashboard
-          </li>
+        
+<ul className="space-y-4 mt-10">
+  <li
+    onClick={() => navegar("about")}
+    className={`cursor-pointer transition-all duration-200 ${
+      currentPage === "about"
+        ? "text-blue-400 font-semibold"
+        : "hover:text-blue-400 hover:translate-x-1"
+    }`}
+  >
+    Acerca de NetWize
+  </li>
 
-          <li
-            onClick={() => navegar("simulator")}
-            className={`cursor-pointer transition-all duration-200 ${
-              currentPage === "simulator"
-                ? "text-blue-400 font-semibold"
-                : "hover:text-blue-400 hover:translate-x-1"
-            }`}
-          >
-            Simulador
-          </li>
+  <li
+    onClick={() => navegar("dashboard")}
+    className={`cursor-pointer transition-all duration-200 ${
+      currentPage === "dashboard"
+        ? "text-blue-400 font-semibold"
+        : "hover:text-blue-400 hover:translate-x-1"
+    }`}
+  >
+    Dashboard
+  </li>
 
-          <li
-            onClick={() => navegar("encyclopedia")}
-            className={`cursor-pointer transition-all duration-200 ${
-              currentPage === "encyclopedia"
-                ? "text-blue-400 font-semibold"
-                : "hover:text-blue-400 hover:translate-x-1"
-            }`}
-          >
-            Enciclopedia
-          </li>
+  <li
+    onClick={() => navegar("simulator")}
+    className={`cursor-pointer transition-all duration-200 ${
+      currentPage === "simulator"
+        ? "text-blue-400 font-semibold"
+        : "hover:text-blue-400 hover:translate-x-1"
+    }`}
+  >
+    Simulador
+  </li>
 
-          <li
-            onClick={cerrarSesion}
-            className="cursor-pointer transition-all duration-200 hover:text-red-400 hover:translate-x-1"
-          >
-            Cerrar sesión
-          </li>
-        </ul>
-      </aside>
+  <li
+    onClick={() => navegar("tickets")}
+    className={`cursor-pointer transition-all duration-200 ${
+      currentPage === "tickets"
+        ? "text-blue-400 font-semibold"
+        : "hover:text-blue-400 hover:translate-x-1"
+    }`}
+  >
+    Gestión de tickets
+  </li>
+
+  <li
+    onClick={() => navegar("encyclopedia")}
+    className={`cursor-pointer transition-all duration-200 ${
+      currentPage === "encyclopedia"
+        ? "text-blue-400 font-semibold"
+        : "hover:text-blue-400 hover:translate-x-1"
+    }`}
+  >
+    Enciclopedia
+  </li>
+
+  <li
+    onClick={cerrarSesion}
+    className="cursor-pointer transition-all duration-200 hover:text-red-400 hover:translate-x-1"
+  >
+    Cerrar sesión
+  </li>
+</ul>
+
+      </aside>  
     </>
   );
 }

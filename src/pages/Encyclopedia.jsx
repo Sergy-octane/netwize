@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import conceptos from "../data/encyclopedia.json";
 
@@ -9,25 +10,19 @@ function normalizarTexto(texto) {
 }
 
 function Encyclopedia() {
-
-  
-  
   const [busqueda, setBusqueda] = useState("");
 
-  
-const conceptosFiltrados = conceptos.filter((concepto) => {
-  const textoBusqueda = normalizarTexto(busqueda.trim());
+  const conceptosFiltrados = conceptos.filter((concepto) => {
+    const textoBusqueda = normalizarTexto(busqueda.trim());
 
-  return (
-    normalizarTexto(concepto.titulo).includes(textoBusqueda) ||
-    normalizarTexto(concepto.categoria).includes(textoBusqueda) ||
-    normalizarTexto(concepto.queEs).includes(textoBusqueda) ||
-    normalizarTexto(concepto.paraQueSirve).includes(textoBusqueda) ||
-    normalizarTexto(concepto.revisarN1).includes(textoBusqueda)
-  );
-});
-
-
+    return (
+      normalizarTexto(concepto.titulo).includes(textoBusqueda) ||
+      normalizarTexto(concepto.categoria).includes(textoBusqueda) ||
+      normalizarTexto(concepto.queEs).includes(textoBusqueda) ||
+      normalizarTexto(concepto.paraQueSirve).includes(textoBusqueda) ||
+      normalizarTexto(concepto.revisarN1).includes(textoBusqueda)
+    );
+  });
 
   return (
     <div>
@@ -39,65 +34,82 @@ const conceptosFiltrados = conceptos.filter((concepto) => {
         Conceptos básicos para soporte técnico de Nivel 1.
       </p>
 
-      <input
-        type="text"
-        placeholder="Buscar concepto..."
+      {/* Buscador */}
+      <div className="relative mb-3">
+        <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500">
+          🔍
+        </span>
+
+        <input
+          type="text"
+          placeholder="Buscar concepto..."
           value={busqueda}
-        onChange={(e) => setBusqueda(e.target.value)}
-        className="w-full p-3 mb-8 border rounded-lg"
-      />
+          onChange={(e) => setBusqueda(e.target.value)}
+          className="w-full p-3 pl-12 border rounded-lg outline-none
+          focus:ring-2 focus:ring-blue-500 focus:border-blue-500
+          transition duration-200"
+        />
+      </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-
-        {conceptosFiltrados.length > 0 ? (
-        conceptosFiltrados.map((concepto) => (
-
-          <div
-            key={concepto.titulo}
-            className="bg-white rounded-xl shadow p-6"
-          >
-
-            <h2 className="text-xl font-bold mb-2">
-              {concepto.titulo}
-            </h2>
-
-            <p className="text-sm text-blue-600 mb-4">
-              {concepto.categoria}
-            </p>
-
-            <h3 className="font-semibold">
-              🧒 ¿Qué es?
-            </h3>
-
-            <p className="text-gray-600 mb-4">
-              {concepto.queEs}
-            </p>
-
-            <h3 className="font-semibold">
-              🔧 ¿Para qué sirve?
-            </h3>
-
-            <p className="text-gray-600 mb-4">
-              {concepto.paraQueSirve}
-            </p>
-
-            <h3 className="font-semibold">
-              🧠 ¿Qué debo revisar como N1?
-            </h3>
-
-            <p className="text-gray-600">
-              {concepto.revisarN1}
-            </p>
-
-          </div>
-
-        ))
+      {/* Información de búsqueda */}
+      <p className="text-sm text-gray-500 mb-8">
+        {busqueda.trim() ? (
+          <>
+            Resultados para: <strong>"{busqueda}"</strong>
+            {" — "}
+            {conceptosFiltrados.length} concepto(s) encontrado(s).
+          </>
         ) : (
-  <p className="text-gray-500 col-span-full text-center">
-    🔍 No se encontraron conceptos.
-  </p>
-)}
+          `Mostrando ${conceptosFiltrados.length} conceptos disponibles.`
+        )}
+      </p>
 
+      {/* Conceptos */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {conceptosFiltrados.length > 0 ? (
+          conceptosFiltrados.map((concepto) => (
+            <div
+              key={concepto.titulo}
+              className="bg-white rounded-xl shadow p-6"
+            >
+              <h2 className="text-xl font-bold mb-2">
+                {concepto.titulo}
+              </h2>
+
+              <p className="text-sm text-blue-600 mb-4">
+                {concepto.categoria}
+              </p>
+
+              <h3 className="font-semibold">
+                🧒 ¿Qué es?
+              </h3>
+
+              <p className="text-gray-600 mb-4">
+                {concepto.queEs}
+              </p>
+
+              <h3 className="font-semibold">
+                🔧 ¿Para qué sirve?
+              </h3>
+
+              <p className="text-gray-600 mb-4">
+                {concepto.paraQueSirve}
+              </p>
+
+              <h3 className="font-semibold">
+                🧠 ¿Qué debo revisar como N1?
+              </h3>
+
+              <p className="text-gray-600">
+                {concepto.revisarN1}
+              </p>
+            </div>
+          ))
+        ) : (
+          <p className="text-gray-500 col-span-full text-center">
+            🔍 No se encontraron conceptos.
+          </p>
+        )}
       </div>
     </div>
   );
