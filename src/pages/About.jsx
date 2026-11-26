@@ -114,16 +114,16 @@ function About() {
         <div className="flex flex-wrap gap-3">
           {["React", "JavaScript", "Vite", "Tailwind CSS",
             "LocalStorage", "Git", "GitHub", "Vercel"].map(
-            (tecnologia) => (
-              <span
-                key={tecnologia}
-                className="bg-blue-50 text-blue-800 px-4 py-2
+              (tecnologia) => (
+                <span
+                  key={tecnologia}
+                  className="bg-blue-50 text-blue-800 px-4 py-2
                 rounded-lg text-sm font-medium"
-              >
-                {tecnologia}
-              </span>
-            )
-          )}
+                >
+                  {tecnologia}
+                </span>
+              )
+            )}
         </div>
       </div>
 
@@ -152,7 +152,7 @@ function About() {
 
           <p>
             <strong className="text-gray-900">Ubicación:</strong>{" "}
-            Bogotá D. C., Colombia (referencia).
+            Bogotá D. C., Colombia .
           </p>
 
           <p>
