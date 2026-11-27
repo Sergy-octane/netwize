@@ -360,13 +360,14 @@ function Tickets({ profile }) {
         >
 
           <button
+          title="Regresar al listado general de tickets."
             type="button"
             onClick={() => setTicketSeleccionado(null)}
             className="text-blue-600 hover:text-blue-800 mb-6 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded"
           >
             ← Volver a los tickets
           </button>
-
+          
           <div className="flex flex-wrap justify-between items-center gap-3 mb-6">
 
             <div>
@@ -495,10 +496,13 @@ function Tickets({ profile }) {
                       </span>
 
                       {registro.visibility === "interna" && (
-                        <span className="text-xs font-semibold text-orange-700">
-                          Nota interna
-                        </span>
-                      )}
+  <span
+    className="text-xs font-semibold text-orange-700"
+    aria-label="Nota interna, visible únicamente para el personal técnico"
+  >
+    Nota interna
+  </span>
+)}
 
                     </div>
 
@@ -520,17 +524,18 @@ function Tickets({ profile }) {
             </label>
 
             <textarea
-              id="nueva-observacion"
-              value={nuevaObservacion}
-              onChange={(e) => setNuevaObservacion(e.target.value)}
-              placeholder={
-                esTecnico
-                  ? "Escribe un procedimiento u observación técnica..."
-                  : "Escribe un comentario para el equipo de soporte..."
-              }
-              rows={3}
-              className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
+  id="nueva-observacion"
+  value={nuevaObservacion}
+  onChange={(e) => setNuevaObservacion(e.target.value)}
+  placeholder={
+    esTecnico
+      ? "Escribe un procedimiento u observación técnica..."
+      : "Escribe un comentario para el equipo de soporte..."
+  }
+  title="Escribe el comentario o procedimiento que deseas registrar en el historial."
+  rows={3}
+  className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+/>
 
             {esTecnico && (
               <div className="mt-3">
@@ -542,11 +547,12 @@ function Tickets({ profile }) {
                 </label>
 
                 <select
-                  id="visibilidad-observacion"
-                  value={visibilidad}
-                  onChange={(e) => setVisibilidad(e.target.value)}
-                  className="border rounded-lg p-2"
-                >
+  id="visibilidad-observacion"
+  value={visibilidad}
+  onChange={(e) => setVisibilidad(e.target.value)}
+  title="Define si la observación será visible para el usuario o solamente para el personal técnico."
+  className="border rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+>
                   <option value="publica">
                     Visible para el usuario
                   </option>
@@ -559,6 +565,7 @@ function Tickets({ profile }) {
             )}
 
             <button
+            title="Guardar el comentario o procedimiento en el historial del ticket."
               type="button"
               onClick={agregarObservacion}
               disabled={procesando}
@@ -574,6 +581,13 @@ function Tickets({ profile }) {
             <div className="mt-8 border-t pt-6">
 
               <button
+              title={
+  ticketSeleccionado.status === "abierto"
+    ? "Tomar el ticket y comenzar su atención técnica."
+    : ticketSeleccionado.status === "resuelto"
+      ? "Reabrir el ticket para continuar su atención."
+      : "Marcar el ticket como resuelto y finalizar su atención."
+}
                 type="button"
                 onClick={cambiarEstado}
                 disabled={procesando}
@@ -644,12 +658,13 @@ function Tickets({ profile }) {
                   </label>
 
                   <select
-                    id="categoria-ticket"
-                    name="category"
-                    value={formulario.category}
-                    onChange={manejarCambio}
-                    className="w-full border rounded-lg p-3"
-                  >
+  id="categoria-ticket"
+  name="category"
+  value={formulario.category}
+  onChange={manejarCambio}
+  title="Selecciona la categoría que mejor describe el problema."
+  className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+>
                     <option value="Redes">Redes</option>
                     <option value="Hardware">Hardware</option>
                     <option value="Software">Software</option>
@@ -667,12 +682,13 @@ function Tickets({ profile }) {
                   </label>
 
                   <select
-                    id="prioridad-ticket"
-                    name="priority"
-                    value={formulario.priority}
-                    onChange={manejarCambio}
-                    className="w-full border rounded-lg p-3"
-                  >
+  id="prioridad-ticket"
+  name="priority"
+  value={formulario.priority}
+  onChange={manejarCambio}
+  title="Selecciona el nivel de prioridad de la solicitud."
+  className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+>
                     <option value="baja">Baja</option>
                     <option value="media">Media</option>
                     <option value="alta">Alta</option>
@@ -703,6 +719,7 @@ function Tickets({ profile }) {
               </div>
 
               <button
+              title="Registrar una nueva solicitud de soporte técnico."
                 type="submit"
                 disabled={procesando}
                 className="mt-6 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white font-medium px-6 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
@@ -817,6 +834,7 @@ function Tickets({ profile }) {
                       </span>
 
                       <button
+                      title={`Consultar el detalle y seguimiento del ticket ${ticket.ticket_number}.`}
                         type="button"
                         onClick={() => abrirTicket(ticket)}
                         className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"

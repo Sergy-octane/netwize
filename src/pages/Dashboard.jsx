@@ -1,234 +1,286 @@
 
-import { useState } from "react";
-import casos from "../data/casos.json";
+import { useEffect, useState } from "react";
+import { supabase } from "../lib/supabase";
 
-function Dashboard() {
-  const [mostrarHistorialCompleto, setMostrarHistorialCompleto] =
-    useState(false);
+function Dashboard({ setCurrentPage }) {
+  const [tickets, setTickets] = useState([]);
+  const [cargando, setCargando] = useState(true);
+  const [error, setError] = useState("");
+  const [busqueda, setBusqueda] = useState("");
 
-  const [historial] = useState(() => {
-    const historialGuardado = localStorage.getItem("historial");
+  // Consultar tickets desde Supabase.
+  useEffect(() => {
+    const cargarTickets = async () => {
+      setCargando(true);
+      setError("");
 
-    return historialGuardado
-      ? JSON.parse(historialGuardado)
-      : [];
-  });
+      const { data, error } = await supabase
+        .from("tickets")
+        .select("*")
+        .order("created_at", { ascending: false });
 
-  const categorias = historial.map((registro) => {
-    const casoEncontrado = casos.find(
-      (caso) => caso.titulo === registro.caso
+      if (error) {
+        console.error("Error al cargar tickets:", error.message);
+        setError("No fue posible cargar los tickets.");
+        setCargando(false);
+        return;
+      }
+
+      setTickets(data || []);
+      setCargando(false);
+    };
+
+    cargarTickets();
+  }, []);
+
+  // Calcular estadísticas.
+  const totalTickets = tickets.length;
+
+  const abiertos = tickets.filter(
+    (ticket) => ticket.status === "abierto"
+  ).length;
+
+  const enProceso = tickets.filter(
+    (ticket) => ticket.status === "en_proceso"
+  ).length;
+
+  const pendientes = tickets.filter(
+    (ticket) => ticket.status === "pendiente"
+  ).length;
+
+  const resueltos = tickets.filter(
+    (ticket) => ticket.status === "resuelto"
+  ).length;
+
+  // Filtrar tickets por número o asunto.
+  const ticketsFiltrados = tickets.filter((ticket) => {
+    const texto = busqueda.toLowerCase().trim();
+
+    return (
+      ticket.ticket_number?.toLowerCase().includes(texto) ||
+      ticket.subject?.toLowerCase().includes(texto)
     );
-
-    return casoEncontrado
-      ? casoEncontrado.categoria
-      : "Desconocida";
   });
 
-  const conteoCategorias = {};
+  // Mostrar nombres comprensibles para los estados.
+  const nombreEstado = (estado) => {
+    const estados = {
+      abierto: "Abierto",
+      en_proceso: "En proceso",
+      pendiente: "Pendiente",
+      resuelto: "Resuelto",
+    };
 
-  categorias.forEach((categoria) => {
-    conteoCategorias[categoria] =
-      (conteoCategorias[categoria] || 0) + 1;
-  });
+    return estados[estado] || estado;
+  };
 
-  const categoriaFrecuente = Object.entries(conteoCategorias)
-    .sort((a, b) => b[1] - a[1])[0] || ["Ninguna", 0];
+  // Colores según el estado.
+  const colorEstado = (estado) => {
+    const colores = {
+      abierto: "bg-yellow-100 text-yellow-700",
+      en_proceso: "bg-blue-100 text-blue-700",
+      pendiente: "bg-orange-100 text-orange-700",
+      resuelto: "bg-green-100 text-green-700",
+    };
+
+    return colores[estado] || "bg-gray-100 text-gray-700";
+  };
+
+  // Formatear fechas.
+  const formatearFecha = (fecha) => {
+    return new Date(fecha).toLocaleString("es-CO");
+  };
+
+  const estadisticas = [
+    {
+      titulo: "Total de tickets",
+      cantidad: totalTickets,
+      descripcion: "Solicitudes registradas",
+      color: "text-blue-600",
+    },
+    {
+      titulo: "Tickets abiertos",
+      cantidad: abiertos,
+      descripcion: "Esperando atención",
+      color: "text-yellow-600",
+    },
+    {
+      titulo: "En proceso",
+      cantidad: enProceso,
+      descripcion: "En atención técnica",
+      color: "text-blue-600",
+    },
+    {
+      titulo: "Pendientes",
+      cantidad: pendientes,
+      descripcion: "Pendientes de seguimiento",
+      color: "text-orange-600",
+    },
+    {
+      titulo: "Resueltos",
+      cantidad: resueltos,
+      descripcion: "Tickets finalizados",
+      color: "text-green-600",
+    },
+  ];
 
   return (
-    <div>
+    <div className="max-w-6xl mx-auto">
       <h1 className="text-3xl font-bold mb-2">
-        Bienvenido a NetWize
+        Panel de gestión técnica
       </h1>
 
       <p className="text-gray-600 mb-8">
-        Panel principal del simulador de soporte técnico.
+        Resumen general de las solicitudes de soporte técnico.
       </p>
 
-      {/* Estadísticas principales */}
+      {error && (
+        <p
+          className="bg-red-100 text-red-700 p-4 rounded-lg mb-6"
+          role="alert"
+          aria-live="assertive"
+        >
+          {error}
+        </p>
+      )}
+
+      {/* Estadísticas */}
       <section
-        aria-label="Estadísticas del simulador"
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+        aria-label="Estadísticas de tickets"
+        aria-busy={cargando}
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
       >
-        {/* Casos resueltos */}
-        <div className="bg-white rounded-xl shadow p-6 transition-all duration-200 hover:-translate-y-1 hover:shadow-lg">
-          <p className="text-sm text-gray-500">
-            Casos resueltos
+        {cargando ? (
+          <p role="status" aria-live="polite" className="text-gray-500">
+            Cargando estadísticas...
           </p>
+        ) : (
+          estadisticas.map((estadistica) => (
+            <div
+              key={estadistica.titulo}
+              className="bg-white rounded-xl shadow p-6 transition-all duration-200 hover:-translate-y-1 hover:shadow-lg"
+            >
+              <p className="text-sm text-gray-500">
+                {estadistica.titulo}
+              </p>
 
-          <p className="text-4xl font-bold mt-2">
-            {historial.length}
-          </p>
+              <p
+                className={`text-4xl font-bold mt-2 ${estadistica.color}`}
+              >
+                {estadistica.cantidad}
+              </p>
 
-          <p className="text-sm text-green-600 mt-2">
-            Casos completados
-          </p>
-        </div>
-
-        {/* Simulaciones */}
-        <div className="bg-white rounded-xl shadow p-6 transition-all duration-200 hover:-translate-y-1 hover:shadow-lg">
-          <p className="text-sm text-gray-500">
-            Simulaciones
-          </p>
-
-          <p className="text-4xl font-bold mt-2">
-            {historial.length}
-          </p>
-
-          <p className="text-sm text-blue-600 mt-2">
-            Simulaciones realizadas
-          </p>
-        </div>
-
-        {/* Nivel */}
-        <div className="bg-white rounded-xl shadow p-6">
-          <p className="text-sm text-gray-500">
-            Nivel actual
-          </p>
-
-          <p className="text-4xl font-bold mt-2">
-            N1
-          </p>
-
-          <p className="text-sm text-gray-500 mt-2">
-            Soporte técnico
-          </p>
-        </div>
-
-        {/* Categoría frecuente */}
-        <div className="bg-white rounded-xl shadow p-6 transition-all duration-200 hover:-translate-y-1 hover:shadow-lg">
-          <p className="text-sm text-gray-500">
-            Categoría frecuente
-          </p>
-
-          <p className="text-3xl font-bold mt-2">
-            {categoriaFrecuente[0]}
-          </p>
-
-          <p className="text-sm text-gray-500 mt-2">
-            {categoriaFrecuente[1]} caso(s)
-          </p>
-        </div>
-
-        {/* Gráfica de categorías */}
-        <div className="bg-white rounded-xl shadow p-6 md:col-span-2 lg:col-span-4">
-          <h2 className="text-xl font-bold mb-6">
-            Categorías frecuentes
-          </h2>
-
-          {Object.keys(conteoCategorias).length === 0 ? (
-            <p className="text-gray-500">
-              Aún no hay estadísticas disponibles.
-            </p>
-          ) : (
-            <div className="space-y-5">
-              {Object.entries(conteoCategorias).map(
-                ([categoria, cantidad]) => {
-                  const porcentaje =
-                    (cantidad / historial.length) * 100;
-
-                  return (
-                    <div key={categoria}>
-                      <div className="flex justify-between mb-2">
-                        <span className="font-medium">
-                          {categoria}
-                        </span>
-
-                        <span className="text-sm text-gray-500">
-                          {cantidad} caso(s) — {porcentaje.toFixed(0)}%
-                        </span>
-                      </div>
-
-                      <div
-                        className="w-full bg-gray-200 rounded-full h-4"
-                        role="progressbar"
-                        aria-label={`Porcentaje de casos de ${categoria}`}
-                        aria-valuenow={Math.round(porcentaje)}
-                        aria-valuemin="0"
-                        aria-valuemax="100"
-                        aria-valuetext={`${porcentaje.toFixed(0)} por ciento, ${cantidad} casos`}
-                      >
-                        <div
-                          className="bg-blue-600 h-4 rounded-full transition-all duration-500"
-                          style={{
-                            width: `${porcentaje}%`,
-                          }}
-                          aria-hidden="true"
-                        ></div>
-                      </div>
-                    </div>
-                  );
-                }
-              )}
+              <p className="text-sm text-gray-500 mt-2">
+                {estadistica.descripcion}
+              </p>
             </div>
-          )}
-        </div>
+          ))
+        )}
       </section>
 
-      {/* Historial de casos */}
+      {/* Listado general de tickets */}
       <section
         className="mt-10 bg-white rounded-xl shadow p-6"
-        aria-labelledby="titulo-historial"
+        aria-labelledby="titulo-listado-tickets"
+        aria-busy={cargando}
       >
         <h2
-          id="titulo-historial"
-          className="text-xl font-bold mb-4"
+          id="titulo-listado-tickets"
+          className="text-xl font-bold mb-5"
         >
-          Historial de casos
+          Tickets registrados
         </h2>
 
-        {historial.length === 0 ? (
-          <div className="text-center py-8">
-            <p className="text-4xl mb-3" aria-hidden="true">
-              📋
-            </p>
+        <label
+          htmlFor="buscar-ticket-dashboard"
+          className="block text-sm font-medium mb-2"
+        >
+          Buscar por número o asunto
+        </label>
 
+        <input
+  id="buscar-ticket-dashboard"
+  type="search"
+  value={busqueda}
+  onChange={(e) => setBusqueda(e.target.value)}
+  placeholder="Ej. NW-2026-00001"
+  title="Filtra los tickets registrados por su número o asunto."
+  className="w-full border rounded-lg p-3 mb-5 focus:outline-none focus:ring-2 focus:ring-blue-500"
+/>
+
+        <p
+          className="text-sm text-gray-500 mb-4"
+          role="status"
+          aria-live="polite"
+          aria-atomic="true"
+        >
+          {busqueda.trim() && !cargando
+            ? `${ticketsFiltrados.length} ticket(s) encontrado(s).`
+            : !cargando
+              ? `${tickets.length} ticket(s) registrados.`
+              : ""}
+        </p>
+
+        {cargando ? (
+          <p
+            className="text-center py-10 text-gray-500"
+            role="status"
+            aria-live="polite"
+          >
+            Cargando tickets...
+          </p>
+        ) : ticketsFiltrados.length === 0 ? (
+          <div className="text-center py-10">
             <p className="text-gray-600 font-medium">
-              Aún no has resuelto ningún caso.
-            </p>
-
-            <p className="text-sm text-gray-400 mt-1">
-              Completa una simulación para comenzar tu historial.
+              {tickets.length === 0
+                ? "Todavía no hay tickets registrados."
+                : "No se encontraron tickets con esa búsqueda."}
             </p>
           </div>
         ) : (
-          <>
-            <ul className="space-y-3">
-              {(mostrarHistorialCompleto
-                ? historial
-                : historial.slice(-5).reverse()
-              ).map((registro, index) => (
-                <li
-                  key={`${registro.fecha}-${index}`}
-                  className="p-3 bg-gray-50 rounded-lg"
-                >
-                  <p className="font-semibold">
-                    <span aria-hidden="true">✅ </span>
-                    {registro.caso}
-                  </p>
-
-                  <p className="text-sm text-gray-500 mt-1">
-                    {registro.fecha}
-                  </p>
-                </li>
-              ))}
-            </ul>
-
-            {historial.length > 5 && (
-              <button
-                type="button"
-                onClick={() =>
-                  setMostrarHistorialCompleto(!mostrarHistorialCompleto)
-                }
-                aria-expanded={mostrarHistorialCompleto}
-                aria-controls="titulo-historial"
-                className="mt-5 text-blue-600 hover:text-blue-800 font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded"
+          <div className="space-y-4">
+            {ticketsFiltrados.map((ticket) => (
+              <article
+                key={ticket.id}
+                className="border rounded-lg p-4 flex flex-col md:flex-row md:items-center justify-between gap-4"
               >
-                {mostrarHistorialCompleto
-                  ? "Mostrar menos ↑"
-                  : "Ver historial completo ↓"}
-              </button>
-            )}
-          </>
+                <div>
+                  <p className="font-bold text-gray-800">
+                    {ticket.ticket_number}
+                  </p>
+
+                  <p className="text-gray-700 mt-1">
+                    {ticket.subject}
+                  </p>
+
+                  <p className="text-gray-500 text-sm mt-1">
+                    {ticket.category} · Prioridad: {ticket.priority}
+                  </p>
+
+                  <p className="text-xs text-gray-400 mt-2">
+                    {formatearFecha(ticket.created_at)}
+                  </p>
+                </div>
+
+                <div className="flex items-center gap-3 flex-wrap">
+                  <span
+                    className={`px-3 py-1 rounded-full text-xs font-semibold ${colorEstado(ticket.status)}`}
+                  >
+                    {nombreEstado(ticket.status)}
+                  </span>
+
+                 <button
+  type="button"
+  onClick={() => setCurrentPage("tickets")}
+  title="Ir a la sección de gestión para consultar y administrar los tickets."
+  className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+>
+  Gestionar tickets
+</button>
+                </div>
+              </article>
+            ))}
+          </div>
         )}
       </section>
     </div>

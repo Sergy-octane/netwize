@@ -38,7 +38,7 @@ function About() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
 
         <div className="bg-white rounded-xl shadow-sm p-6">
-          <div className="text-3xl mb-4">🎯</div>
+         <div aria-hidden="true" className="text-3xl mb-4">🎯</div>
 
           <h2 className="text-xl font-bold mb-3">
             Nuestro objetivo
@@ -52,7 +52,7 @@ function About() {
         </div>
 
         <div className="bg-white rounded-xl shadow-sm p-6">
-          <div className="text-3xl mb-4">💡</div>
+        <div aria-hidden="true" className="text-3xl mb-4">💡</div>
 
           <h2 className="text-xl font-bold mb-3">
             Nuestra propuesta
@@ -76,7 +76,7 @@ function About() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
 
           <div className="border rounded-lg p-5">
-            <div className="text-3xl mb-3">🖥️</div>
+            <div aria-hidden="true" className="text-3xl mb-3">🖥️</div>
             <h3 className="font-bold mb-2">Simulador N1</h3>
             <p className="text-gray-600 text-sm">
               Practica diagnósticos y soluciones mediante
@@ -85,7 +85,7 @@ function About() {
           </div>
 
           <div className="border rounded-lg p-5">
-            <div className="text-3xl mb-3">📚</div>
+           <div aria-hidden="true" className="text-3xl mb-3">📚</div>
             <h3 className="font-bold mb-2">Enciclopedia N1</h3>
             <p className="text-gray-600 text-sm">
               Consulta conceptos y conocimientos técnicos
@@ -94,7 +94,7 @@ function About() {
           </div>
 
           <div className="border rounded-lg p-5">
-            <div className="text-3xl mb-3">📊</div>
+            <div aria-hidden="true" className="text-3xl mb-3">📊</div>
             <h3 className="font-bold mb-2">Dashboard</h3>
             <p className="text-gray-600 text-sm">
               Visualiza tu actividad, estadísticas e historial

@@ -46,7 +46,8 @@ function Simulator({ setCurrentPage }) {
               setDiagnostico("");
             }}
             aria-pressed={casoSeleccionado === index}
-            className={`px-4 py-2 rounded-lg font-medium border-2 transition-all duration-200
+            title={`Seleccionar el caso: ${casoItem.titulo}`}
+            className={`px-4 py-2 rounded-lg font-medium border-2 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2
               ${
                 casoSeleccionado === index
                   ? "bg-blue-800 border-blue-900 text-white shadow-lg scale-105 ring-2 ring-blue-300"
@@ -91,7 +92,8 @@ function Simulator({ setCurrentPage }) {
           <button
             type="button"
             onClick={() => setCurrentPage("encyclopedia")}
-            className="text-blue-700 hover:text-blue-900 font-semibold underline"
+            title="Consultar definiciones y explicaciones de términos técnicos."
+            className="text-blue-700 hover:text-blue-900 font-semibold underline focus:outline-none focus:ring-2 focus:ring-blue-500 rounded"
           >
             Consultar la enciclopedia →
           </button>
@@ -150,7 +152,8 @@ function Simulator({ setCurrentPage }) {
                   );
                 }
               }}
-              className="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition"
+              title={`Seleccionar respuesta: ${opcion.texto}`}
+              className="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
             >
               {opcion.texto}
             </button>
@@ -201,7 +204,8 @@ function Simulator({ setCurrentPage }) {
           <button
             type="button"
             onClick={() => setCurrentPage("tickets")}
-            className="bg-orange-600 hover:bg-orange-700 text-white px-5 py-3 rounded-lg transition"
+            title="Ir a mis tickets para registrar una nueva solicitud de soporte."
+            className="bg-orange-600 hover:bg-orange-700 text-white px-5 py-3 rounded-lg transition focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
           >
             <span aria-hidden="true">🎫 </span>
             Crear ticket de soporte
@@ -213,7 +217,8 @@ function Simulator({ setCurrentPage }) {
           <button
             type="button"
             onClick={() => setCurrentPage("dashboard")}
-            className="bg-gray-700 hover:bg-gray-800 text-white px-6 py-3 rounded-lg transition"
+            title="Volver a la sección de mis tickets."
+            className="bg-gray-700 hover:bg-gray-800 text-white px-6 py-3 rounded-lg transition focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
           >
             Volver a mis tickets
           </button>

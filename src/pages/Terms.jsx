@@ -120,10 +120,12 @@ function Terms({ setCurrentPage }) {
           </p>
 
           <div className="border-t pt-6 text-center">
-            <button
-              onClick={() => setCurrentPage("register")}
-              className="text-blue-600 hover:underline"
-            >
+           <button
+  type="button"
+  onClick={() => setCurrentPage("register")}
+  title="Volver al formulario de registro de NetWize."
+  className="text-blue-600 hover:underline focus:outline-none focus:ring-2 focus:ring-blue-500 rounded"
+>
               ← Volver al registro
             </button>
           </div>

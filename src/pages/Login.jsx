@@ -57,6 +57,7 @@ function Login({ setCurrentPage }) {
   type="email"
   autoComplete="email"
   placeholder="correo@ejemplo.com"
+  title="Introduce el correo electrónico asociado a tu cuenta de NetWize."
   value={email}
   onChange={(e) => setEmail(e.target.value)}
   className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -77,6 +78,7 @@ function Login({ setCurrentPage }) {
   type={mostrarPassword ? "text" : "password"}
                 autoComplete="current-password"
                 placeholder="••••••••"
+                title="Introduce la contraseña de tu cuenta."
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className="w-full p-3 pr-12 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -91,6 +93,7 @@ function Login({ setCurrentPage }) {
                     : "Mostrar contraseña"
                 }
                 aria-pressed={mostrarPassword}
+                title={mostrarPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
                 className="absolute inset-y-0 right-0 flex items-center px-3 text-gray-500 hover:text-blue-600"
               >
                 {mostrarPassword ? (
@@ -146,8 +149,9 @@ function Login({ setCurrentPage }) {
           <button
             type="button"
             onClick={handleLogin}
+            title="Validar tus credenciales e iniciar sesión en NetWize."
             disabled={cargando}
-            className="w-full bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
+           className="w-full bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
           >
             {cargando ? "Verificando..." : "Iniciar sesión"}
           </button>
@@ -155,7 +159,8 @@ function Login({ setCurrentPage }) {
           <div className="text-center mt-6">
             <button
               onClick={() => setCurrentPage("forgotPassword")}
-              className="text-sm text-blue-600 hover:underline"
+              title="Ir a la recuperación de contraseña si no puedes acceder a tu cuenta."
+              className="text-sm text-blue-600 hover:underline focus:outline-none focus:ring-2 focus:ring-blue-500 rounded"
             >
               ¿Olvidaste tu contraseña?
             </button>
@@ -164,7 +169,8 @@ function Login({ setCurrentPage }) {
               ¿No tienes una cuenta?{" "}
               <button
                 onClick={() => setCurrentPage("register")}
-                className="text-blue-600 hover:underline"
+                title="Ir al formulario para crear una cuenta nueva."
+                className="text-blue-600 hover:underline focus:outline-none focus:ring-2 focus:ring-blue-500 rounded"
               >
                 Regístrate
               </button>
@@ -173,7 +179,8 @@ function Login({ setCurrentPage }) {
             <div className="mt-4">
               <button
                 onClick={() => setCurrentPage("welcome")}
-                className="text-sm text-blue-600 hover:underline"
+                title="Volver a la página de bienvenida para conocer NetWize."
+                className="text-sm text-blue-600 hover:underline focus:outline-none focus:ring-2 focus:ring-blue-500 rounded"
               >
                 ¿Qué es NetWize?
               </button>

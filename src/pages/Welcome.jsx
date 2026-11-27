@@ -46,13 +46,14 @@ function Welcome({ setCurrentPage }) {
   </div>
 
 </div>
-
-        <button
-          onClick={() => setCurrentPage("login")}
-          className="bg-blue-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-blue-700 hover:scale-105 transition duration-200"
-        >
-          Comenzar
-        </button>
+<button
+  type="button"
+  onClick={() => setCurrentPage("login")}
+  title="Ir a la página de inicio de sesión para acceder a NetWize."
+  className="bg-blue-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-blue-700 hover:scale-105 transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+>
+  Comenzar
+</button>
 
       </div>
 

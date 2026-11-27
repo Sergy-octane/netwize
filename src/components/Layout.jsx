@@ -199,6 +199,7 @@ function Layout() {
     <div>
       <a
         href="#contenido-principal"
+        title="Ir directamente al contenido principal y omitir la navegación."
         className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-100 focus:bg-white focus:text-blue-700 focus:p-3 focus:rounded"
       >
         Saltar al contenido principal
@@ -249,8 +250,10 @@ function Layout() {
                 </p>
 
                 <button
+                  type="button"
                   onClick={cerrarSesion}
-                  className="bg-blue-700 text-white px-4 py-2 rounded"
+                  title="Cerrar tu sesión y volver a la pantalla de inicio de sesión."
+                  className="bg-blue-700 hover:bg-blue-800 text-white px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                 >
                   Cerrar sesión
                 </button>

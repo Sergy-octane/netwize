@@ -51,6 +51,7 @@ function Encyclopedia() {
           id="buscar-concepto"
           type="text"
           placeholder="Buscar concepto..."
+          title="Busca conceptos por título, categoría, definición o recomendaciones de revisión N1."
           value={busqueda}
           onChange={(e) => setBusqueda(e.target.value)}
           aria-describedby="informacion-busqueda"

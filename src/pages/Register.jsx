@@ -142,6 +142,7 @@ function Register({ setCurrentPage }) {
               id="nombre"
               type="text"
               placeholder="Tu nombre"
+              title="Escribe el nombre que deseas asociar a tu cuenta."
               value={name}
               onChange={(e) => setName(e.target.value)}
               className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -149,26 +150,28 @@ function Register({ setCurrentPage }) {
           </div>
 
           <div className="mb-5">
-            <label
-              htmlFor="correo-registro"
-              className="block text-sm font-medium text-gray-700 mb-2"
-            >
-              Correo electrónico
-            </label>
+  <label
+    htmlFor="correo-registro"
+    className="block text-sm font-medium text-gray-700 mb-2"
+  >
+    Correo electrónico
+  </label>
 
-            <input
-              id="correo-registro"
-              type="email"
-              placeholder="correo@ejemplo.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
+  <input
+    id="correo-registro"
+    type="email"
+    placeholder="correo@ejemplo.com"
+    title="Introduce el correo electrónico que utilizarás para iniciar sesión."
+    value={email}
+    onChange={(e) => setEmail(e.target.value)}
+    className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+  />
+</div>
 
           <div className="mb-5">
             <label
               htmlFor="password-registro"
+
               className="block text-sm font-medium text-gray-700 mb-2"
             >
               Contraseña
@@ -179,6 +182,7 @@ function Register({ setCurrentPage }) {
                 id="password-registro"
                 type={mostrarPassword ? "text" : "password"}
                 placeholder="••••••••"
+                title="Crea una contraseña de al menos 6 caracteres."
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className="w-full p-3 pr-12 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -193,7 +197,8 @@ function Register({ setCurrentPage }) {
                     : "Mostrar contraseña"
                 }
                 aria-pressed={mostrarPassword}
-                className="absolute inset-y-0 right-0 flex items-center px-3 text-gray-500 hover:text-blue-600"
+                title={mostrarPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
+                className="absolute inset-y-0 right-0 flex items-center px-3 text-gray-500 hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-r-lg"
               >
                 {iconoOjo(mostrarPassword)}
               </button>
@@ -213,6 +218,7 @@ function Register({ setCurrentPage }) {
                 id="confirmar-password"
                 type={mostrarConfirmacion ? "text" : "password"}
                 placeholder="••••••••"
+                title="Vuelve a escribir tu contraseña para confirmar que coincide."
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 className="w-full p-3 pr-12 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -229,7 +235,12 @@ function Register({ setCurrentPage }) {
                     : "Mostrar confirmación de contraseña"
                 }
                 aria-pressed={mostrarConfirmacion}
-                className="absolute inset-y-0 right-0 flex items-center px-3 text-gray-500 hover:text-blue-600"
+                title={
+  mostrarConfirmacion
+    ? "Ocultar confirmación de contraseña"
+    : "Mostrar confirmación de contraseña"
+}
+                className="absolute inset-y-0 right-0 flex items-center px-3 text-gray-500 hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-r-lg"
               >
                 {iconoOjo(mostrarConfirmacion)}
               </button>
@@ -239,6 +250,7 @@ function Register({ setCurrentPage }) {
           <div className="mb-6 flex items-start gap-3">
             <input
               id="aceptar-terminos"
+              title="Marca esta casilla para aceptar los términos y condiciones."
               type="checkbox"
               checked={acceptedTerms}
               onChange={(e) => setAcceptedTerms(e.target.checked)}
@@ -253,7 +265,8 @@ function Register({ setCurrentPage }) {
               <button
                 type="button"
                 onClick={() => setCurrentPage("terms")}
-                className="text-blue-600 hover:underline"
+                title="Consultar los términos y condiciones antes de aceptarlos."
+                className="text-blue-600 hover:underline focus:outline-none focus:ring-2 focus:ring-blue-500 rounded"
               >
                 términos y condiciones
               </button>
@@ -288,7 +301,7 @@ function Register({ setCurrentPage }) {
             disabled={!acceptedTerms || loading}
             className={`w-full py-3 rounded-lg font-medium transition ${
               acceptedTerms && !loading
-                ? "bg-blue-600 text-white hover:bg-blue-700"
+                ? "bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                 : "bg-gray-300 text-gray-500 cursor-not-allowed"
             }`}
           >
@@ -301,7 +314,8 @@ function Register({ setCurrentPage }) {
               <button
                 type="button"
                 onClick={() => setCurrentPage("login")}
-                className="text-blue-600 hover:underline"
+                title="Ir a la página de inicio de sesión si ya tienes una cuenta."
+                className="text-blue-600 hover:underline focus:outline-none focus:ring-2 focus:ring-blue-500 rounded"
               >
                 Inicia sesión
               </button>
@@ -312,7 +326,8 @@ function Register({ setCurrentPage }) {
             <button
               type="button"
               onClick={() => setCurrentPage("terms")}
-              className="text-sm text-blue-600 hover:underline mt-4"
+              title="Abrir la página completa de términos y condiciones."
+              className="text-sm text-blue-600 hover:underline mt-4 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded"
             >
               Leer términos y condiciones
             </button>

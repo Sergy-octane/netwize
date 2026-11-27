@@ -69,6 +69,7 @@ function ForgotPassword({ setCurrentPage }) {
 
               <input
                 id="correo-recuperacion"
+                title="Introduce el correo electrónico asociado a la cuenta que deseas recuperar."
                 type="email"
                 placeholder="correo@ejemplo.com"
                 value={correo}
@@ -110,11 +111,11 @@ function ForgotPassword({ setCurrentPage }) {
               aria-label="Enviar instrucciones para recuperar la contraseña"
               title="Enviar instrucciones de recuperación"
               disabled={loading}
-              className={`w-full py-3 rounded-lg font-medium transition ${
-                loading
-                  ? "bg-gray-400 text-white cursor-not-allowed"
-                  : "bg-blue-600 text-white hover:bg-blue-700"
-              }`}
+              className={`w-full py-3 rounded-lg font-medium transition focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
+  loading
+    ? "bg-gray-400 text-white cursor-not-allowed"
+    : "bg-blue-600 text-white hover:bg-blue-700"
+}`}
             >
               {loading ? "Enviando..." : "Enviar instrucciones"}
             </button>
@@ -124,7 +125,8 @@ function ForgotPassword({ setCurrentPage }) {
             <button
               type="button"
               onClick={() => setCurrentPage("login")}
-              className="text-sm text-blue-600 hover:underline"
+              title="Volver a la página de inicio de sesión."
+              className="text-sm text-blue-600 hover:underline focus:outline-none focus:ring-2 focus:ring-blue-500 rounded"
             >
               ← Volver a iniciar sesión
             </button>
