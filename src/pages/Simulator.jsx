@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import casos from "../data/casos.json";
 
@@ -5,14 +6,15 @@ function Simulator({ setCurrentPage }) {
   const [casoSeleccionado, setCasoSeleccionado] = useState(0);
   const [nodoActual, setNodoActual] = useState(0);
   const [solucion, setSolucion] = useState("");
-  const [diagnostico, setDiagnostico] = useState("")
-  const [historial, setHistorial] = useState(() => {
-  const historialGuardado = localStorage.getItem("historial");
+  const [diagnostico, setDiagnostico] = useState("");
 
-  return historialGuardado
-    ? JSON.parse(historialGuardado)
-    : [];
-});
+  const [historial, setHistorial] = useState(() => {
+    const historialGuardado = localStorage.getItem("historial");
+
+    return historialGuardado
+      ? JSON.parse(historialGuardado)
+      : [];
+  });
 
   const caso = casos[casoSeleccionado];
   const nodo = caso.nodos[nodoActual];
@@ -27,164 +29,195 @@ function Simulator({ setCurrentPage }) {
         Practica diagnósticos de soporte técnico nivel 1.
       </p>
 
-      
-{/* Botones para seleccionar el caso */}
-<div className="flex flex-wrap gap-3 mb-8">
-  {casos.map((casoItem, index) => (
-    <button
-      key={casoItem.id}
-      onClick={() => {
-        setCasoSeleccionado(index);
-        setNodoActual(0);
-        setSolucion("");
-        setDiagnostico("");
-      }}
-      className={`px-4 py-2 rounded-lg font-medium border-2 transition-all duration-200
-        ${
-          casoSeleccionado === index
-            ? "bg-blue-800 border-blue-900 text-white shadow-lg scale-105 ring-2 ring-blue-300"
-            : "bg-blue-600 border-blue-600 hover:bg-blue-700 hover:border-blue-800 text-white"
-        }`}
-    >
-      {casoItem.titulo}
-      {casoSeleccionado === index && " ✓"}
-    </button>
-  ))}
-</div>
-
+      {/* Botones para seleccionar el caso */}
+      <div
+        className="flex flex-wrap gap-3 mb-8"
+        role="group"
+        aria-label="Seleccionar caso de soporte"
+      >
+        {casos.map((casoItem, index) => (
+          <button
+            key={casoItem.id}
+            type="button"
+            onClick={() => {
+              setCasoSeleccionado(index);
+              setNodoActual(0);
+              setSolucion("");
+              setDiagnostico("");
+            }}
+            aria-pressed={casoSeleccionado === index}
+            className={`px-4 py-2 rounded-lg font-medium border-2 transition-all duration-200
+              ${
+                casoSeleccionado === index
+                  ? "bg-blue-800 border-blue-900 text-white shadow-lg scale-105 ring-2 ring-blue-300"
+                  : "bg-blue-600 border-blue-600 hover:bg-blue-700 hover:border-blue-800 text-white"
+              }`}
+          >
+            {casoItem.titulo}
+            {casoSeleccionado === index && (
+              <span aria-hidden="true"> ✓</span>
+            )}
+          </button>
+        ))}
+      </div>
 
       {/* Tarjeta principal */}
       <div className="bg-white rounded-xl shadow-lg p-8 max-w-3xl mx-auto">
-
         <h2 className="text-2xl font-bold mb-2">
-  {caso.titulo}
-</h2>
+          {caso.titulo}
+        </h2>
 
-<div className="flex gap-4 text-sm text-gray-600 mb-4">
-  <span>📂 Categoría: {caso.categoria}</span>
-  <span>🎯 Nivel: {caso.nivel}</span>
-</div>
-   
-<p className="text-gray-700 mb-6">
-  {caso.descripcion}
-</p>
+        <div className="flex gap-4 text-sm text-gray-600 mb-4">
+          <span>
+            <span aria-hidden="true">📂 </span>
+            Categoría: {caso.categoria}
+          </span>
 
-<div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-  <p className="text-gray-700 mb-2">
-    ¿No entiendes algún término técnico?
-  </p>
+          <span>
+            <span aria-hidden="true">🎯 </span>
+            Nivel: {caso.nivel}
+          </span>
+        </div>
 
-  <button
-    onClick={() => setCurrentPage("encyclopedia")}
-    className="text-blue-700 hover:text-blue-900 font-semibold underline"
-  >
-    Consultar la enciclopedia →
-  </button>
-</div>
+        <p className="text-gray-700 mb-6">
+          {caso.descripcion}
+        </p>
 
-<p className="text-sm text-gray-500 mb-2">
-  Paso {nodoActual + 1} de {caso.nodos.length}
-</p>
+        <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+          <p className="text-gray-700 mb-2">
+            ¿No entiendes algún término técnico?
+          </p>
 
-<p className="text-lg font-medium mb-6">
-  {nodo.pregunta}
-</p>
+          <button
+            type="button"
+            onClick={() => setCurrentPage("encyclopedia")}
+            className="text-blue-700 hover:text-blue-900 font-semibold underline"
+          >
+            Consultar la enciclopedia →
+          </button>
+        </div>
 
-        {/* Botones Sí y No */}
-        
-        <div className="flex flex-col md:flex-row gap-4">
+        <p
+          className="text-sm text-gray-500 mb-2"
+          aria-live="polite"
+        >
+          Paso {nodoActual + 1} de {caso.nodos.length}
+        </p>
 
-  {nodo.opciones.map((opcion, index) => (
+        <p className="text-lg font-medium mb-6">
+          {nodo.pregunta}
+        </p>
 
-    <button
-      key={index}
-      onClick={() => {
+        {/* Botones de respuesta */}
+        <div
+          className="flex flex-col md:flex-row gap-4"
+          role="group"
+          aria-label="Opciones de respuesta"
+        >
+          {nodo.opciones.map((opcion, index) => (
+            <button
+              key={index}
+              type="button"
+              onClick={() => {
+                if (opcion.siguiente !== undefined) {
+                  setNodoActual(opcion.siguiente - 1);
+                  setDiagnostico("");
+                  setSolucion("");
+                }
 
-        if (opcion.siguiente !== undefined) {
-          setNodoActual(opcion.siguiente - 1);
-          setDiagnostico("");
-          setSolucion("");
-        }
+                if (opcion.diagnostico) {
+                  setDiagnostico(opcion.diagnostico);
+                }
 
-        if (opcion.diagnostico) {
-          setDiagnostico(opcion.diagnostico);
-        }
-        
-        if (opcion.solucion) {
-            setSolucion(opcion.solucion);
+                if (opcion.solucion) {
+                  setSolucion(opcion.solucion);
 
-          const nuevoRegistro = {
-            caso: caso.titulo,
-            fecha: new Date().toLocaleString()
-          };
+                  const nuevoRegistro = {
+                    caso: caso.titulo,
+                    fecha: new Date().toLocaleString(),
+                  };
 
-const nuevoHistorial = [...historial, nuevoRegistro];
+                  const nuevoHistorial = [
+                    ...historial,
+                    nuevoRegistro,
+                  ];
 
-setHistorial(nuevoHistorial);
+                  setHistorial(nuevoHistorial);
 
-localStorage.setItem(
-  "historial",
-  JSON.stringify(nuevoHistorial)
-);
-        }
-
-      }}
-      className="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition"
-    >
-      {opcion.texto}
-    </button>
-
-       ))}
-
-      </div>
+                  localStorage.setItem(
+                    "historial",
+                    JSON.stringify(nuevoHistorial)
+                  );
+                }
+              }}
+              className="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition"
+            >
+              {opcion.texto}
+            </button>
+          ))}
+        </div>
 
         {/* Diagnóstico */}
         {diagnostico && (
-          <div className="mt-6 p-4 bg-blue-100 border border-blue-400 rounded-lg">
-          <h3 className="font-bold mb-2">🩺 Diagnóstico:</h3>
-          <p>{diagnostico}</p>
+          <div
+            className="mt-6 p-4 bg-blue-100 border border-blue-400 rounded-lg"
+            role="status"
+            aria-live="polite"
+          >
+            <h3 className="font-bold mb-2">
+              <span aria-hidden="true">🩺 </span>
+              Diagnóstico:
+            </h3>
+            <p>{diagnostico}</p>
           </div>
-          )}
+        )}
 
-                {/* Solución */}
+        {/* Solución */}
         {solucion && (
-          <div className="mt-6 p-4 bg-green-100 border border-green-400 rounded-lg">
-            <h3 className="font-bold mb-2">✅ Solución:</h3>
+          <div
+            className="mt-6 p-4 bg-green-100 border border-green-400 rounded-lg"
+            role="status"
+            aria-live="polite"
+          >
+            <h3 className="font-bold mb-2">
+              <span aria-hidden="true">✅ </span>
+              Solución:
+            </h3>
             <p>{solucion}</p>
           </div>
         )}
 
-{/* Opción para escalar el caso */}
-<div className="mt-6 p-5 bg-orange-50 border border-orange-200 rounded-lg">
-  <h3 className="font-bold text-gray-800 mb-2">
-    ¿No pudiste solucionar el problema?
-  </h3>
+        {/* Opción para escalar el caso */}
+        <div className="mt-6 p-5 bg-orange-50 border border-orange-200 rounded-lg">
+          <h3 className="font-bold text-gray-800 mb-2">
+            ¿No pudiste solucionar el problema?
+          </h3>
 
-  <p className="text-gray-600 text-sm mb-4">
-    Si el procedimiento no permitió resolver el inconveniente,
-    puedes registrar un ticket para documentar el caso y darle seguimiento.
-  </p>
+          <p className="text-gray-600 text-sm mb-4">
+            Si el procedimiento no permitió resolver el inconveniente,
+            puedes registrar un ticket para documentar el caso y darle seguimiento.
+          </p>
 
-  <button
-    onClick={() => setCurrentPage("tickets")}
-    className="bg-orange-600 hover:bg-orange-700 text-white px-5 py-3 rounded-lg transition"
-  >
-    🎫 Crear ticket de soporte
-  </button>
-</div>
+          <button
+            type="button"
+            onClick={() => setCurrentPage("tickets")}
+            className="bg-orange-600 hover:bg-orange-700 text-white px-5 py-3 rounded-lg transition"
+          >
+            <span aria-hidden="true">🎫 </span>
+            Crear ticket de soporte
+          </button>
+        </div>
 
         {/* Botón volver */}
         <div className="mt-8 text-center">
           <button
-           onClick={() => {
-             setCurrentPage("dashboard");
-              }}
+            type="button"
+            onClick={() => setCurrentPage("dashboard")}
             className="bg-gray-700 hover:bg-gray-800 text-white px-6 py-3 rounded-lg transition"
           >
             Volver a mis tickets
           </button>
         </div>
-
       </div>
     </div>
   );

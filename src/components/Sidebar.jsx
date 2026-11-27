@@ -57,11 +57,13 @@ opciones.push({
         }`}
         aria-label={menuAbierto ? "Cerrar menú" : "Abrir menú"}
         aria-expanded={menuAbierto}
+        title={menuAbierto ? "Cerrar menú de navegación" : "Abrir menú de navegación"}
       >
         <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="w-6 h-6"
-          fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+  aria-hidden="true"
+  className="w-6 h-6"
+  fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
           strokeWidth={2}
@@ -84,7 +86,8 @@ opciones.push({
 
       {/* Barra lateral */}
       <aside
-        className={`
+  aria-label="Menú principal de navegación"
+  className={`
           bg-gray-900 text-white w-64 p-6
           fixed inset-y-0 left-0 z-40 overflow-y-auto
           transform transition-transform duration-300
@@ -97,27 +100,33 @@ opciones.push({
         </h2>
 
         <ul className="space-y-4 mt-10">
-          {opciones.map((opcion) => (
-            <li
-              key={opcion.pagina}
-              onClick={() => navegar(opcion.pagina)}
-              className={`cursor-pointer transition-all duration-200 ${
-                currentPage === opcion.pagina
-                  ? "text-blue-400 font-semibold"
-                  : "hover:text-blue-400 hover:translate-x-1"
-              }`}
-            >
-              {opcion.nombre}
-            </li>
-          ))}
+  {opciones.map((opcion) => (
+    <li key={opcion.pagina}>
+      <button
+        type="button"
+        onClick={() => navegar(opcion.pagina)}
+        aria-current={currentPage === opcion.pagina ? "page" : undefined}
+        className={`w-full text-left transition-all duration-200 ${
+          currentPage === opcion.pagina
+            ? "text-blue-400 font-semibold"
+            : "hover:text-blue-400 hover:translate-x-1"
+        }`}
+      >
+        {opcion.nombre}
+      </button>
+    </li>
+  ))}
 
-          <li
-            onClick={manejarCierreSesion}
-            className="cursor-pointer transition-all duration-200 hover:text-red-400 hover:translate-x-1"
-          >
-            Cerrar sesión
-          </li>
-        </ul>
+  <li>
+    <button
+      type="button"
+      onClick={manejarCierreSesion}
+      className="w-full text-left transition-all duration-200 hover:text-red-400 hover:translate-x-1"
+    >
+      Cerrar sesión
+    </button>
+  </li>
+</ul>
       </aside>
     </>
   );

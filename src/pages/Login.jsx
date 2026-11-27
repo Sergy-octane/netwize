@@ -45,28 +45,36 @@ function Login({ setCurrentPage }) {
 
         <div className="bg-white p-8 rounded-xl shadow-sm">
           <div className="mb-5">
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Correo electrónico
-            </label>
+            <label
+  htmlFor="correo"
+  className="block text-sm font-medium text-gray-700 mb-2"
+>
+  Correo electrónico
+</label>
 
-            <input
-              type="email"
-              autoComplete="email"
-              placeholder="correo@ejemplo.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
+           <input
+  id="correo"
+  type="email"
+  autoComplete="email"
+  placeholder="correo@ejemplo.com"
+  value={email}
+  onChange={(e) => setEmail(e.target.value)}
+  className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+/>
           </div>
 
           <div className="mb-6">
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Contraseña
-            </label>
+            <label
+  htmlFor="password"
+  className="block text-sm font-medium text-gray-700 mb-2"
+>
+  Contraseña
+</label>
 
             <div className="relative">
               <input
-                type={mostrarPassword ? "text" : "password"}
+               id="password"
+  type={mostrarPassword ? "text" : "password"}
                 autoComplete="current-password"
                 placeholder="••••••••"
                 value={password}
@@ -125,10 +133,15 @@ function Login({ setCurrentPage }) {
           </div>
 
           {error && (
-            <p className="text-sm text-red-600 mb-4" role="alert">
-              {error}
-            </p>
-          )}
+  <p
+    id="mensaje-error"
+    className="text-sm text-red-600 mb-4"
+    role="alert"
+    aria-live="assertive"
+  >
+    {error}
+  </p>
+)}
 
           <button
             type="button"

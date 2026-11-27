@@ -1,15 +1,6 @@
 
 import { useState } from "react";
-
-async function hashPassword(password) {
-  const encoder = new TextEncoder();
-  const data = encoder.encode(password);
-  const hashBuffer = await crypto.subtle.digest("SHA-256", data);
-
-  return Array.from(new Uint8Array(hashBuffer))
-    .map((byte) => byte.toString(16).padStart(2, "0"))
-    .join("");
-}
+import { supabase } from "../lib/supabase";
 
 function Register({ setCurrentPage }) {
   const [name, setName] = useState("");
@@ -19,6 +10,7 @@ function Register({ setCurrentPage }) {
   const [acceptedTerms, setAcceptedTerms] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const [loading, setLoading] = useState(false);
   const [mostrarPassword, setMostrarPassword] = useState(false);
   const [mostrarConfirmacion, setMostrarConfirmacion] = useState(false);
 
@@ -26,8 +18,16 @@ function Register({ setCurrentPage }) {
     setError("");
     setSuccess("");
 
-    if (!name || !email || !password || !confirmPassword) {
+    const nombreLimpio = name.trim();
+    const correoLimpio = email.trim().toLowerCase();
+
+    if (!nombreLimpio || !correoLimpio || !password || !confirmPassword) {
       setError("Completa todos los campos.");
+      return;
+    }
+
+    if (password.length < 6) {
+      setError("La contraseña debe tener al menos 6 caracteres.");
       return;
     }
 
@@ -41,33 +41,48 @@ function Register({ setCurrentPage }) {
       return;
     }
 
-    const existingUser = JSON.parse(
-      localStorage.getItem("netwizeUser")
-    );
+    try {
+      setLoading(true);
 
-    if (
-      existingUser &&
-      existingUser.email.toLowerCase() === email.toLowerCase()
-    ) {
-      setError("Ya existe una cuenta con este correo.");
-      return;
+      const { data, error: registerError } = await supabase.auth.signUp({
+        email: correoLimpio,
+        password,
+        options: {
+          data: {
+            full_name: nombreLimpio,
+          },
+        },
+      });
+
+      if (registerError) {
+        if (
+          registerError.message.toLowerCase().includes("already registered")
+        ) {
+          setError("Ya existe una cuenta con este correo.");
+        } else {
+          setError(registerError.message);
+        }
+
+        return;
+      }
+
+      if (data.session) {
+        setSuccess("Cuenta creada correctamente. Iniciando sesión...");
+      } else {
+        setSuccess(
+          "Cuenta creada correctamente. Revisa tu correo si necesitas confirmar el registro."
+        );
+
+        setTimeout(() => {
+          setCurrentPage("login");
+        }, 2500);
+      }
+    } catch (err) {
+      console.error("Error al registrar usuario:", err);
+      setError("Ocurrió un error al crear la cuenta. Inténtalo nuevamente.");
+    } finally {
+      setLoading(false);
     }
-
-    const passwordHash = await hashPassword(password);
-
-    const user = {
-      name,
-      email: email.toLowerCase(),
-      passwordHash,
-    };
-
-    localStorage.setItem("netwizeUser", JSON.stringify(user));
-
-    setSuccess("Cuenta creada correctamente. Redirigiendo al inicio de sesión...");
-
-    setTimeout(() => {
-      setCurrentPage("login");
-    }, 1500);
   };
 
   const iconoOjo = (visible) =>
@@ -116,11 +131,15 @@ function Register({ setCurrentPage }) {
 
         <div className="bg-white p-8 rounded-xl shadow-sm">
           <div className="mb-5">
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label
+              htmlFor="nombre"
+              className="block text-sm font-medium text-gray-700 mb-2"
+            >
               Nombre
             </label>
 
             <input
+              id="nombre"
               type="text"
               placeholder="Tu nombre"
               value={name}
@@ -130,11 +149,15 @@ function Register({ setCurrentPage }) {
           </div>
 
           <div className="mb-5">
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label
+              htmlFor="correo-registro"
+              className="block text-sm font-medium text-gray-700 mb-2"
+            >
               Correo electrónico
             </label>
 
             <input
+              id="correo-registro"
               type="email"
               placeholder="correo@ejemplo.com"
               value={email}
@@ -144,12 +167,16 @@ function Register({ setCurrentPage }) {
           </div>
 
           <div className="mb-5">
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label
+              htmlFor="password-registro"
+              className="block text-sm font-medium text-gray-700 mb-2"
+            >
               Contraseña
             </label>
 
             <div className="relative">
               <input
+                id="password-registro"
                 type={mostrarPassword ? "text" : "password"}
                 placeholder="••••••••"
                 value={password}
@@ -174,12 +201,16 @@ function Register({ setCurrentPage }) {
           </div>
 
           <div className="mb-6">
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label
+              htmlFor="confirmar-password"
+              className="block text-sm font-medium text-gray-700 mb-2"
+            >
               Confirmar contraseña
             </label>
 
             <div className="relative">
               <input
+                id="confirmar-password"
                 type={mostrarConfirmacion ? "text" : "password"}
                 placeholder="••••••••"
                 value={confirmPassword}
@@ -207,13 +238,17 @@ function Register({ setCurrentPage }) {
 
           <div className="mb-6 flex items-start gap-3">
             <input
+              id="aceptar-terminos"
               type="checkbox"
               checked={acceptedTerms}
               onChange={(e) => setAcceptedTerms(e.target.checked)}
               className="mt-1"
             />
 
-            <p className="text-sm text-gray-600">
+            <label
+              htmlFor="aceptar-terminos"
+              className="text-sm text-gray-600"
+            >
               Acepto los{" "}
               <button
                 type="button"
@@ -222,32 +257,42 @@ function Register({ setCurrentPage }) {
               >
                 términos y condiciones
               </button>
-            </p>
+            </label>
           </div>
 
           {error && (
-            <p className="text-sm text-red-600 mb-4">
+            <p
+              className="text-sm text-red-600 mb-4"
+              role="alert"
+              aria-live="assertive"
+            >
               {error}
             </p>
           )}
 
           {success && (
-            <p className="text-sm text-green-600 mb-4">
+            <p
+              className="text-sm text-green-600 mb-4"
+              role="status"
+              aria-live="polite"
+            >
               {success}
             </p>
           )}
 
           <button
             type="button"
+            aria-label="Crear una cuenta nueva en NetWize"
+            title="Crear cuenta"
             onClick={handleRegister}
-            disabled={!acceptedTerms}
+            disabled={!acceptedTerms || loading}
             className={`w-full py-3 rounded-lg font-medium transition ${
-              acceptedTerms
+              acceptedTerms && !loading
                 ? "bg-blue-600 text-white hover:bg-blue-700"
                 : "bg-gray-300 text-gray-500 cursor-not-allowed"
             }`}
           >
-            Crear cuenta
+            {loading ? "Creando cuenta..." : "Crear cuenta"}
           </button>
 
           <div className="text-center mt-6">

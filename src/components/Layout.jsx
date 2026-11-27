@@ -14,6 +14,7 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Terms from "../pages/Terms";
 import ForgotPassword from "../pages/ForgotPassword";
+import UpdatePassword from "../pages/UpdatePassword";
 import HelpButton from "./HelpButton";
 import About from "../pages/About";
 import Tickets from "../pages/Tickets";
@@ -26,10 +27,11 @@ function Layout() {
   const [session, setSession] = useState(null);
   const [profile, setProfile] = useState(null);
 
-  // Estados de carga
+  // Estados de carga y recuperación
   const [sessionReady, setSessionReady] = useState(false);
   const [authLoading, setAuthLoading] = useState(true);
   const [profileError, setProfileError] = useState("");
+  const [recoveryMode, setRecoveryMode] = useState(false);
 
   // 1. Consultar la sesión de Supabase
   useEffect(() => {
@@ -46,9 +48,10 @@ function Layout() {
 
       setSession(data?.session ?? null);
       setSessionReady(true);
+
       if (!data?.session) {
-  setAuthLoading(false);
-}
+        setAuthLoading(false);
+      }
     };
 
     cargarSesion();
@@ -56,15 +59,28 @@ function Layout() {
     // Escuchar cambios en la sesión
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, nuevaSesion) => {
+    } = supabase.auth.onAuthStateChange((event, nuevaSesion) => {
       if (!mounted) return;
 
       setSession(nuevaSesion);
 
-      if (!nuevaSesion) {
+      // El usuario viene desde el enlace de recuperación
+      if (event === "PASSWORD_RECOVERY") {
+        setRecoveryMode(true);
+        setProfile(null);
+        setProfileError("");
+        setCurrentPage("updatePassword");
+        setAuthLoading(false);
+        return;
+      }
+
+      // El usuario cerró sesión
+      if (event === "SIGNED_OUT") {
+        setRecoveryMode(false);
         setProfile(null);
         setProfileError("");
         setCurrentPage("login");
+        setAuthLoading(false);
       }
     });
 
@@ -76,11 +92,11 @@ function Layout() {
 
   // 2. Consultar el perfil y el rol del usuario
   useEffect(() => {
-    if (!sessionReady) return;
+    if (!sessionReady || recoveryMode) return;
 
     if (!session?.user?.id) {
-  return;
-}
+      return;
+    }
 
     let active = true;
 
@@ -118,7 +134,7 @@ function Layout() {
     return () => {
       active = false;
     };
-  }, [session?.user?.id, sessionReady]);
+  }, [session?.user?.id, sessionReady, recoveryMode]);
 
   // 3. Controlar la navegación y los permisos
   const goToPage = (page) => {
@@ -130,9 +146,7 @@ function Layout() {
       "tickets",
     ];
 
-    const paginasTecnico = [
-  "dashboard",
-];
+    const paginasTecnico = ["dashboard"];
 
     if (paginasProtegidas.includes(page) && !session) {
       setMenuAbierto(false);
@@ -151,15 +165,17 @@ function Layout() {
     }
 
     setMenuAbierto(false);
+
     // El simulador es exclusivo para usuarios normales
-if (
-  page === "simulator" &&
-  profile?.role !== "usuario"
-) {
-  setMenuAbierto(false);
-  setCurrentPage("about");
-  return;
-}
+    if (
+      page === "simulator" &&
+      profile?.role !== "usuario"
+    ) {
+      setMenuAbierto(false);
+      setCurrentPage("about");
+      return;
+    }
+
     setCurrentPage(page);
   };
 
@@ -181,6 +197,13 @@ if (
 
   return (
     <div>
+      <a
+        href="#contenido-principal"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-100 focus:bg-white focus:text-blue-700 focus:p-3 focus:rounded"
+      >
+        Saltar al contenido principal
+      </a>
+
       <Navbar />
 
       <HelpButton />
@@ -198,8 +221,11 @@ if (
         )}
 
         <div className="flex flex-1 min-w-0 flex-col">
-          <main className="flex-1 min-w-0 p-6 bg-gray-50">
-
+          <main
+            id="contenido-principal"
+            tabIndex="-1"
+            className="flex-1 min-w-0 p-6 bg-gray-50"
+          >
             {authLoading && (
               <div className="text-center py-10">
                 <p className="text-gray-600">
@@ -208,7 +234,11 @@ if (
               </div>
             )}
 
-            {!authLoading && profileError && (
+            {!authLoading && recoveryMode && (
+              <UpdatePassword setCurrentPage={setCurrentPage} />
+            )}
+
+            {!authLoading && !recoveryMode && profileError && (
               <div className="max-w-lg mx-auto bg-white p-6 rounded-lg shadow">
                 <h2 className="text-xl font-bold text-red-600 mb-2">
                   No se pudo cargar tu perfil
@@ -227,7 +257,7 @@ if (
               </div>
             )}
 
-            {!authLoading && !profileError && (
+            {!authLoading && !profileError && !recoveryMode && (
               <>
                 {currentPage === "welcome" && (
                   <Welcome setCurrentPage={setCurrentPage} />
@@ -249,26 +279,27 @@ if (
                   <ForgotPassword setCurrentPage={setCurrentPage} />
                 )}
 
-                {currentPage === "dashboard" && profile?.role === "tecnico" && (
-                  <Dashboard setCurrentPage={goToPage} />
+                {currentPage === "dashboard" &&
+                  profile?.role === "tecnico" && (
+                    <Dashboard setCurrentPage={goToPage} />
+                  )}
+
+                {currentPage === "simulator" &&
+                  profile?.role === "usuario" && (
+                    <Simulator setCurrentPage={goToPage} />
+                  )}
+
+                {currentPage === "encyclopedia" && session && (
+                  <Encyclopedia />
                 )}
 
-                {currentPage === "simulator" && profile?.role === "usuario" && (
-  <Simulator setCurrentPage={goToPage} />
-)}
+                {currentPage === "about" && session && <About />}
 
-                {currentPage === "encyclopedia" && session && <Encyclopedia />}
-
-                {currentPage === "about" && session && (
-                  <About />
+                {currentPage === "tickets" && session && (
+                  <Tickets profile={profile} />
                 )}
-
-               {currentPage === "tickets" && session && (
-  <Tickets profile={profile} />
-)}
               </>
             )}
-
           </main>
 
           <footer className="bg-gray-900 text-gray-300 px-6 py-6 text-center">

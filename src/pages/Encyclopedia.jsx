@@ -36,15 +36,24 @@ function Encyclopedia() {
 
       {/* Buscador */}
       <div className="relative mb-3">
-        <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500">
+        <span
+          className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500"
+          aria-hidden="true"
+        >
           🔍
         </span>
 
+        <label htmlFor="buscar-concepto" className="sr-only">
+          Buscar conceptos en la enciclopedia
+        </label>
+
         <input
+          id="buscar-concepto"
           type="text"
           placeholder="Buscar concepto..."
           value={busqueda}
           onChange={(e) => setBusqueda(e.target.value)}
+          aria-describedby="informacion-busqueda"
           className="w-full p-3 pl-12 border rounded-lg outline-none
           focus:ring-2 focus:ring-blue-500 focus:border-blue-500
           transition duration-200"
@@ -52,7 +61,13 @@ function Encyclopedia() {
       </div>
 
       {/* Información de búsqueda */}
-      <p className="text-sm text-gray-500 mb-8">
+      <p
+        id="informacion-busqueda"
+        className="text-sm text-gray-500 mb-8"
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
+      >
         {busqueda.trim() ? (
           <>
             Resultados para: <strong>"{busqueda}"</strong>
@@ -81,7 +96,8 @@ function Encyclopedia() {
               </p>
 
               <h3 className="font-semibold">
-                🧒 ¿Qué es?
+                <span aria-hidden="true">🧒 </span>
+                ¿Qué es?
               </h3>
 
               <p className="text-gray-600 mb-4">
@@ -89,7 +105,8 @@ function Encyclopedia() {
               </p>
 
               <h3 className="font-semibold">
-                🔧 ¿Para qué sirve?
+                <span aria-hidden="true">🔧 </span>
+                ¿Para qué sirve?
               </h3>
 
               <p className="text-gray-600 mb-4">
@@ -97,7 +114,8 @@ function Encyclopedia() {
               </p>
 
               <h3 className="font-semibold">
-                🧠 ¿Qué debo revisar como N1?
+                <span aria-hidden="true">🧠 </span>
+                ¿Qué debo revisar como N1?
               </h3>
 
               <p className="text-gray-600">
@@ -106,8 +124,13 @@ function Encyclopedia() {
             </div>
           ))
         ) : (
-          <p className="text-gray-500 col-span-full text-center">
-            🔍 No se encontraron conceptos.
+          <p
+            className="text-gray-500 col-span-full text-center"
+            role="status"
+            aria-live="polite"
+          >
+            <span aria-hidden="true">🔍 </span>
+            No se encontraron conceptos.
           </p>
         )}
       </div>

@@ -1,34 +1,48 @@
 
 import { useState } from "react";
+import { supabase } from "../lib/supabase";
 
 function ForgotPassword({ setCurrentPage }) {
   const [correo, setCorreo] = useState("");
   const [mensaje, setMensaje] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const enviarInstrucciones = (e) => {
+  const enviarInstrucciones = async (e) => {
     e.preventDefault();
 
     setMensaje("");
     setError("");
 
-    const correoLimpio = correo.trim();
+    const correoLimpio = correo.trim().toLowerCase();
 
     if (!correoLimpio) {
       setError("Por favor, ingresa tu correo electrónico.");
       return;
     }
 
-    const formatoCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    try {
+      setLoading(true);
 
-    if (!formatoCorreo.test(correoLimpio)) {
-      setError("Ingresa un correo electrónico válido.");
-      return;
+      const { error: resetError } =
+        await supabase.auth.resetPasswordForEmail(correoLimpio, {
+          redirectTo: window.location.origin,
+        });
+
+      if (resetError) {
+        setError(resetError.message);
+        return;
+      }
+
+      setMensaje(
+        "Si existe una cuenta asociada a ese correo, recibirás un enlace para recuperar tu contraseña. Revisa también la carpeta de spam."
+      );
+    } catch (err) {
+      console.error("Error al recuperar contraseña:", err);
+      setError("No fue posible procesar la solicitud. Inténtalo nuevamente.");
+    } finally {
+      setLoading(false);
     }
-
-    setMensaje(
-      `Se ha simulado el envío de las instrucciones de recuperación al correo ${correoLimpio}.`
-    );
   };
 
   return (
@@ -71,6 +85,7 @@ function ForgotPassword({ setCurrentPage }) {
             {error && (
               <div
                 role="alert"
+                aria-live="assertive"
                 className="mb-4 p-3 bg-red-50 border border-red-200 text-red-700 rounded-lg text-sm"
               >
                 {error}
@@ -80,28 +95,34 @@ function ForgotPassword({ setCurrentPage }) {
             {mensaje && (
               <div
                 role="status"
+                aria-live="polite"
                 className="mb-4 p-4 bg-green-50 border border-green-200 text-green-800 rounded-lg text-sm"
               >
                 <p className="font-semibold mb-1">
                   ✓ Solicitud procesada
                 </p>
                 <p>{mensaje}</p>
-                <p className="mt-2 text-green-700">
-                  Esta es una demostración: no se ha enviado ningún correo real.
-                </p>
               </div>
             )}
 
             <button
               type="submit"
-              className="w-full bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition"
+              aria-label="Enviar instrucciones para recuperar la contraseña"
+              title="Enviar instrucciones de recuperación"
+              disabled={loading}
+              className={`w-full py-3 rounded-lg font-medium transition ${
+                loading
+                  ? "bg-gray-400 text-white cursor-not-allowed"
+                  : "bg-blue-600 text-white hover:bg-blue-700"
+              }`}
             >
-              Enviar instrucciones
+              {loading ? "Enviando..." : "Enviar instrucciones"}
             </button>
           </form>
 
           <div className="text-center mt-6">
             <button
+              type="button"
               onClick={() => setCurrentPage("login")}
               className="text-sm text-blue-600 hover:underline"
             >

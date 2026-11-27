@@ -1,6 +1,9 @@
 function Navbar() {
   return (
-    <nav className="bg-blue-700 text-white flex justify-between items-center px-6 py-4 shadow">
+    <nav
+  aria-label="Barra superior de NetWize"
+  className="bg-blue-700 text-white flex justify-between items-center px-6 py-4 shadow"
+>
 
       <h1 className="text-2xl font-bold transition-transform duration-200 hover:scale-105">
         NetWize

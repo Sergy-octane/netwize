@@ -1,37 +1,40 @@
-  import { useState } from "react";
-  import casos from "../data/casos.json";
-  function Dashboard() {
-    const [mostrarHistorialCompleto, setMostrarHistorialCompleto] = useState(false);
+
+import { useState } from "react";
+import casos from "../data/casos.json";
+
+function Dashboard() {
+  const [mostrarHistorialCompleto, setMostrarHistorialCompleto] =
+    useState(false);
+
   const [historial] = useState(() => {
     const historialGuardado = localStorage.getItem("historial");
-    
 
     return historialGuardado
       ? JSON.parse(historialGuardado)
       : [];
   });
- const categorias = historial.map((registro) => {
-  const casoEncontrado = casos.find(
-    (caso) => caso.titulo === registro.caso
-  );
 
-  return casoEncontrado
-    ? casoEncontrado.categoria
-    : "Desconocida";
-});
+  const categorias = historial.map((registro) => {
+    const casoEncontrado = casos.find(
+      (caso) => caso.titulo === registro.caso
+    );
 
-const conteoCategorias = {};
+    return casoEncontrado
+      ? casoEncontrado.categoria
+      : "Desconocida";
+  });
 
-categorias.forEach((categoria) => {
-  conteoCategorias[categoria] =
-    (conteoCategorias[categoria] || 0) + 1;
-});
+  const conteoCategorias = {};
 
-const categoriaFrecuente = Object.entries(conteoCategorias)
-  .sort((a, b) => b[1] - a[1])[0] || ["Ninguna", 0];
+  categorias.forEach((categoria) => {
+    conteoCategorias[categoria] =
+      (conteoCategorias[categoria] || 0) + 1;
+  });
+
+  const categoriaFrecuente = Object.entries(conteoCategorias)
+    .sort((a, b) => b[1] - a[1])[0] || ["Ninguna", 0];
 
   return (
-    
     <div>
       <h1 className="text-3xl font-bold mb-2">
         Bienvenido a NetWize
@@ -41,188 +44,193 @@ const categoriaFrecuente = Object.entries(conteoCategorias)
         Panel principal del simulador de soporte técnico.
       </p>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {/* Estadísticas principales */}
+      <section
+        aria-label="Estadísticas del simulador"
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+      >
+        {/* Casos resueltos */}
+        <div className="bg-white rounded-xl shadow p-6 transition-all duration-200 hover:-translate-y-1 hover:shadow-lg">
+          <p className="text-sm text-gray-500">
+            Casos resueltos
+          </p>
 
-  {/* Casos resueltos */}
-  <div className="bg-white rounded-xl shadow p-6 transition-all duration-200 hover:-translate-y-1 hover:shadow-lg">
-    <p className="text-sm text-gray-500">
-      Casos resueltos
-    </p>
+          <p className="text-4xl font-bold mt-2">
+            {historial.length}
+          </p>
 
-    <p className="text-4xl font-bold mt-2">
-      {historial.length}
-    </p>
+          <p className="text-sm text-green-600 mt-2">
+            Casos completados
+          </p>
+        </div>
 
-    <p className="text-sm text-green-600 mt-2">
-      Casos completados
-    </p>
-  </div>
+        {/* Simulaciones */}
+        <div className="bg-white rounded-xl shadow p-6 transition-all duration-200 hover:-translate-y-1 hover:shadow-lg">
+          <p className="text-sm text-gray-500">
+            Simulaciones
+          </p>
 
+          <p className="text-4xl font-bold mt-2">
+            {historial.length}
+          </p>
 
-  {/* Simulaciones */}
-  <div className="bg-white rounded-xl shadow p-6 transition-all duration-200 hover:-translate-y-1 hover:shadow-lg">
-    <p className="text-sm text-gray-500">
-      Simulaciones
-    </p>
+          <p className="text-sm text-blue-600 mt-2">
+            Simulaciones realizadas
+          </p>
+        </div>
 
-    <p className="text-4xl font-bold mt-2">
-      {historial.length}
-    </p>
+        {/* Nivel */}
+        <div className="bg-white rounded-xl shadow p-6">
+          <p className="text-sm text-gray-500">
+            Nivel actual
+          </p>
 
-    <p className="text-sm text-blue-600 mt-2">
-      Simulaciones realizadas
-    </p>
-  </div>
+          <p className="text-4xl font-bold mt-2">
+            N1
+          </p>
 
+          <p className="text-sm text-gray-500 mt-2">
+            Soporte técnico
+          </p>
+        </div>
 
-  {/* Nivel */}
-  <div className="bg-white rounded-xl shadow p-6">
-    <p className="text-sm text-gray-500">
-      Nivel actual
-    </p>
+        {/* Categoría frecuente */}
+        <div className="bg-white rounded-xl shadow p-6 transition-all duration-200 hover:-translate-y-1 hover:shadow-lg">
+          <p className="text-sm text-gray-500">
+            Categoría frecuente
+          </p>
 
-    <p className="text-4xl font-bold mt-2">
-      N1
-    </p>
+          <p className="text-3xl font-bold mt-2">
+            {categoriaFrecuente[0]}
+          </p>
 
-    <p className="text-sm text-gray-500 mt-2">
-      Soporte técnico
-    </p>
-  </div>
+          <p className="text-sm text-gray-500 mt-2">
+            {categoriaFrecuente[1]} caso(s)
+          </p>
+        </div>
 
+        {/* Gráfica de categorías */}
+        <div className="bg-white rounded-xl shadow p-6 md:col-span-2 lg:col-span-4">
+          <h2 className="text-xl font-bold mb-6">
+            Categorías frecuentes
+          </h2>
 
-  {/* Categoría frecuente */}
-  <div className="bg-white rounded-xl shadow p-6 transition-all duration-200 hover:-translate-y-1 hover:shadow-lg">
-    <p className="text-sm text-gray-500">
-      Categoría frecuente
-    </p>
-
-    <p className="text-3xl font-bold mt-2">
-      {categoriaFrecuente[0]}
-    </p>
-
-    <p className="text-sm text-gray-500 mt-2">
-      {categoriaFrecuente[1]} caso(s)
-    </p>
-  </div>
-
-
-  {/* Gráfica de categorías */}
-  <div className="bg-white rounded-xl shadow p-6 md:col-span-2 lg:col-span-4">
-
-    <h2 className="text-xl font-bold mb-6">
-      Categorías frecuentes
-    </h2>
-
-    {Object.keys(conteoCategorias).length === 0 ? (
-      <p className="text-gray-500">
-        Aún no hay estadísticas disponibles.
-      </p>
-    ) : (
-      <div className="space-y-5">
-
-        {Object.entries(conteoCategorias).map(
-          ([categoria, cantidad]) => {
-
-            const porcentaje =
-              (cantidad / historial.length) * 100;
-
-            return (
-              <div key={categoria}>
-
-                <div className="flex justify-between mb-2">
-
-                  <span className="font-medium">
-                    {categoria}
-                  </span>
-
-                  <span className="text-sm text-gray-500">
-                    {cantidad} caso(s) — {porcentaje.toFixed(0)}%
-                  </span>
-
-                </div>
-
-                <div className="w-full bg-gray-200 rounded-full h-4">
-
-                  <div
-                    className="bg-blue-600 h-4 rounded-full transition-all duration-500"
-                    style={{
-                      width: `${porcentaje}%`,
-                    }}
-                  ></div>
-
-                </div>
-
-              </div>
-            );
-          }
-        )}
-
-      </div>
-    )}
-
-  </div>
-
-
-      </div>
-      
-<div className="mt-10 bg-white rounded-xl shadow p-6">
-  <h2 className="text-xl font-bold mb-4">
-    Historial de casos
-  </h2>
-
-  {historial.length === 0 ? (
-    <div className="text-center py-8">
-      <p className="text-4xl mb-3">📋</p>
-
-      <p className="text-gray-600 font-medium">
-        Aún no has resuelto ningún caso.
-      </p>
-
-      <p className="text-sm text-gray-400 mt-1">
-        Completa una simulación para comenzar tu historial.
-      </p>
-    </div>
-  ) : (
-    <>
-      <ul className="space-y-3">
-        {(mostrarHistorialCompleto
-          ? historial
-          : historial.slice(-5).reverse()
-        ).map((registro, index) => (
-          <li
-            key={`${registro.fecha}-${index}`}
-            className="p-3 bg-gray-50 rounded-lg"
-          >
-            <p className="font-semibold">
-              ✅ {registro.caso}
+          {Object.keys(conteoCategorias).length === 0 ? (
+            <p className="text-gray-500">
+              Aún no hay estadísticas disponibles.
             </p>
+          ) : (
+            <div className="space-y-5">
+              {Object.entries(conteoCategorias).map(
+                ([categoria, cantidad]) => {
+                  const porcentaje =
+                    (cantidad / historial.length) * 100;
 
-            <p className="text-sm text-gray-500 mt-1">
-              {registro.fecha}
-            </p>
-          </li>
-        ))}
-      </ul>
+                  return (
+                    <div key={categoria}>
+                      <div className="flex justify-between mb-2">
+                        <span className="font-medium">
+                          {categoria}
+                        </span>
 
-      {historial.length > 5 && (
-        <button
-          onClick={() =>
-            setMostrarHistorialCompleto(!mostrarHistorialCompleto)
-          }
-          className="mt-5 text-blue-600 hover:text-blue-800 font-semibold"
+                        <span className="text-sm text-gray-500">
+                          {cantidad} caso(s) — {porcentaje.toFixed(0)}%
+                        </span>
+                      </div>
+
+                      <div
+                        className="w-full bg-gray-200 rounded-full h-4"
+                        role="progressbar"
+                        aria-label={`Porcentaje de casos de ${categoria}`}
+                        aria-valuenow={Math.round(porcentaje)}
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                        aria-valuetext={`${porcentaje.toFixed(0)} por ciento, ${cantidad} casos`}
+                      >
+                        <div
+                          className="bg-blue-600 h-4 rounded-full transition-all duration-500"
+                          style={{
+                            width: `${porcentaje}%`,
+                          }}
+                          aria-hidden="true"
+                        ></div>
+                      </div>
+                    </div>
+                  );
+                }
+              )}
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* Historial de casos */}
+      <section
+        className="mt-10 bg-white rounded-xl shadow p-6"
+        aria-labelledby="titulo-historial"
+      >
+        <h2
+          id="titulo-historial"
+          className="text-xl font-bold mb-4"
         >
-          {mostrarHistorialCompleto
-            ? "Mostrar menos ↑"
-            : "Ver historial completo ↓"}
-        </button>
-      )}
-    </>
-  )}
-</div>
+          Historial de casos
+        </h2>
 
-  
-    
+        {historial.length === 0 ? (
+          <div className="text-center py-8">
+            <p className="text-4xl mb-3" aria-hidden="true">
+              📋
+            </p>
+
+            <p className="text-gray-600 font-medium">
+              Aún no has resuelto ningún caso.
+            </p>
+
+            <p className="text-sm text-gray-400 mt-1">
+              Completa una simulación para comenzar tu historial.
+            </p>
+          </div>
+        ) : (
+          <>
+            <ul className="space-y-3">
+              {(mostrarHistorialCompleto
+                ? historial
+                : historial.slice(-5).reverse()
+              ).map((registro, index) => (
+                <li
+                  key={`${registro.fecha}-${index}`}
+                  className="p-3 bg-gray-50 rounded-lg"
+                >
+                  <p className="font-semibold">
+                    <span aria-hidden="true">✅ </span>
+                    {registro.caso}
+                  </p>
+
+                  <p className="text-sm text-gray-500 mt-1">
+                    {registro.fecha}
+                  </p>
+                </li>
+              ))}
+            </ul>
+
+            {historial.length > 5 && (
+              <button
+                type="button"
+                onClick={() =>
+                  setMostrarHistorialCompleto(!mostrarHistorialCompleto)
+                }
+                aria-expanded={mostrarHistorialCompleto}
+                aria-controls="titulo-historial"
+                className="mt-5 text-blue-600 hover:text-blue-800 font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded"
+              >
+                {mostrarHistorialCompleto
+                  ? "Mostrar menos ↑"
+                  : "Ver historial completo ↓"}
+              </button>
+            )}
+          </>
+        )}
+      </section>
     </div>
   );
 }
