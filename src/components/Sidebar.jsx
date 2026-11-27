@@ -1,63 +1,80 @@
 
-function Sidebar({ setCurrentPage, currentPage, menuAbierto, setMenuAbierto }) {
+function Sidebar({
+  setCurrentPage,
+  currentPage,
+  menuAbierto,
+  setMenuAbierto,
+  cerrarSesion,
+  profile,
+}) {
   const navegar = (pagina) => {
     setCurrentPage(pagina);
     setMenuAbierto(false);
   };
 
-  const cerrarSesion = () => {
-    localStorage.removeItem("netwizeSession");
+  const manejarCierreSesion = () => {
     setMenuAbierto(false);
-    setCurrentPage("login");
+    cerrarSesion();
   };
+// Opciones comunes para todos los perfiles.
+console.log("Perfil recibido en Sidebar:", profile);
+const opciones = [
+    { pagina: "about", nombre: "Acerca de NetWize" },
+    {
+      pagina: "tickets",
+      nombre: profile?.role === "tecnico" ? "Gestión de tickets" : "Mis tickets",
+    },
+  ];
+
+  // Opciones exclusivas del técnico.
+if (profile?.role === "tecnico") {
+  opciones.splice(
+    1,
+    0,
+    { pagina: "dashboard", nombre: "Dashboard" }
+  );
+}
+
+if (profile?.role === "usuario") {
+  opciones.push({
+    pagina: "simulator",
+    nombre: "Simulador",
+  });
+}
+
+opciones.push({
+  pagina: "encyclopedia",
+  nombre: "Enciclopedia",
+});
 
   return (
     <>
       {/* Botón del menú móvil */}
       <button
         onClick={() => setMenuAbierto(!menuAbierto)}
-        className={`sm:hidden fixed top-[52px] right-3 z-50 bg-gray-900 text-white p-2 rounded-lg shadow-lg ${
-  menuAbierto ? "hidden" : "block"
-}`}
+        className={`sm:hidden fixed top-13 right-3 z-50 bg-gray-900 text-white p-2 rounded-lg shadow-lg ${
+          menuAbierto ? "hidden" : "block"
+        }`}
         aria-label={menuAbierto ? "Cerrar menú" : "Abrir menú"}
         aria-expanded={menuAbierto}
       >
-        {menuAbierto ? (
-          
-<svg
-  xmlns="http://www.w3.org/2000/svg"
-  className="w-6 h-6"
-  fill="none"
-  viewBox="0 0 24 24"
-  stroke="currentColor"
-  strokeWidth={2}
->
-  <path
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    d="M4 6h16M4 12h16M4 18h16"
-  />
-</svg>
-
-        ) : (
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="w-6 h-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={2}
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M4 6h16M4 12h16M4 18h16"
-            />
-          </svg>
-        )}
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="w-6 h-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth={2}
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M4 6h16M4 12h16M4 18h16"
+          />
+        </svg>
       </button>
 
-      {/* Fondo oscuro al abrir el menú en móvil */}
+      {/* Fondo oscuro del menú móvil */}
       {menuAbierto && (
         <div
           className="sm:hidden fixed inset-0 z-30 bg-black/40"
@@ -68,83 +85,40 @@ function Sidebar({ setCurrentPage, currentPage, menuAbierto, setMenuAbierto }) {
       {/* Barra lateral */}
       <aside
         className={`
-  bg-gray-900 text-white w-64 p-6
-  fixed inset-y-0 left-0 z-40 overflow-y-auto
-  transform transition-transform duration-300
-  sm:sticky sm:top-0 sm:translate-x-0 sm:min-h-screen
-  ${menuAbierto ? "translate-x-0" : "-translate-x-full"}
-`}
+          bg-gray-900 text-white w-64 p-6
+          fixed inset-y-0 left-0 z-40 overflow-y-auto
+          transform transition-transform duration-300
+          sm:sticky sm:top-0 sm:translate-x-0 sm:min-h-screen
+          ${menuAbierto ? "translate-x-0" : "-translate-x-full"}
+        `}
       >
         <h2 className="text-lg font-semibold mb-8">
           Menú
         </h2>
 
-        
-<ul className="space-y-4 mt-10">
-  <li
-    onClick={() => navegar("about")}
-    className={`cursor-pointer transition-all duration-200 ${
-      currentPage === "about"
-        ? "text-blue-400 font-semibold"
-        : "hover:text-blue-400 hover:translate-x-1"
-    }`}
-  >
-    Acerca de NetWize
-  </li>
+        <ul className="space-y-4 mt-10">
+          {opciones.map((opcion) => (
+            <li
+              key={opcion.pagina}
+              onClick={() => navegar(opcion.pagina)}
+              className={`cursor-pointer transition-all duration-200 ${
+                currentPage === opcion.pagina
+                  ? "text-blue-400 font-semibold"
+                  : "hover:text-blue-400 hover:translate-x-1"
+              }`}
+            >
+              {opcion.nombre}
+            </li>
+          ))}
 
-  <li
-    onClick={() => navegar("dashboard")}
-    className={`cursor-pointer transition-all duration-200 ${
-      currentPage === "dashboard"
-        ? "text-blue-400 font-semibold"
-        : "hover:text-blue-400 hover:translate-x-1"
-    }`}
-  >
-    Dashboard
-  </li>
-
-  <li
-    onClick={() => navegar("simulator")}
-    className={`cursor-pointer transition-all duration-200 ${
-      currentPage === "simulator"
-        ? "text-blue-400 font-semibold"
-        : "hover:text-blue-400 hover:translate-x-1"
-    }`}
-  >
-    Simulador
-  </li>
-
-  <li
-    onClick={() => navegar("tickets")}
-    className={`cursor-pointer transition-all duration-200 ${
-      currentPage === "tickets"
-        ? "text-blue-400 font-semibold"
-        : "hover:text-blue-400 hover:translate-x-1"
-    }`}
-  >
-    Gestión de tickets
-  </li>
-
-  <li
-    onClick={() => navegar("encyclopedia")}
-    className={`cursor-pointer transition-all duration-200 ${
-      currentPage === "encyclopedia"
-        ? "text-blue-400 font-semibold"
-        : "hover:text-blue-400 hover:translate-x-1"
-    }`}
-  >
-    Enciclopedia
-  </li>
-
-  <li
-    onClick={cerrarSesion}
-    className="cursor-pointer transition-all duration-200 hover:text-red-400 hover:translate-x-1"
-  >
-    Cerrar sesión
-  </li>
-</ul>
-
-      </aside>  
+          <li
+            onClick={manejarCierreSesion}
+            className="cursor-pointer transition-all duration-200 hover:text-red-400 hover:translate-x-1"
+          >
+            Cerrar sesión
+          </li>
+        </ul>
+      </aside>
     </>
   );
 }

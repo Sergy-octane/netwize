@@ -1,58 +1,39 @@
 
 import { useState } from "react";
-
-async function hashPassword(password) {
-  const encoder = new TextEncoder();
-  const data = encoder.encode(password);
-  const hashBuffer = await crypto.subtle.digest("SHA-256", data);
-
-  return Array.from(new Uint8Array(hashBuffer))
-    .map((byte) => byte.toString(16).padStart(2, "0"))
-    .join("");
-}
+import { supabase } from "../lib/supabase";
 
 function Login({ setCurrentPage }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [mostrarPassword, setMostrarPassword] = useState(false);
+  const [cargando, setCargando] = useState(false);
 
   const handleLogin = async () => {
     setError("");
 
-    if (!email || !password) {
+    if (!email.trim() || !password) {
       setError("Completa el correo y la contraseña.");
       return;
     }
 
-    const savedUser = JSON.parse(
-      localStorage.getItem("netwizeUser")
-    );
+    setCargando(true);
 
-    if (!savedUser) {
-      setError("No existe una cuenta registrada.");
-      return;
-    }
+    const { error } = await supabase.auth.signInWithPassword({
+      email: email.trim().toLowerCase(),
+      password,
+    });
 
-    const passwordHash = await hashPassword(password);
+   if (error) {
+  console.error("Error de Supabase:", error);
 
-    if (
-      email.toLowerCase() !== savedUser.email ||
-      passwordHash !== savedUser.passwordHash
-    ) {
-      setError("El correo o la contraseña son incorrectos.");
-      return;
-    }
+  setError(error.message);
+  setCargando(false);
+  return;
+}
 
-    localStorage.setItem(
-      "netwizeSession",
-      JSON.stringify({
-        email: savedUser.email,
-        name: savedUser.name,
-      })
-    );
-
-    setCurrentPage("dashboard");
+    // Layout detectará la sesión y consultará el rol automáticamente.
+    setCargando(false);
   };
 
   return (
@@ -70,6 +51,7 @@ function Login({ setCurrentPage }) {
 
             <input
               type="email"
+              autoComplete="email"
               placeholder="correo@ejemplo.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -85,6 +67,7 @@ function Login({ setCurrentPage }) {
             <div className="relative">
               <input
                 type={mostrarPassword ? "text" : "password"}
+                autoComplete="current-password"
                 placeholder="••••••••"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -142,7 +125,7 @@ function Login({ setCurrentPage }) {
           </div>
 
           {error && (
-            <p className="text-sm text-red-600 mb-4">
+            <p className="text-sm text-red-600 mb-4" role="alert">
               {error}
             </p>
           )}
@@ -150,9 +133,10 @@ function Login({ setCurrentPage }) {
           <button
             type="button"
             onClick={handleLogin}
-            className="w-full bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition"
+            disabled={cargando}
+            className="w-full bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            Iniciar sesión
+            {cargando ? "Verificando..." : "Iniciar sesión"}
           </button>
 
           <div className="text-center mt-6">

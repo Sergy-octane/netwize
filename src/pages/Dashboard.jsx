@@ -1,6 +1,6 @@
   import { useState } from "react";
   import casos from "../data/casos.json";
-  function Dashboard({ setCurrentPage }) {
+  function Dashboard() {
     const [mostrarHistorialCompleto, setMostrarHistorialCompleto] = useState(false);
   const [historial] = useState(() => {
     const historialGuardado = localStorage.getItem("historial");
@@ -221,14 +221,7 @@ const categoriaFrecuente = Object.entries(conteoCategorias)
   )}
 </div>
 
-     <div className="mt-10">
-  <button
-    onClick={() => setCurrentPage("simulator")}
-    className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition"
-  >
-    Iniciar simulación
-  </button>
-</div>
+  
     
     </div>
   );

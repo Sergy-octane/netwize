@@ -1,124 +1,323 @@
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { supabase } from "../lib/supabase";
 
-function obtenerTickets() {
-  try {
-    const guardados = localStorage.getItem("tickets");
-    return guardados ? JSON.parse(guardados) : [];
-  } catch {
-    return [];
-  }
-}
-
-function Tickets() {
-  const [tickets, setTickets] = useState(obtenerTickets);
-
+function Tickets({ profile }) {
+  const [tickets, setTickets] = useState([]);
   const [ticketSeleccionado, setTicketSeleccionado] = useState(null);
+  const [historial, setHistorial] = useState([]);
+
+  const [cargando, setCargando] = useState(true);
+  const [procesando, setProcesando] = useState(false);
+  const [cargandoHistorial, setCargandoHistorial] = useState(false);
+  const [error, setError] = useState("");
+
+  const [busqueda, setBusqueda] = useState("");
   const [nuevaObservacion, setNuevaObservacion] = useState("");
+  const [visibilidad, setVisibilidad] = useState("publica");
 
   const [formulario, setFormulario] = useState({
-    nombre: "",
-    telefono: "",
-    correo: "",
-    problema: "",
-    procedimientos: "",
+    subject: "",
+    description: "",
+    category: "Redes",
+    priority: "media",
   });
 
-  const guardarTickets = (nuevosTickets) => {
-    setTickets(nuevosTickets);
-    localStorage.setItem("tickets", JSON.stringify(nuevosTickets));
-  };
+  const esTecnico = profile?.role === "tecnico";
 
-  const manejarCambio = (e) => {
-    const { name, value } = e.target;
+  // Cargar los tickets desde Supabase.
+  useEffect(() => {
+    const cargarTickets = async () => {
+      if (!profile?.id || !profile?.role) {
+        setCargando(false);
+        return;
+      }
 
-    setFormulario({
-      ...formulario,
-      [name]: value,
-    });
-  };
+      setCargando(true);
+      setError("");
 
-  const crearTicket = (e) => {
-    e.preventDefault();
+      const { data, error } = await supabase
+        .from("tickets")
+        .select("*")
+        .order("created_at", { ascending: false });
 
-    const nuevoTicket = {
-      id: `TK-${Date.now().toString().slice(-6)}`,
-      ...formulario,
-      estado: "Abierto",
-      fecha: new Date().toLocaleString("es-CO"),
-      observaciones: [],
+      if (error) {
+        console.error("Error al cargar tickets:", error.message);
+        setError("No fue posible cargar los tickets.");
+        setCargando(false);
+        return;
+      }
+
+      setTickets(data || []);
+      setCargando(false);
     };
 
-    guardarTickets([nuevoTicket, ...tickets]);
+    cargarTickets();
+  }, [profile?.id, profile?.role]);
 
-    setFormulario({
-      nombre: "",
-      telefono: "",
-      correo: "",
-      problema: "",
-      procedimientos: "",
-    });
-  };
-
-  const cambiarEstado = (id) => {
-    const nuevosTickets = tickets.map((ticket) =>
-      ticket.id === id
-        ? {
-            ...ticket,
-            estado: ticket.estado === "Abierto" ? "Resuelto" : "Abierto",
-          }
-        : ticket
-    );
-
-    guardarTickets(nuevosTickets);
-    setTicketSeleccionado(
-      nuevosTickets.find((ticket) => ticket.id === id)
-    );
-  };
-
-  const agregarObservacion = (id) => {
-    if (!nuevaObservacion.trim()) return;
-
-    const nuevosTickets = tickets.map((ticket) =>
-      ticket.id === id
-        ? {
-            ...ticket,
-            observaciones: [
-              ...ticket.observaciones,
-              {
-                texto: nuevaObservacion.trim(),
-                fecha: new Date().toLocaleString("es-CO"),
-              },
-            ],
-          }
-        : ticket
-    );
-
-    guardarTickets(nuevosTickets);
-    setTicketSeleccionado(
-      nuevosTickets.find((ticket) => ticket.id === id)
-    );
-    setNuevaObservacion("");
-  };
-
+  // Contar tickets según su estado.
   const abiertos = tickets.filter(
-    (ticket) => ticket.estado === "Abierto"
+    (ticket) => ticket.status === "abierto"
   ).length;
 
   const resueltos = tickets.filter(
-    (ticket) => ticket.estado === "Resuelto"
+    (ticket) => ticket.status === "resuelto"
   ).length;
+
+  // Filtrar tickets por número o asunto.
+  const ticketsFiltrados = tickets.filter((ticket) => {
+    const texto = busqueda.toLowerCase().trim();
+
+    return (
+      ticket.ticket_number?.toLowerCase().includes(texto) ||
+      ticket.subject?.toLowerCase().includes(texto)
+    );
+  });
+
+  // Actualizar los campos del formulario.
+  const manejarCambio = (e) => {
+    const { name, value } = e.target;
+
+    setFormulario((actual) => ({
+      ...actual,
+      [name]: value,
+    }));
+  };
+
+  // Crear un nuevo ticket.
+  const crearTicket = async (e) => {
+    e.preventDefault();
+
+    setError("");
+    setProcesando(true);
+
+    const { data, error: errorCreacion } = await supabase
+      .from("tickets")
+      .insert({
+        subject: formulario.subject.trim(),
+        description: formulario.description.trim(),
+        category: formulario.category,
+        priority: formulario.priority,
+        created_by: profile.id,
+        status: "abierto",
+        assigned_to: null,
+      })
+      .select()
+      .single();
+
+    if (errorCreacion) {
+      console.error("Error al crear ticket:", errorCreacion.message);
+      setError("No se pudo crear el ticket. Inténtalo nuevamente.");
+      setProcesando(false);
+      return;
+    }
+
+    setTickets((actuales) => [data, ...actuales]);
+
+    setFormulario({
+      subject: "",
+      description: "",
+      category: "Redes",
+      priority: "media",
+    });
+
+    setProcesando(false);
+  };
+
+  // Consultar el historial de un ticket.
+  const cargarHistorial = async (ticketId) => {
+    setCargandoHistorial(true);
+
+    const { data, error } = await supabase
+      .from("ticket_history")
+      .select("*")
+      .eq("ticket_id", ticketId)
+      .order("created_at", { ascending: true });
+
+    if (error) {
+      console.error("Error al cargar historial:", error.message);
+      setError("No fue posible cargar el historial del ticket.");
+      setHistorial([]);
+      setCargandoHistorial(false);
+      return;
+    }
+
+    setHistorial(data || []);
+    setCargandoHistorial(false);
+  };
+
+  // Abrir el detalle de un ticket.
+  const abrirTicket = async (ticket) => {
+    setError("");
+    setTicketSeleccionado(ticket);
+    setHistorial([]);
+    setNuevaObservacion("");
+    setVisibilidad("publica");
+
+    await cargarHistorial(ticket.id);
+  };
+
+  // Agregar un comentario o procedimiento al historial.
+  const agregarObservacion = async () => {
+    if (!nuevaObservacion.trim()) {
+      setError("Escribe una observación antes de continuar.");
+      return;
+    }
+
+    setError("");
+    setProcesando(true);
+
+    const { data, error: errorObservacion } = await supabase
+      .from("ticket_history")
+      .insert({
+        ticket_id: ticketSeleccionado.id,
+        actor_id: profile.id,
+        event_type: esTecnico ? "procedimiento" : "comentario",
+        description: nuevaObservacion.trim(),
+        visibility: esTecnico ? visibilidad : "publica",
+      })
+      .select()
+      .single();
+
+    if (errorObservacion) {
+      console.error(
+        "Error al registrar observación:",
+        errorObservacion.message
+      );
+
+      setError("No se pudo guardar el registro en el historial.");
+      setProcesando(false);
+      return;
+    }
+
+    setHistorial((actual) => [...actual, data]);
+    setNuevaObservacion("");
+    setVisibilidad("publica");
+    setProcesando(false);
+  };
+
+  // Cambiar el estado de un ticket.
+  const cambiarEstado = async () => {
+    const estadoActual = ticketSeleccionado.status;
+
+    let nuevoEstado;
+
+    if (estadoActual === "abierto") {
+      nuevoEstado = "en_proceso";
+    } else if (estadoActual === "resuelto") {
+      nuevoEstado = "abierto";
+    } else if (
+      estadoActual === "en_proceso" ||
+      estadoActual === "pendiente"
+    ) {
+      nuevoEstado = "resuelto";
+    } else {
+      setError("El estado actual del ticket no es válido.");
+      return;
+    }
+
+    setError("");
+    setProcesando(true);
+
+    const cambios = {
+      status: nuevoEstado,
+      closed_at:
+        nuevoEstado === "resuelto"
+          ? new Date().toISOString()
+          : null,
+    };
+
+    if (nuevoEstado === "en_proceso") {
+      cambios.assigned_to = profile.id;
+    }
+
+    if (nuevoEstado === "abierto") {
+      cambios.assigned_to = null;
+    }
+
+    const { data, error: errorEstado } = await supabase
+      .from("tickets")
+      .update(cambios)
+      .eq("id", ticketSeleccionado.id)
+      .select()
+      .single();
+
+    if (errorEstado) {
+      console.error("Error al cambiar estado:", errorEstado.message);
+      setError("No se pudo actualizar el estado del ticket.");
+      setProcesando(false);
+      return;
+    }
+
+    setTicketSeleccionado(data);
+
+    setTickets((actuales) =>
+      actuales.map((ticket) =>
+        ticket.id === data.id ? data : ticket
+      )
+    );
+
+    // Registrar el cambio en el historial.
+    const { error: errorHistorial } = await supabase
+      .from("ticket_history")
+      .insert({
+        ticket_id: data.id,
+        actor_id: profile.id,
+        event_type: "cambio_estado",
+        description: `Estado cambiado de ${estadoActual} a ${nuevoEstado}.`,
+        visibility: "publica",
+      });
+
+    if (errorHistorial) {
+      console.error(
+        "Error al registrar cambio de estado:",
+        errorHistorial.message
+      );
+
+      setError(
+        "El estado se actualizó, pero no se pudo registrar el cambio en el historial."
+      );
+    } else {
+      await cargarHistorial(data.id);
+    }
+
+    setProcesando(false);
+  };
+
+  // Mostrar nombres comprensibles para los estados.
+  const nombreEstado = (estado) => {
+    const estados = {
+      abierto: "Abierto",
+      en_proceso: "En proceso",
+      pendiente: "Pendiente",
+      resuelto: "Resuelto",
+    };
+
+    return estados[estado] || estado;
+  };
+
+  // Formatear fechas.
+  const formatearFecha = (fecha) => {
+    return new Date(fecha).toLocaleString("es-CO");
+  };
 
   return (
     <div className="max-w-6xl mx-auto">
 
+      {error && (
+        <p className="bg-red-100 text-red-700 p-4 rounded-lg mb-6">
+          {error}
+        </p>
+      )}
+
       <h1 className="text-3xl font-bold mb-2">
-        Gestión de tickets
+        {esTecnico ? "Gestión de tickets" : "Mis tickets"}
       </h1>
 
       <p className="text-gray-600 mb-8">
-        Registra, documenta y realiza seguimiento a las solicitudes
-        de soporte técnico.
+        {esTecnico
+          ? "Administra las solicitudes y documenta la atención técnica."
+          : "Registra tus solicitudes y consulta su estado y seguimiento."}
       </p>
 
       {/* Resumen de tickets */}
@@ -154,18 +353,18 @@ function Tickets() {
 
           <div className="flex flex-wrap justify-between items-center gap-3 mb-6">
 
-            <h2 className="text-2xl font-bold">
-              {ticketSeleccionado.id}
-            </h2>
+            <div>
+              <h2 className="text-2xl font-bold">
+                {ticketSeleccionado.ticket_number}
+              </h2>
 
-            <span
-              className={`px-3 py-1 rounded-full text-sm font-semibold ${
-                ticketSeleccionado.estado === "Abierto"
-                  ? "bg-yellow-100 text-yellow-700"
-                  : "bg-green-100 text-green-700"
-              }`}
-            >
-              {ticketSeleccionado.estado}
+              <p className="text-gray-500 text-sm mt-1">
+                {ticketSeleccionado.subject}
+              </p>
+            </div>
+
+            <span className="px-3 py-1 rounded-full text-sm font-semibold bg-blue-100 text-blue-700">
+              {nombreEstado(ticketSeleccionado.status)}
             </span>
 
           </div>
@@ -173,109 +372,166 @@ function Tickets() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
             <div>
-              <h3 className="font-bold mb-3">Datos de contacto</h3>
+              <h3 className="font-bold mb-3">Información del ticket</h3>
 
               <p className="text-gray-600 mb-2">
-                <strong>Nombre:</strong> {ticketSeleccionado.nombre}
+                <strong>Categoría:</strong> {ticketSeleccionado.category}
               </p>
 
               <p className="text-gray-600 mb-2">
-                <strong>Teléfono:</strong> {ticketSeleccionado.telefono}
+                <strong>Prioridad:</strong> {ticketSeleccionado.priority}
               </p>
 
-              <p className="text-gray-600 break-all">
-                <strong>Correo:</strong> {ticketSeleccionado.correo}
+              <p className="text-gray-600 mb-2">
+                <strong>Solicitante:</strong>{" "}
+                {esTecnico ? "Usuario registrado" : "Tú"}
               </p>
 
               <p className="text-sm text-gray-400 mt-4">
-                Creado: {ticketSeleccionado.fecha}
+                Creado: {formatearFecha(ticketSeleccionado.created_at)}
               </p>
             </div>
 
             <div>
-              <h3 className="font-bold mb-3">Problema reportado</h3>
+              <h3 className="font-bold mb-3">Descripción del problema</h3>
 
               <p className="text-gray-600 whitespace-pre-wrap">
-                {ticketSeleccionado.problema}
+                {ticketSeleccionado.description}
               </p>
             </div>
 
           </div>
 
+          {/* Historial */}
           <div className="mt-8">
-            <h3 className="font-bold mb-3">
-              Procedimientos realizados
+            <h3 className="font-bold mb-4">
+              Historial y seguimiento
             </h3>
 
-            <div className="bg-gray-50 rounded-lg p-4 text-gray-700 whitespace-pre-wrap">
-              {ticketSeleccionado.procedimientos}
-            </div>
-          </div>
+            {cargandoHistorial ? (
 
-          <div className="mt-8">
-            <h3 className="font-bold mb-3">
-              Seguimiento y observaciones
-            </h3>
+              <p className="text-gray-500">
+                Cargando historial...
+              </p>
 
-            {ticketSeleccionado.observaciones.length === 0 ? (
+            ) : historial.length === 0 ? (
+
               <p className="text-gray-500 text-sm mb-4">
-                Todavía no hay observaciones registradas.
+                Todavía no hay registros en el historial.
               </p>
+
             ) : (
-              <div className="space-y-3 mb-5">
 
-                {ticketSeleccionado.observaciones.map(
-                  (observacion, index) => (
-                    <div
-                      key={index}
-                      className="bg-gray-50 rounded-lg p-4"
-                    >
-                      <p className="text-gray-700 whitespace-pre-wrap">
-                        {observacion.texto}
-                      </p>
+              <div className="space-y-3 mb-6">
 
-                      <p className="text-xs text-gray-400 mt-2">
-                        {observacion.fecha}
-                      </p>
+                {historial.map((registro) => (
+
+                  <div
+                    key={registro.id}
+                    className="bg-gray-50 rounded-lg p-4"
+                  >
+
+                    <div className="flex flex-wrap justify-between gap-2 mb-2">
+
+                      <span className="font-semibold text-gray-700">
+                        {registro.actor_id === profile.id
+                          ? "Tú"
+                          : esTecnico
+                            ? "Usuario / soporte técnico"
+                            : "Soporte técnico"}
+                      </span>
+
+                      <span className="text-xs text-gray-500">
+                        {registro.event_type}
+                      </span>
+
                     </div>
-                  )
-                )}
+
+                    <p className="text-gray-700 whitespace-pre-wrap">
+                      {registro.description}
+                    </p>
+
+                    <div className="flex justify-between flex-wrap gap-2 mt-3">
+
+                      <span className="text-xs text-gray-400">
+                        {formatearFecha(registro.created_at)}
+                      </span>
+
+                      {registro.visibility === "interna" && (
+                        <span className="text-xs font-semibold text-orange-700">
+                          Nota interna
+                        </span>
+                      )}
+
+                    </div>
+
+                  </div>
+
+                ))}
 
               </div>
+
             )}
 
             <textarea
               value={nuevaObservacion}
               onChange={(e) => setNuevaObservacion(e.target.value)}
-              placeholder="Escribe una nueva observación o procedimiento..."
+              placeholder={
+                esTecnico
+                  ? "Escribe un procedimiento u observación técnica..."
+                  : "Escribe un comentario para el equipo de soporte..."
+              }
               rows={3}
               className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
 
+            {esTecnico && (
+              <div className="mt-3">
+                <label className="block text-sm font-medium mb-2">
+                  Visibilidad del registro
+                </label>
+
+                <select
+                  value={visibilidad}
+                  onChange={(e) => setVisibilidad(e.target.value)}
+                  className="border rounded-lg p-2"
+                >
+                  <option value="publica">Visible para el usuario</option>
+                  <option value="interna">Solo personal técnico</option>
+                </select>
+              </div>
+            )}
+
             <button
-              onClick={() => agregarObservacion(ticketSeleccionado.id)}
-              className="mt-3 bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg"
+              onClick={agregarObservacion}
+              disabled={procesando}
+              className="mt-3 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white px-5 py-2 rounded-lg"
             >
-              Agregar observación
+              {procesando ? "Guardando..." : "Agregar al historial"}
             </button>
+
           </div>
 
-          <div className="mt-8 border-t pt-6">
+          {/* Acciones exclusivas del técnico */}
+          {esTecnico && (
+            <div className="mt-8 border-t pt-6">
 
-            <button
-              onClick={() => cambiarEstado(ticketSeleccionado.id)}
-              className={`px-5 py-3 rounded-lg text-white font-medium ${
-                ticketSeleccionado.estado === "Abierto"
-                  ? "bg-green-600 hover:bg-green-700"
-                  : "bg-yellow-600 hover:bg-yellow-700"
-              }`}
-            >
-              {ticketSeleccionado.estado === "Abierto"
-                ? "Marcar como resuelto"
-                : "Reabrir ticket"}
-            </button>
+              <button
+                onClick={cambiarEstado}
+                disabled={procesando}
+                className="px-5 py-3 rounded-lg text-white font-medium bg-green-600 hover:bg-green-700 disabled:opacity-50"
+              >
+                {procesando
+                  ? "Actualizando..."
+                  : ticketSeleccionado.status === "abierto"
+                    ? "Tomar ticket"
+                    : ticketSeleccionado.status === "resuelto"
+                      ? "Reabrir ticket"
+                      : "Marcar como resuelto"}
+              </button>
 
-          </div>
+            </div>
+          )}
 
         </div>
 
@@ -283,127 +539,135 @@ function Tickets() {
 
         <>
 
-          {/* Formulario para crear ticket */}
-          <form
-            onSubmit={crearTicket}
-            className="bg-white rounded-xl shadow p-6 mb-10"
-          >
-
-            <h2 className="text-xl font-bold mb-6">
-              Crear nuevo ticket
-            </h2>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-
-              <div>
-                <label className="block text-sm font-medium mb-2">
-                  Nombre completo
-                </label>
-
-                <input
-                  type="text"
-                  name="nombre"
-                  value={formulario.nombre}
-                  onChange={manejarCambio}
-                  required
-                  placeholder="Nombre de la persona"
-                  className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium mb-2">
-                  Número de teléfono
-                </label>
-
-                <input
-                  type="tel"
-                  name="telefono"
-                  value={formulario.telefono}
-                  onChange={manejarCambio}
-                  required
-                  placeholder="Ej. 3001234567"
-                  className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-              </div>
-
-              <div className="md:col-span-2">
-                <label className="block text-sm font-medium mb-2">
-                  Correo electrónico
-                </label>
-
-                <input
-                  type="email"
-                  name="correo"
-                  value={formulario.correo}
-                  onChange={manejarCambio}
-                  required
-                  placeholder="correo@ejemplo.com"
-                  className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-              </div>
-
-              <div className="md:col-span-2">
-                <label className="block text-sm font-medium mb-2">
-                  Descripción del problema
-                </label>
-
-                <textarea
-                  name="problema"
-                  value={formulario.problema}
-                  onChange={manejarCambio}
-                  required
-                  rows={3}
-                  placeholder="Describe el problema reportado..."
-                  className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-              </div>
-
-              <div className="md:col-span-2">
-                <label className="block text-sm font-medium mb-2">
-                  Procedimientos realizados
-                </label>
-
-                <textarea
-                  name="procedimientos"
-                  value={formulario.procedimientos}
-                  onChange={manejarCambio}
-                  required
-                  rows={3}
-                  placeholder="Ej. Se realizó ping, se verificó la dirección IP..."
-                  className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-              </div>
-
-            </div>
-
-            <button
-              type="submit"
-              className="mt-6 bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-3 rounded-lg transition"
+          {/* Formulario exclusivo del usuario */}
+          {!esTecnico && (
+            <form
+              onSubmit={crearTicket}
+              className="bg-white rounded-xl shadow p-6 mb-10"
             >
-              Crear ticket
-            </button>
 
-          </form>
+              <h2 className="text-xl font-bold mb-6">
+                Crear nuevo ticket
+              </h2>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+                <div className="md:col-span-2">
+                  <label className="block text-sm font-medium mb-2">
+                    Asunto
+                  </label>
+
+                  <input
+                    type="text"
+                    name="subject"
+                    value={formulario.subject}
+                    onChange={manejarCambio}
+                    required
+                    placeholder="Ej. No tengo conexión a Internet"
+                    className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-2">
+                    Categoría
+                  </label>
+
+                  <select
+                    name="category"
+                    value={formulario.category}
+                    onChange={manejarCambio}
+                    className="w-full border rounded-lg p-3"
+                  >
+                    <option value="Redes">Redes</option>
+                    <option value="Hardware">Hardware</option>
+                    <option value="Software">Software</option>
+                    <option value="Accesos">Accesos</option>
+                    <option value="Otros">Otros</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-2">
+                    Prioridad
+                  </label>
+
+                  <select
+                    name="priority"
+                    value={formulario.priority}
+                    onChange={manejarCambio}
+                    className="w-full border rounded-lg p-3"
+                  >
+                    <option value="baja">Baja</option>
+                    <option value="media">Media</option>
+                    <option value="alta">Alta</option>
+                    <option value="critica">Crítica</option>
+                  </select>
+                </div>
+
+                <div className="md:col-span-2">
+                  <label className="block text-sm font-medium mb-2">
+                    Descripción del problema
+                  </label>
+
+                  <textarea
+                    name="description"
+                    value={formulario.description}
+                    onChange={manejarCambio}
+                    required
+                    rows={4}
+                    placeholder="Describe detalladamente el problema..."
+                    className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+
+              </div>
+
+              <button
+                type="submit"
+                disabled={procesando}
+                className="mt-6 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white font-medium px-6 py-3 rounded-lg"
+              >
+                {procesando ? "Creando ticket..." : "Crear ticket"}
+              </button>
+
+            </form>
+          )}
 
           {/* Listado de tickets */}
           <div className="bg-white rounded-xl shadow p-6">
 
             <h2 className="text-xl font-bold mb-5">
-              Tickets registrados
+              {esTecnico ? "Tickets registrados" : "Mis solicitudes"}
             </h2>
 
-            {tickets.length === 0 ? (
+            <label className="block text-sm font-medium mb-2">
+              Buscar ticket por número o asunto
+            </label>
+
+            <input
+              type="search"
+              value={busqueda}
+              onChange={(e) => setBusqueda(e.target.value)}
+              placeholder="Ej. NW-2026-00001"
+              className="w-full border rounded-lg p-3 mb-6 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+
+            {cargando ? (
+
+              <p className="text-center py-10 text-gray-500">
+                Cargando tickets...
+              </p>
+
+            ) : ticketsFiltrados.length === 0 ? (
 
               <div className="text-center py-10">
                 <p className="text-4xl mb-3">🎫</p>
 
                 <p className="text-gray-600 font-medium">
-                  Todavía no hay tickets registrados.
-                </p>
-
-                <p className="text-sm text-gray-400 mt-1">
-                  Crea tu primer ticket para comenzar.
+                  {tickets.length === 0
+                    ? "Todavía no hay tickets registrados."
+                    : "No se encontraron tickets con esa búsqueda."}
                 </p>
               </div>
 
@@ -411,7 +675,7 @@ function Tickets() {
 
               <div className="space-y-4">
 
-                {tickets.map((ticket) => (
+                {ticketsFiltrados.map((ticket) => (
 
                   <div
                     key={ticket.id}
@@ -420,32 +684,30 @@ function Tickets() {
 
                     <div>
                       <p className="font-bold text-gray-800">
-                        {ticket.id} · {ticket.nombre}
+                        {ticket.ticket_number}
                       </p>
 
-                      <p className="text-gray-600 text-sm mt-1">
-                        {ticket.problema}
+                      <p className="text-gray-700 mt-1">
+                        {ticket.subject}
+                      </p>
+
+                      <p className="text-gray-500 text-sm mt-1">
+                        {ticket.category} · Prioridad: {ticket.priority}
                       </p>
 
                       <p className="text-xs text-gray-400 mt-2">
-                        {ticket.fecha}
+                        {formatearFecha(ticket.created_at)}
                       </p>
                     </div>
 
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-3 flex-wrap">
 
-                      <span
-                        className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                          ticket.estado === "Abierto"
-                            ? "bg-yellow-100 text-yellow-700"
-                            : "bg-green-100 text-green-700"
-                        }`}
-                      >
-                        {ticket.estado}
+                      <span className="px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-700">
+                        {nombreEstado(ticket.status)}
                       </span>
 
                       <button
-                        onClick={() => setTicketSeleccionado(ticket)}
+                        onClick={() => abrirTicket(ticket)}
                         className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm"
                       >
                         Ver ticket
