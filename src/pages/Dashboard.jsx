@@ -52,6 +52,52 @@ function Dashboard({ setCurrentPage }) {
     (ticket) => ticket.status === "resuelto"
   ).length;
 
+  // Calcular los tickets por categoría.
+  const categorias = Object.entries(
+    tickets.reduce((acumulado, ticket) => {
+      const categoria = ticket.category || "Otros";
+      acumulado[categoria] = (acumulado[categoria] || 0) + 1;
+      return acumulado;
+    }, {})
+  ).sort((a, b) => b[1] - a[1]);
+
+  // Identificar los asuntos que más se repiten.
+  const asuntosFrecuentes = Object.values(
+    tickets.reduce((acumulado, ticket) => {
+      const asunto = ticket.subject?.trim() || "Sin asunto";
+      const clave = asunto.toLowerCase();
+
+      if (!acumulado[clave]) {
+        acumulado[clave] = { nombre: asunto, cantidad: 0 };
+      }
+
+      acumulado[clave].cantidad++;
+      return acumulado;
+    }, {})
+  )
+    .sort((a, b) => b.cantidad - a.cantidad)
+    .slice(0, 5);
+
+  // Calcular tickets por prioridad.
+  const prioridades = [
+    { nombre: "Crítica", valor: "critica", color: "bg-red-500" },
+    { nombre: "Alta", valor: "alta", color: "bg-orange-500" },
+    { nombre: "Media", valor: "media", color: "bg-yellow-500" },
+    { nombre: "Baja", valor: "baja", color: "bg-green-500" },
+  ].map((prioridad) => ({
+    ...prioridad,
+    cantidad: tickets.filter(
+      (ticket) => ticket.priority === prioridad.valor
+    ).length,
+  }));
+
+  // Calcular porcentajes para las gráficas.
+  const calcularPorcentaje = (cantidad) =>
+    totalTickets === 0
+      ? 0
+      : Math.round((cantidad / totalTickets) * 100);
+
+
  
   const estadisticas = [
     {
@@ -137,6 +183,138 @@ function Dashboard({ setCurrentPage }) {
           ))
         )}
       </section>
+
+
+      {/* Análisis de incidencias */}
+      <section className="mt-10" aria-label="Análisis de incidencias">
+
+        <h2 className="text-2xl font-bold text-gray-900 mb-2">
+          Análisis de incidencias
+        </h2>
+
+        <p className="text-gray-600 mb-6">
+          Identifica las categorías y los problemas que generan
+          más solicitudes de soporte.
+        </p>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+          {/* Tickets por categoría */}
+          <div className="bg-white rounded-xl shadow p-6">
+            <h3 className="text-lg font-bold mb-5">
+              Tickets por categoría
+            </h3>
+
+            {categorias.length === 0 ? (
+              <p className="text-gray-500">
+                Todavía no hay datos disponibles.
+              </p>
+            ) : (
+              <div className="space-y-5">
+                {categorias.map(([nombre, cantidad]) => (
+                  <div key={nombre}>
+                    <div className="flex justify-between mb-2">
+                      <span className="text-gray-700 font-medium">
+                        {nombre}
+                      </span>
+
+                      <span className="text-gray-600 text-sm">
+                        {cantidad} ({calcularPorcentaje(cantidad)}%)
+                      </span>
+                    </div>
+
+                    <div className="w-full bg-gray-100 rounded-full h-3">
+                      <div
+                        className="bg-blue-600 h-3 rounded-full transition-all"
+                        style={{
+                          width: `${calcularPorcentaje(cantidad)}%`,
+                        }}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Tickets por prioridad */}
+          <div className="bg-white rounded-xl shadow p-6">
+            <h3 className="text-lg font-bold mb-5">
+              Tickets por prioridad
+            </h3>
+
+            <div className="space-y-5">
+              {prioridades.map((prioridad) => (
+                <div key={prioridad.valor}>
+                  <div className="flex justify-between mb-2">
+                    <span className="text-gray-700 font-medium">
+                      {prioridad.nombre}
+                    </span>
+
+                    <span className="text-gray-600 text-sm">
+                      {prioridad.cantidad} (
+                      {calcularPorcentaje(prioridad.cantidad)}%)
+                    </span>
+                  </div>
+
+                  <div className="w-full bg-gray-100 rounded-full h-3">
+                    <div
+                      className={`${prioridad.color} h-3 rounded-full transition-all`}
+                      style={{
+                        width: `${calcularPorcentaje(prioridad.cantidad)}%`,
+                      }}
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+        </div>
+
+        {/* Problemas más frecuentes */}
+        <div className="bg-white rounded-xl shadow p-6 mt-6">
+          <h3 className="text-lg font-bold mb-2">
+            Problemas más frecuentes
+          </h3>
+
+          <p className="text-gray-500 text-sm mb-5">
+            Asuntos que aparecen repetidamente en los tickets.
+          </p>
+
+          {asuntosFrecuentes.length === 0 ? (
+            <p className="text-gray-500">
+              Todavía no hay datos disponibles.
+            </p>
+          ) : (
+            <div className="space-y-4">
+              {asuntosFrecuentes.map((asunto, indice) => (
+                <div
+                  key={asunto.nombre}
+                  className="flex items-center justify-between gap-4 border-b pb-3 last:border-0"
+                >
+                  <div className="flex items-center gap-3">
+                    <span className="bg-blue-100 text-blue-700 font-bold rounded-lg px-3 py-2">
+                      {indice + 1}
+                    </span>
+
+                    <span className="text-gray-700 font-medium">
+                      {asunto.nombre}
+                    </span>
+                  </div>
+
+                  <span className="text-sm font-semibold text-gray-600 whitespace-nowrap">
+                    {asunto.cantidad}{" "}
+                    {asunto.cantidad === 1 ? "ticket" : "tickets"}
+                  </span>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+      </section>
+
 
       {/* Listado general de tickets */}
       {/* Acceso a la gestión de tickets */}
