@@ -855,6 +855,7 @@ setCargando(false);
             <input
               id="buscar-ticket"
               type="search"
+              title="Busca tickets por su número de identificación o por el asunto de la solicitud."
               value={busqueda}
               onChange={(e) => setBusqueda(e.target.value)}
               placeholder="Ej. NW-2026-00001"
