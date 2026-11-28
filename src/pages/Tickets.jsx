@@ -106,11 +106,15 @@ function Tickets({ profile }) {
       .single();
 
     if (errorCreacion) {
-      console.error("Error al crear ticket:", errorCreacion.message);
-      setError("No se pudo crear el ticket. Inténtalo nuevamente.");
-      setProcesando(false);
-      return;
-    }
+  console.error("Error al crear ticket:", errorCreacion);
+
+  setError(
+    `Error de Supabase: ${errorCreacion.message}`
+  );
+
+  setProcesando(false);
+  return;
+}
 
     setTickets((actuales) => [data, ...actuales]);
 
