@@ -197,22 +197,22 @@ function Tickets({ profile }) {
   };
 
   // Cambiar el estado de un ticket.
-  const cambiarEstado = async () => {
+  
+  // Cambiar el estado de un ticket.
+  const cambiarEstado = async (nuevoEstado) => {
+    if (!esTecnico || procesando) return;
+
     const estadoActual = ticketSeleccionado.status;
 
-    let nuevoEstado;
+    const estadosPermitidos = {
+      abierto: ["en_proceso"],
+      en_proceso: ["pendiente", "resuelto"],
+      pendiente: ["en_proceso", "resuelto"],
+      resuelto: ["abierto"],
+    };
 
-    if (estadoActual === "abierto") {
-      nuevoEstado = "en_proceso";
-    } else if (estadoActual === "resuelto") {
-      nuevoEstado = "abierto";
-    } else if (
-      estadoActual === "en_proceso" ||
-      estadoActual === "pendiente"
-    ) {
-      nuevoEstado = "resuelto";
-    } else {
-      setError("El estado actual del ticket no es válido.");
+    if (!estadosPermitidos[estadoActual]?.includes(nuevoEstado)) {
+      setError("No se puede realizar ese cambio de estado.");
       return;
     }
 
@@ -258,13 +258,20 @@ function Tickets({ profile }) {
     );
 
     // Registrar el cambio en el historial.
+    const nombresEstados = {
+      abierto: "Abierto",
+      en_proceso: "En proceso",
+      pendiente: "Pendiente",
+      resuelto: "Resuelto",
+    };
+
     const { error: errorHistorial } = await supabase
       .from("ticket_history")
       .insert({
         ticket_id: data.id,
         actor_id: profile.id,
         event_type: "cambio_estado",
-        description: `Estado cambiado de ${estadoActual} a ${nuevoEstado}.`,
+        description: `Estado cambiado de ${nombresEstados[estadoActual]} a ${nombresEstados[nuevoEstado]}.`,
         visibility: "publica",
       });
 
@@ -283,6 +290,7 @@ function Tickets({ profile }) {
 
     setProcesando(false);
   };
+
 
   // Mostrar nombres comprensibles para los estados.
   const nombreEstado = (estado) => {
@@ -576,39 +584,101 @@ function Tickets({ profile }) {
 
           </section>
 
-          {/* Acciones exclusivas del técnico */}
-          {esTecnico && (
-            <div className="mt-8 border-t pt-6">
+      
+          
+{/* Acciones exclusivas del técnico */}
+{esTecnico && (
+  <div className="mt-8 border-t pt-6">
+    <h3 className="font-bold text-gray-800 mb-4">
+      Acciones de gestión
+    </h3>
 
-              <button
-              title={
-  ticketSeleccionado.status === "abierto"
-    ? "Tomar el ticket y comenzar su atención técnica."
-    : ticketSeleccionado.status === "resuelto"
-      ? "Reabrir el ticket para continuar su atención."
-      : "Marcar el ticket como resuelto y finalizar su atención."
-}
-                type="button"
-                onClick={cambiarEstado}
-                disabled={procesando}
-                className="px-5 py-3 rounded-lg text-white font-medium bg-green-600 hover:bg-green-700 disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
-              >
-                {procesando
-                  ? "Actualizando..."
-                  : ticketSeleccionado.status === "abierto"
-                    ? "Tomar ticket"
-                    : ticketSeleccionado.status === "resuelto"
-                      ? "Reabrir ticket"
-                      : "Marcar como resuelto"}
-              </button>
+    <div className="flex flex-wrap gap-3">
 
-            </div>
-          )}
+      {ticketSeleccionado.status === "abierto" && (
+        <button
+          type="button"
+          onClick={() => cambiarEstado("en_proceso")}
+          disabled={procesando}
+          title="Tomar el ticket y comenzar su atención técnica."
+          className="px-5 py-3 rounded-lg text-white font-medium bg-blue-600 hover:bg-blue-700 disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+        >
+          Tomar ticket
+        </button>
+      )}
 
-        </section>
+      {ticketSeleccionado.status === "en_proceso" && (
+        <>
+          <button
+            type="button"
+            onClick={() => cambiarEstado("pendiente")}
+            disabled={procesando}
+            title="Dejar el ticket pendiente de seguimiento."
+            className="px-5 py-3 rounded-lg text-white font-medium bg-orange-500 hover:bg-orange-600 disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
+          >
+            Marcar como pendiente
+          </button>
+
+          <button
+            type="button"
+            onClick={() => cambiarEstado("resuelto")}
+            disabled={procesando}
+            title="Finalizar la atención y resolver el ticket."
+            className="px-5 py-3 rounded-lg text-white font-medium bg-green-600 hover:bg-green-700 disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+          >
+            Marcar como resuelto
+          </button>
+        </>
+      )}
+
+      {ticketSeleccionado.status === "pendiente" && (
+        <>
+          <button
+            type="button"
+            onClick={() => cambiarEstado("en_proceso")}
+            disabled={procesando}
+            title="Retomar la atención técnica del ticket."
+            className="px-5 py-3 rounded-lg text-white font-medium bg-blue-600 hover:bg-blue-700 disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+          >
+            Retomar atención
+          </button>
+
+          <button
+            type="button"
+            onClick={() => cambiarEstado("resuelto")}
+            disabled={procesando}
+            title="Finalizar la atención y resolver el ticket."
+            className="px-5 py-3 rounded-lg text-white font-medium bg-green-600 hover:bg-green-700 disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+          >
+            Marcar como resuelto
+          </button>
+        </>
+      )}
+
+      {ticketSeleccionado.status === "resuelto" && (
+        <button
+          type="button"
+          onClick={() => cambiarEstado("abierto")}
+          disabled={procesando}
+          title="Reabrir el ticket para una nueva atención."
+          className="px-5 py-3 rounded-lg text-white font-medium bg-yellow-600 hover:bg-yellow-700 disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2"
+        >
+          Reabrir ticket
+        </button>
+      )}
+
+    </div>
+
+    {procesando && (
+      <p className="text-sm text-gray-500 mt-3" role="status">
+        Actualizando estado del ticket...
+      </p>
+    )}
+  </div>
+)}
+     </section>
 
       ) : (
-
         <>
 
           {/* Formulario exclusivo del usuario */}
