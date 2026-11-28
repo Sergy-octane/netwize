@@ -4,6 +4,7 @@ import { supabase } from "../lib/supabase";
 
 function Tickets({ profile }) {
   const [tickets, setTickets] = useState([]);
+  const [nombresUsuarios, setNombresUsuarios] = useState({});
   const [ticketSeleccionado, setTicketSeleccionado] = useState(null);
   const [historial, setHistorial] = useState([]);
 
@@ -48,8 +49,36 @@ function Tickets({ profile }) {
         return;
       }
 
-      setTickets(data || []);
-      setCargando(false);
+      // Consultar los nombres de los usuarios que crearon los tickets.
+const idsUsuarios = [
+  ...new Set(
+    (data || [])
+      .map((ticket) => ticket.created_by)
+      .filter(Boolean)
+  ),
+];
+
+if (idsUsuarios.length > 0) {
+  const { data: perfiles, error: errorPerfiles } = await supabase
+    .from("profiles")
+    .select("id, full_name")
+    .in("id", idsUsuarios);
+
+  if (errorPerfiles) {
+    console.error("Error al consultar nombres:", errorPerfiles.message);
+  } else {
+    const nombres = {};
+
+    perfiles.forEach((usuario) => {
+      nombres[usuario.id] = usuario.full_name;
+    });
+
+    setNombresUsuarios(nombres);
+  }
+}
+
+setTickets(data || []);
+setCargando(false);
     };
 
     cargarTickets();
@@ -416,9 +445,11 @@ function Tickets({ profile }) {
               </p>
 
               <p className="text-gray-600 mb-2">
-                <strong>Solicitante:</strong>{" "}
-                {esTecnico ? "Usuario registrado" : "Tú"}
-              </p>
+  <strong>Solicitante:</strong>{" "}
+  {esTecnico
+    ? nombresUsuarios[ticketSeleccionado.created_by] || "Nombre no registrado"
+    : "Tú"}
+</p>
 
               <p className="text-sm text-gray-400 mt-4">
                 Creado: {formatearFecha(ticketSeleccionado.created_at)}
@@ -884,6 +915,12 @@ function Tickets({ profile }) {
                       <p className="text-gray-700 mt-1">
                         {ticket.subject}
                       </p>
+                      {esTecnico && (
+  <p className="text-sm text-gray-500 mt-1">
+    Solicitante:{" "}
+    {nombresUsuarios[ticket.created_by] || "Nombre no registrado"}
+  </p>
+)}
 
                       <p className="text-gray-500 text-sm mt-1">
                         {ticket.category} · Prioridad: {ticket.priority}
