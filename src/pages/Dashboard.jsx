@@ -98,6 +98,80 @@ function Dashboard({ setCurrentPage }) {
       : Math.round((cantidad / totalTickets) * 100);
 
 
+  // Descargar el análisis de incidencias en CSV.
+  const exportarAnalisisCSV = () => {
+    const filas = [
+      ["Tipo de análisis", "Nombre", "Cantidad", "Porcentaje"],
+    ];
+
+    // Agregar categorías.
+    categorias.forEach(([nombre, cantidad]) => {
+      filas.push([
+        "Categoría",
+        nombre,
+        cantidad,
+        `${calcularPorcentaje(cantidad)}%`,
+      ]);
+    });
+
+    // Agregar problemas frecuentes.
+    asuntosFrecuentes.forEach((asunto) => {
+      filas.push([
+        "Problema frecuente",
+        asunto.nombre,
+        asunto.cantidad,
+        `${calcularPorcentaje(asunto.cantidad)}%`,
+      ]);
+    });
+
+    // Agregar prioridades.
+    prioridades.forEach((prioridad) => {
+      filas.push([
+        "Prioridad",
+        prioridad.nombre,
+        prioridad.cantidad,
+        `${calcularPorcentaje(prioridad.cantidad)}%`,
+      ]);
+    });
+
+    // Preparar los datos para CSV.
+    const contenidoCSV = filas
+      .map((fila) =>
+        fila
+          .map((valor) => {
+            const texto = String(valor ?? "");
+            const seguro = /^[=+\-@\t\r]/.test(texto)
+              ? `'${texto}`
+              : texto;
+
+            return `"${seguro.replace(/"/g, '""')}"`;
+          })
+          .join(";")
+      )
+      .join("\n");
+
+    // Crear y descargar el archivo.
+    const archivo = new Blob(
+      ["\uFEFF" + contenidoCSV],
+      { type: "text/csv;charset=utf-8;" }
+    );
+
+    const enlace = document.createElement("a");
+    const url = URL.createObjectURL(archivo);
+
+    enlace.href = url;
+    enlace.download = `NetWize_Analisis_${new Date()
+      .toISOString()
+      .slice(0, 10)}.csv`;
+
+    document.body.appendChild(enlace);
+    enlace.click();
+    document.body.removeChild(enlace);
+
+    URL.revokeObjectURL(url);
+  };
+
+
  
   const estadisticas = [
     {
@@ -188,9 +262,23 @@ function Dashboard({ setCurrentPage }) {
       {/* Análisis de incidencias */}
       <section className="mt-10" aria-label="Análisis de incidencias">
 
-        <h2 className="text-2xl font-bold text-gray-900 mb-2">
-          Análisis de incidencias
-        </h2>
+       
+<div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-2">
+  <h2 className="text-2xl font-bold text-gray-900">
+    Análisis de incidencias
+  </h2>
+
+  <button
+    type="button"
+    onClick={exportarAnalisisCSV}
+    disabled={cargando || totalTickets === 0}
+    title="Descargar el análisis de incidencias en formato CSV."
+    className="bg-green-600 hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed text-white px-5 py-3 rounded-lg font-medium focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+  >
+    Descargar análisis CSV
+  </button>
+</div>
+
 
         <p className="text-gray-600 mb-6">
           Identifica las categorías y los problemas que generan
